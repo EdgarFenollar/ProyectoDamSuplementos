@@ -10,7 +10,6 @@ public class Login extends JFrame{
     private JTextField txtUsuario;
     private JPasswordField txtPassword;
     private JButton LOGINButton;
-    private JTabbedPane tabbedPane1;
     private JLabel imgLogo;
     private JLabel imgLineaAzul;
 

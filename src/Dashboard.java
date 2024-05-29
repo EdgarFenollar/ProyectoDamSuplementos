@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Dashboard extends JFrame{
@@ -159,5 +161,19 @@ public class Dashboard extends JFrame{
         empleadosBtn.setIcon(empleados);
         imgEmpleadosDash.setIcon(empleados);
         //////////////////////////////
+
+        btnLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame menuLogin = new Login();
+                menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
+                menuLogin.setVisible(true);
+                menuLogin.setSize(800,450);
+                menuLogin.setLocationRelativeTo(null);
+                menuLogin.setResizable(false);
+                menuLogin.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                dispose();
+            }
+        });
     }
 }
