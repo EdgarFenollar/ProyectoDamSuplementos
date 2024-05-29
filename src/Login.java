@@ -35,12 +35,13 @@ public class Login extends JFrame{
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame dasboard = new Dashboard();
-                dasboard.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
-                dasboard.setVisible(true);
-                dasboard.setSize(1500,900);
-                dasboard.setLocationRelativeTo(null);
-                dasboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                JFrame dashboard = new Dashboard();
+                dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
+                dashboard.setVisible(true);
+                dashboard.setSize(1500,900);
+                dashboard.setLocationRelativeTo(null);
+                dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                dashboard.setResizable(false);
                 dispose();
             }
         });
