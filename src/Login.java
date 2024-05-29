@@ -59,6 +59,7 @@ public class Login extends JFrame{
                 menuLogin.setLocationRelativeTo(null);
                 menuLogin.setResizable(false);
                 menuLogin.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                DataManager.cargarDatos();
             }
         });
     }

@@ -1,12 +1,13 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Dashboard extends JFrame{
-    private JPanel panelDashboard;
+public class MenuProveedores extends JFrame{
+    private JPanel panelProveedores;
     private JButton btnHome;
     private JLabel imgMiniLogo;
     private JButton btnLogout;
@@ -24,20 +25,25 @@ public class Dashboard extends JFrame{
     private JLabel imgVentasDash;
     private JLabel imgClientesDash;
     private JLabel imgEmpleadosDash;
-    private JLabel txtTotalVentas;
-    private JLabel txtTotalClientes;
-    private JLabel txtTotalEmpleados;
     private JButton empleadosBtn;
+    private JPanel panelTablaProveedores;
+    private JComboBox comboBoxFiltrar;
+    private JTextField txtBuscar;
+    private JButton btnBuscar;
+    private JButton btnBorrar;
+    private JButton btnEditar;
+    private JButton btnCrear;
+    private JButton btnFiltrar;
+    private JTable tableInfo;
+    private JScrollPane scrollTable;
 
-    public Dashboard(){
-        setContentPane(panelDashboard);
+    public MenuProveedores(){
+        setContentPane(panelProveedores);
+        createTable(tableInfo);
         btnLogout.setBorder(null);
         btnLogout.setBackground(null);
         btnHome.setBorder(null);
         btnHome.setBackground(null);
-        String usr = System.getProperty("user.name");
-        txtNombre.setText(usr);
-        txtBienvenida.setText("BIENVENIDO " + usr);
 
         //Menu Botones
         dashboardButton.setBorder(null);
@@ -63,6 +69,21 @@ public class Dashboard extends JFrame{
 
         empleadosBtn.setBorder(null);
         empleadosBtn.setOpaque(false);
+
+        btnBorrar.setBorder(null);
+        btnBorrar.setOpaque(false);
+
+        btnCrear.setBorder(null);
+        btnCrear.setOpaque(false);
+
+        btnEditar.setBorder(null);
+        btnEditar.setOpaque(false);
+
+        btnBuscar.setBorder(null);
+        btnBuscar.setOpaque(false);
+
+        btnFiltrar.setBorder(null);
+        btnFiltrar.setOpaque(false);
 
         //Redimensionar Imagen MINILOGO//
         ImageIcon miniLogoPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/miniLogo.png")));
@@ -126,7 +147,6 @@ public class Dashboard extends JFrame{
         Image clientesPrincImageScaledInstance = clientesPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon clientes = new ImageIcon(clientesPrincImageScaledInstance);
         clientesBtn.setIcon(clientes);
-        imgClientesDash.setIcon(clientes);
         //////////////////////////////
 
         //Redimensionar Imagen CATEGORIAS//
@@ -143,7 +163,6 @@ public class Dashboard extends JFrame{
         Image ventasPrincImageScaledInstance = ventasPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon ventas = new ImageIcon(ventasPrincImageScaledInstance);
         ventasBtn.setIcon(ventas);
-        imgVentasDash.setIcon(ventas);
         //////////////////////////////
 
         //Redimensionar Imagen PEDIDOS//
@@ -160,7 +179,46 @@ public class Dashboard extends JFrame{
         Image empleadosPrincImageScaledInstance = empleadosPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon empleados = new ImageIcon(empleadosPrincImageScaledInstance);
         empleadosBtn.setIcon(empleados);
-        imgEmpleadosDash.setIcon(empleados);
+        //////////////////////////////
+
+        //Redimensionar Imagen CREAR//
+        ImageIcon crearPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/create.png")));
+        Image crearPrincImage = crearPrinc.getImage();
+        Image crearPrincImageScaledInstance = crearPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon crear = new ImageIcon(crearPrincImageScaledInstance);
+        btnCrear.setIcon(crear);
+        //////////////////////////////
+
+        //Redimensionar Imagen EDITAR//
+        ImageIcon editarPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/edit.png")));
+        Image editarPrincImage = editarPrinc.getImage();
+        Image editarPrincImageScaledInstance = editarPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon editar = new ImageIcon(editarPrincImageScaledInstance);
+        btnEditar.setIcon(editar);
+        //////////////////////////////
+
+        //Redimensionar Imagen BORRAR//
+        ImageIcon borrarPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/delete.png")));
+        Image borrarPrincImage = borrarPrinc.getImage();
+        Image borrarPrincImageScaledInstance = borrarPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon borrar = new ImageIcon(borrarPrincImageScaledInstance);
+        btnBorrar.setIcon(borrar);
+        //////////////////////////////
+
+        //Redimensionar Imagen BUSCAR//
+        ImageIcon buscarPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/lupa.png")));
+        Image buscarPrincImage = buscarPrinc.getImage();
+        Image buscarPrincImageScaledInstance = buscarPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon buscar = new ImageIcon(buscarPrincImageScaledInstance);
+        btnBuscar.setIcon(buscar);
+        //////////////////////////////
+
+        //Redimensionar Imagen FILTRAR//
+        ImageIcon filtrarPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/filtrar.png")));
+        Image filtrarPrincImage = filtrarPrinc.getImage();
+        Image filtrarPrincImageScaledInstance = filtrarPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon filtrar = new ImageIcon(filtrarPrincImageScaledInstance);
+        btnFiltrar.setIcon(filtrar);
         //////////////////////////////
 
         btnLogout.addActionListener(new ActionListener() {
@@ -176,20 +234,79 @@ public class Dashboard extends JFrame{
                 dispose();
             }
         });
-        proveedoresBtn.addComponentListener(new ComponentAdapter() {
-        });
-        proveedoresBtn.addActionListener(new ActionListener() {
+        dashboardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame proveedores = new MenuProveedores();
-                proveedores.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
-                proveedores.setVisible(true);
-                proveedores.setSize(1500,900);
-                proveedores.setLocationRelativeTo(null);
-                proveedores.setResizable(false);
-                proveedores.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                JFrame dashboard = new Dashboard();
+                dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
+                dashboard.setVisible(true);
+                dashboard.setSize(1500,900);
+                dashboard.setLocationRelativeTo(null);
+                dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                dashboard.setResizable(false);
                 dispose();
             }
         });
+        btnHome.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame dashboard = new Dashboard();
+                dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
+                dashboard.setVisible(true);
+                dashboard.setSize(1500,900);
+                dashboard.setLocationRelativeTo(null);
+                dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                dashboard.setResizable(false);
+                dispose();
+            }
+        });
+    }
+
+    public static void createTable(JTable tabla){
+        try{
+            if (DataManager.proveedores == null){
+                DataManager.proveedores = new ArrayList<>();
+            }
+
+            String [][] data = new String[DataManager.proveedores.size()][5];
+            cargarProveedores(data);
+
+
+            String [] cabe = new String[]{"ID", "Nombre", "Correo Electrónico", "Código Postal", "Dirección"};
+
+            tabla.setModel(new DefaultTableModel(
+                    data, cabe
+            ));
+            tabla.getTableHeader().setReorderingAllowed(false);
+            tabla.setEnabled(true);
+            tabla.setDefaultEditor(Object.class, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String [][] cargarProveedores(String [][] data){
+        try{
+            for (int i = 0; i < data.length; i++) {
+                for (int j = 0; j < data[0].length; j++) {
+                    if (DataManager.proveedores.get(i) != null){
+                        if (j == 0){
+                            data[i][j] = String.valueOf((DataManager.proveedores.get(i).getId()));
+                        } else if (j == 1){
+                            data[i][j] = String.valueOf((DataManager.proveedores.get(i).getNombre()));
+                        } else if (j == 2){
+                            data[i][j] = String.valueOf((DataManager.proveedores.get(i).getCorreo()));
+                        } else if (j == 3){
+                            data[i][j] = String.valueOf((DataManager.proveedores.get(i).getCp()));
+                        } else if (j == 4){
+                            data[i][j] = String.valueOf((DataManager.proveedores.get(i).getDireccion()));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error loading students", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return data;
     }
 }
