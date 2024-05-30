@@ -34,7 +34,7 @@ public class Login extends JFrame{
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame dashboard = new Dashboard();
+                JFrame dashboard = new PantallaPrincipal();
                 dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
                 dashboard.setVisible(true);
                 dashboard.setSize(1500,900);
