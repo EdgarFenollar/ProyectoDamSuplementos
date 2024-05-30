@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class MenuCrearProveedores extends JPanel{
+public class MenuEditarProveedores extends JPanel{
     private JPanel panelProveedores;
     private JPanel panelCrearProveedores;
     private JButton btnConfirmar;
@@ -16,7 +16,7 @@ public class MenuCrearProveedores extends JPanel{
     private JTextField txtDireccion;
     private JLabel imgProveedorGrande;
 
-    public MenuCrearProveedores(){
+    public MenuEditarProveedores(){
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 
@@ -46,7 +46,7 @@ public class MenuCrearProveedores extends JPanel{
         //Redimensionar Imagen PROVEEDOR//
         ImageIcon proveedorPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/proveedor.png")));
         Image proveedorPrincImage = proveedorPrinc.getImage();
-        Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
+        Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);
         imgProveedor.setIcon(proveedor);
         //////////////////////////////
