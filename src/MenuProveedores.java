@@ -49,12 +49,21 @@ public class MenuProveedores extends JPanel {
         btnCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog crearProveedores = new MenuCrearProveedores();
-                crearProveedores.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
-                crearProveedores.setVisible(true);
-                crearProveedores.setSize(1500, 900);
-                crearProveedores.setLocationRelativeTo(null);
-                crearProveedores.setResizable(false);
+                panelProveedores.setLayout(new BorderLayout());
+                panelProveedores.removeAll();  // Remove any existing components
+                panelProveedores.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.revalidate();  // Revalidate to apply layout changes
+                panelProveedores.repaint();  // Repaint to refresh the component
+            }
+        });
+        btnEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelProveedores.setLayout(new BorderLayout());
+                panelProveedores.removeAll();  // Remove any existing components
+                panelProveedores.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.revalidate();  // Revalidate to apply layout changes
+                panelProveedores.repaint();  // Repaint to refresh the component
             }
         });
     }
@@ -109,9 +118,5 @@ public class MenuProveedores extends JPanel {
             JOptionPane.showMessageDialog(null, "Error loading students", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return data;
-    }
-
-    public JPanel getPanel() {
-        return this;
     }
 }
