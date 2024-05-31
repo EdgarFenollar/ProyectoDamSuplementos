@@ -28,9 +28,13 @@ public class MenuCrearPromociones extends JPanel{
         btnCancelar.setBorder(null);
         btnCancelar.setOpaque(false);
         panelFecha1.setLayout(new FlowLayout());
+        dateChooser1.setDateFormatString("yyyy-MM-dd");
         panelFecha1.add(dateChooser1);
+        dateChooser1.setPreferredSize(new Dimension(485, 40));
         panelFecha2.setLayout(new FlowLayout());
+        dateChooser2.setDateFormatString("yyyy-MM-dd");
         panelFecha2.add(dateChooser2);
+        dateChooser2.setPreferredSize(new Dimension(485, 40));
 
         //Redimensionar Imagen CANCELAR//
         ImageIcon cancelPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/x.png")));
