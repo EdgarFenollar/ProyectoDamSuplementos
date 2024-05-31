@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MenuProveedores extends JPanel {
+public class MenuPromociones extends JPanel {
     private JPanel panelProveedores;
     private JButton btnBuscar;
     private JButton btnBorrar;
@@ -20,7 +20,7 @@ public class MenuProveedores extends JPanel {
     private JScrollPane scrollTable;
     private JLabel lblBuscar;
 
-    public MenuProveedores() {
+    public MenuPromociones() {
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 
@@ -51,7 +51,7 @@ public class MenuProveedores extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 panelProveedores.setLayout(new BorderLayout());
                 panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.add(new MenuCrearPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelProveedores.revalidate();  // Revalidate to apply layout changes
                 panelProveedores.repaint();  // Repaint to refresh the component
             }
@@ -84,7 +84,7 @@ public class MenuProveedores extends JPanel {
             String[][] data = new String[DataManager.proveedores.size()][5];
             cargarProveedores(data);
 
-            String[] cabe = {"ID", "Nombre", "Correo Electrónico", "Código Postal", "Dirección"};
+            String[] cabe = {"ID", "Descripción", "Descuento", "Fecha Inicio", "Fecha Fin"};
 
             tabla.setModel(new DefaultTableModel(data, cabe));
             tabla.getTableHeader().setReorderingAllowed(false);

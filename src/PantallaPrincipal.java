@@ -183,5 +183,15 @@ public class PantallaPrincipal extends JFrame{
                 panelPantallas.repaint();  // Repaint to refresh the component
             }
         });
+        promocionesBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelPantallas.setLayout(new BorderLayout());
+                panelPantallas.removeAll();  // Remove any existing components
+                panelPantallas.add(new MenuPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelPantallas.revalidate();  // Revalidate to apply layout changes
+                panelPantallas.repaint();  // Repaint to refresh the component
+            }
+        });
     }
 }
