@@ -33,6 +33,9 @@ public class MenuClientes extends JPanel {
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
+        btnBorrar.setBackground(null);
+        btnEditar.setBackground(null);
+        btnCrear.setBackground(null);
         btnBorrar.setBorder(null);
         btnBorrar.setBackground(null);
         btnBorrar.setOpaque(false);

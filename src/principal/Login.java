@@ -70,7 +70,7 @@ public class Login extends JFrame{
                 try {
                     UIManager.setLookAndFeel(new FlatLightOwlIJTheme());
                 } catch( Exception ex ) {
-                    System.err.println( "Failed to initialize LaF" );
+                    System.err.println( "Error al cargar el tema" );
                 }
                 JFrame menuLogin = new Login();
                 menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));

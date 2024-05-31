@@ -57,7 +57,7 @@ public class MenuEditarPromociones extends JPanel{
         //Redimensionar Imagen CANCELAR//
         ImageIcon cancelPrinc = new ImageIcon("imagenes/x.png");
         Image cancelPrincImage = cancelPrinc.getImage();
-        Image cancelPrincImageScaledInstance = cancelPrincImage.getScaledInstance(30, 30,  Image.SCALE_SMOOTH);
+        Image cancelPrincImageScaledInstance = cancelPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon cancel = new ImageIcon(cancelPrincImageScaledInstance);
         btnCancelar.setIcon(cancel);
         //////////////////////////////
@@ -65,7 +65,7 @@ public class MenuEditarPromociones extends JPanel{
         //Redimensionar Imagen CREAR//
         ImageIcon crearPrinc = new ImageIcon("imagenes/save.png");
         Image crearPrincImage = crearPrinc.getImage();
-        Image crearPrincImageScaledInstance = crearPrincImage.getScaledInstance(30, 30,  Image.SCALE_SMOOTH);
+        Image crearPrincImageScaledInstance = crearPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon crear = new ImageIcon(crearPrincImageScaledInstance);
         btnConfirmar.setIcon(crear);
         //////////////////////////////

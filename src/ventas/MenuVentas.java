@@ -33,6 +33,9 @@ public class MenuVentas extends JPanel {
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
+        btnBorrar.setBackground(null);
+        btnEditar.setBackground(null);
+        btnCrear.setBackground(null);
         btnBorrar.setBorder(null);
         btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
@@ -76,7 +79,7 @@ public class MenuVentas extends JPanel {
     private void setButtonIcon(JButton button, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
-        Image scaledIconImage = iconImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Image scaledIconImage = iconImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         button.setIcon(new ImageIcon(scaledIconImage));
     }
 

@@ -34,7 +34,9 @@ public class MenuPromociones extends JPanel {
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 
-
+        btnBorrar.setBackground(null);
+        btnEditar.setBackground(null);
+        btnCrear.setBackground(null);
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
@@ -90,7 +92,7 @@ public class MenuPromociones extends JPanel {
     private void setButtonIcon(JButton button, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
-        Image scaledIconImage = iconImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Image scaledIconImage = iconImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         button.setIcon(new ImageIcon(scaledIconImage));
     }
 

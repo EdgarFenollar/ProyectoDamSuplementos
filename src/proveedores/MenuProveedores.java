@@ -34,6 +34,9 @@ public class MenuProveedores extends JPanel {
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 
+        btnBorrar.setBackground(null);
+        btnEditar.setBackground(null);
+        btnCrear.setBackground(null);
 
         createTable(tableInfo);
 
@@ -91,7 +94,7 @@ public class MenuProveedores extends JPanel {
     private void setButtonIcon(JButton button, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
-        Image scaledIconImage = iconImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Image scaledIconImage = iconImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         button.setIcon(new ImageIcon(scaledIconImage));
     }
 
