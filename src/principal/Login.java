@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class Login extends JFrame{
 
@@ -21,7 +20,7 @@ public class Login extends JFrame{
         setContentPane(panelLogin);
 
         //Redimensionar Imagen LOGO//
-        ImageIcon logoPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/peeklogo.png")));
+        ImageIcon logoPrinc = new ImageIcon("imagenes/peeklogo.png");
         Image logoImg = logoPrinc.getImage();
         Image logoScaled = logoImg.getScaledInstance(400, 400,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon crear = new ImageIcon(logoScaled);
@@ -29,7 +28,7 @@ public class Login extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen LINEA//
-        ImageIcon lineaPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/lineaazul.png")));
+        ImageIcon lineaPrinc = new ImageIcon("imagenes/lineaazul.png");
         Image lineaImg = lineaPrinc.getImage();
         Image lineaScaled = lineaImg.getScaledInstance(50, 350,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon linea = new ImageIcon(lineaScaled);
@@ -39,7 +38,7 @@ public class Login extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame dashboard = new PantallaPrincipal();
-                dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
+                dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
                 dashboard.setVisible(true);
                 dashboard.setSize(1500,900);
                 dashboard.setLocationRelativeTo(null);
@@ -57,7 +56,7 @@ public class Login extends JFrame{
 
             public void run() {
                 JFrame menuLogin = new Login();
-                menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
+                menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
                 menuLogin.setVisible(true);
                 menuLogin.setSize(800,450);
                 menuLogin.setLocationRelativeTo(null);

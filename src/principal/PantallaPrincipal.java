@@ -1,7 +1,5 @@
 package principal;
 
-import principal.Dashboard;
-import principal.Login;
 import promociones.MenuPromociones;
 import proveedores.MenuProveedores;
 
@@ -62,7 +60,7 @@ public class PantallaPrincipal extends JFrame{
         empleadosBtn.setOpaque(false);
 
         //Redimensionar Imagen MINILOGO//
-        ImageIcon miniLogoPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/miniLogo.png")));
+        ImageIcon miniLogoPrinc = new ImageIcon("imagenes/miniLogo.png");
         Image miniLogoImg = miniLogoPrinc.getImage();
         Image miniLogoScaled = miniLogoImg.getScaledInstance(70, 70,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon miniLogo = new ImageIcon(miniLogoScaled);
@@ -70,7 +68,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen USUARIO//
-        ImageIcon userPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/usuario.png")));
+        ImageIcon userPrinc = new ImageIcon("imagenes/usuario.png");
         Image userImg = userPrinc.getImage();
         Image userScaled = userImg.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon user = new ImageIcon(userScaled);
@@ -78,7 +76,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen LOGOUT//
-        ImageIcon logoutPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/logout.png")));
+        ImageIcon logoutPrinc = new ImageIcon("imagenes/logout.png");
         Image logoutImg = logoutPrinc.getImage();
         Image logoutScaled = logoutImg.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon logout = new ImageIcon(logoutScaled);
@@ -86,7 +84,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen DASHBOARD//
-        ImageIcon dashboardPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/dashboard.png")));
+        ImageIcon dashboardPrinc = new ImageIcon("imagenes/dashboard.png");
         Image dashboardImage = dashboardPrinc.getImage();
         Image dashboardImageScaledInstance = dashboardImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon dashboard = new ImageIcon(dashboardImageScaledInstance);
@@ -94,7 +92,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen PROVEEDOR//
-        ImageIcon proveedorPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/proveedor.png")));
+        ImageIcon proveedorPrinc = new ImageIcon("imagenes/proveedor.png");
         Image proveedorPrincImage = proveedorPrinc.getImage();
         Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);
@@ -102,7 +100,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen PROMOCIONES//
-        ImageIcon promocionesPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/promotions.png")));
+        ImageIcon promocionesPrinc = new ImageIcon("imagenes/promotions.png");
         Image promocionesPrincImage = promocionesPrinc.getImage();
         Image promocionesPrincImageScaledInstance = promocionesPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon promociones = new ImageIcon(promocionesPrincImageScaledInstance);
@@ -110,7 +108,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen CLIENTES//
-        ImageIcon clientesPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/clientes.png")));
+        ImageIcon clientesPrinc = new ImageIcon("imagenes/clientes.png");
         Image clientesPrincImage = clientesPrinc.getImage();
         Image clientesPrincImageScaledInstance = clientesPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon clientes = new ImageIcon(clientesPrincImageScaledInstance);
@@ -118,7 +116,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen CATEGORIAS//
-        ImageIcon categoriasPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/categoria.png")));
+        ImageIcon categoriasPrinc = new ImageIcon("imagenes/categoria.png");
         Image categoriasPrincImage = categoriasPrinc.getImage();
         Image categoriasPrincImageScaledInstance = categoriasPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon categorias = new ImageIcon(categoriasPrincImageScaledInstance);
@@ -126,7 +124,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen VENTAS//
-        ImageIcon ventasPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/cart.png")));
+        ImageIcon ventasPrinc = new ImageIcon("imagenes/cart.png");
         Image ventasPrincImage = ventasPrinc.getImage();
         Image ventasPrincImageScaledInstance = ventasPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon ventas = new ImageIcon(ventasPrincImageScaledInstance);
@@ -134,7 +132,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen PEDIDOS//
-        ImageIcon pedidosPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/pedidos.png")));
+        ImageIcon pedidosPrinc = new ImageIcon("imagenes/pedidos.png");
         Image pedidosPrincImage = pedidosPrinc.getImage();
         Image pedidosPrincImageScaledInstance = pedidosPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon pedidos = new ImageIcon(pedidosPrincImageScaledInstance);
@@ -142,7 +140,7 @@ public class PantallaPrincipal extends JFrame{
         //////////////////////////////
 
         //Redimensionar Imagen EMPLEADOS//
-        ImageIcon empleadosPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/employe.png")));
+        ImageIcon empleadosPrinc = new ImageIcon("imagenes/employe.png");
         Image empleadosPrincImage = empleadosPrinc.getImage();
         Image empleadosPrincImageScaledInstance = empleadosPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon empleados = new ImageIcon(empleadosPrincImageScaledInstance);
@@ -159,7 +157,7 @@ public class PantallaPrincipal extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame menuLogin = new Login();
-                menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("imagenes/miniLogo.png")));
+                menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
                 menuLogin.setVisible(true);
                 menuLogin.setSize(800,450);
                 menuLogin.setLocationRelativeTo(null);

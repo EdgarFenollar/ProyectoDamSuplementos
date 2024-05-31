@@ -1,7 +1,6 @@
 package promociones;
 
 import com.toedter.calendar.JDateChooser;
-import promociones.MenuPromociones;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +50,7 @@ public class MenuCrearPromociones extends JPanel{
         dateChooser2.setPreferredSize(new Dimension(485, 40));
 
         //Redimensionar Imagen CANCELAR//
-        ImageIcon cancelPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/x.png")));
+        ImageIcon cancelPrinc = new ImageIcon("imagenes/x.png");
         Image cancelPrincImage = cancelPrinc.getImage();
         Image cancelPrincImageScaledInstance = cancelPrincImage.getScaledInstance(30, 30,  Image.SCALE_SMOOTH);
         ImageIcon cancel = new ImageIcon(cancelPrincImageScaledInstance);
@@ -59,7 +58,7 @@ public class MenuCrearPromociones extends JPanel{
         //////////////////////////////
 
         //Redimensionar Imagen CREAR//
-        ImageIcon crearPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/save.png")));
+        ImageIcon crearPrinc = new ImageIcon("imagenes/save.png");
         Image crearPrincImage = crearPrinc.getImage();
         Image crearPrincImageScaledInstance = crearPrincImage.getScaledInstance(30, 30,  Image.SCALE_SMOOTH);
         ImageIcon crear = new ImageIcon(crearPrincImageScaledInstance);
@@ -67,7 +66,7 @@ public class MenuCrearPromociones extends JPanel{
         //////////////////////////////
 
         //Redimensionar Imagen PROMOCION//
-        ImageIcon promocionPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/promotions.png")));
+        ImageIcon promocionPrinc = new ImageIcon("imagenes/promotions.png");
         Image promocionPrincImage = promocionPrinc.getImage();
         Image promocionPrincImageScaledInstance = promocionPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon promocion = new ImageIcon(promocionPrincImageScaledInstance);

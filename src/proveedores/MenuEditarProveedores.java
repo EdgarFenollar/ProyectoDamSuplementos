@@ -35,7 +35,7 @@ public class MenuEditarProveedores extends JPanel{
         txtNombre.setSize(new Dimension(100, 100));
 
         //Redimensionar Imagen CANCELAR//
-        ImageIcon cancelPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/x.png")));
+        ImageIcon cancelPrinc = new ImageIcon("imagenes/x.png");
         Image cancelPrincImage = cancelPrinc.getImage();
         Image cancelPrincImageScaledInstance = cancelPrincImage.getScaledInstance(30, 30,  Image.SCALE_SMOOTH);
         ImageIcon cancel = new ImageIcon(cancelPrincImageScaledInstance);
@@ -43,7 +43,7 @@ public class MenuEditarProveedores extends JPanel{
         //////////////////////////////
 
         //Redimensionar Imagen CREAR//
-        ImageIcon crearPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/save.png")));
+        ImageIcon crearPrinc = new ImageIcon("imagenes/save.png");
         Image crearPrincImage = crearPrinc.getImage();
         Image crearPrincImageScaledInstance = crearPrincImage.getScaledInstance(30, 30,  Image.SCALE_SMOOTH);
         ImageIcon crear = new ImageIcon(crearPrincImageScaledInstance);
@@ -51,7 +51,7 @@ public class MenuEditarProveedores extends JPanel{
         //////////////////////////////
 
         //Redimensionar Imagen PROVEEDOR//
-        ImageIcon proveedorPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/proveedor.png")));
+        ImageIcon proveedorPrinc = new ImageIcon("imagenes/proveedor.png");
         Image proveedorPrincImage = proveedorPrinc.getImage();
         Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);

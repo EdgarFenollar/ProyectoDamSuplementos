@@ -29,7 +29,7 @@ public class Dashboard extends JPanel{
     }
 
     private void setButtonIcon(JLabel lbl, String iconPath) {
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(iconPath)));
+        ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
         Image scaledIconImage = iconImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         lbl.setIcon(new ImageIcon(scaledIconImage));

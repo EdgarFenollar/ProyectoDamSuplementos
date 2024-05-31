@@ -64,7 +64,7 @@
                       <background color="-7551259"/>
                       <font size="18" style="1"/>
                       <foreground color="-16777216"/>
-                      <text value="proveedores.Proveedor"/>
+                      <text value="Proveedor"/>
                     </properties>
                   </component>
                   <component id="e025" class="javax.swing.JButton" binding="promocionesBtn">

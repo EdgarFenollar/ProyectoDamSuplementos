@@ -75,7 +75,7 @@ public class MenuVentas extends JPanel {
     }
 
     private void setButtonIcon(JButton button, String iconPath) {
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(iconPath)));
+        ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
         Image scaledIconImage = iconImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         button.setIcon(new ImageIcon(scaledIconImage));
