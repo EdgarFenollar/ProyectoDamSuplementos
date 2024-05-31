@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Esta clase sirve para crear el panel utilizado el cual servira para visualizar los proveedores, y poder editar, borrar o crear otros proveedores.
+ * @version: 0.1
+ */
+
 public class MenuProveedores extends JPanel {
     private JPanel panelProveedores;
     private JButton btnBuscar;
@@ -66,6 +71,16 @@ public class MenuProveedores extends JPanel {
                 panelProveedores.repaint();  // Repaint to refresh the component
             }
         });
+
+        btnBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el proveedor?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (eliminar == 0){
+
+                }
+            }
+        });
     }
 
     private void setButtonIcon(JButton button, String iconPath) {
@@ -115,7 +130,7 @@ public class MenuProveedores extends JPanel {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error loading students", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al cargar los proveedores", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return data;
     }

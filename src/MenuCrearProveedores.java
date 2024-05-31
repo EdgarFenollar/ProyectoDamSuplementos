@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+/**
+ * Esta clase sirve para crear el panel utilizado para crear los proveedores.
+ * @version: 0.1
+ */
+
 public class MenuCrearProveedores extends JPanel{
     private JPanel panelProveedores;
     private JPanel panelCrearProveedores;

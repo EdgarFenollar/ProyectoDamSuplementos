@@ -4,15 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Esta clase sirve para crear el panel utilizado para crear las promociones.
+ * Esta clase sirve para crear el panel utilizado para editar las promociones.
  * @version: 0.1
  */
 
-
-public class MenuCrearPromociones extends JPanel{
+public class MenuEditarPromociones extends JPanel{
     private JPanel panelPromociones;
     private JPanel panelCrearPromociones;
     private JButton btnConfirmar;
@@ -26,7 +26,7 @@ public class MenuCrearPromociones extends JPanel{
     private JDateChooser dateChooser1 = new JDateChooser();
     private JDateChooser dateChooser2 = new JDateChooser();
 
-    public MenuCrearPromociones(){
+    public MenuEditarPromociones(){
         setLayout(new BorderLayout());
         add(panelPromociones, BorderLayout.CENTER);
 

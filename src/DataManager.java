@@ -5,6 +5,7 @@ import java.util.List;
 
 public class DataManager {
     public static List<Proveedor> proveedores = new ArrayList<>();
+    public static List<Promocion> promociones = new ArrayList<>();
 
     public static void cargarDatos(){
         proveedores.add(new Proveedor(1, "NutriFit S.A.", "info@nutrifit.com", "28003", "Avenida de la Salud 10"));

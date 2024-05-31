@@ -79,10 +79,10 @@
                     <properties>
                       <model>
                         <item value="Id"/>
-                        <item value="Nombre"/>
-                        <item value="Correo Electronico"/>
-                        <item value="Código Postal"/>
-                        <item value="Dirección"/>
+                        <item value="Descripción"/>
+                        <item value="Descuento"/>
+                        <item value="Fecha Inicio"/>
+                        <item value="Fecha Fin"/>
                       </model>
                     </properties>
                   </component>
