@@ -1,5 +1,8 @@
 package principal;
 
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.ui.FlatLineBorder;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
@@ -13,12 +16,15 @@ public class Dashboard extends JPanel{
     private JLabel imgEmpleadosDash;
     private JLabel txtTotalEmpleados;
     private JLabel txtBienvenida;
+    private JPanel panelStats;
 
     public Dashboard(){
         String usr = System.getProperty("user.name");
         txtBienvenida.setText(usr);
         txtBienvenida.setText("BIENVENIDO " + usr);
 
+        panelStats.setBorder( new FlatLineBorder( new Insets( 16, 16, 16, 16 ), Color.blue, 1, 8 ) );
+        panelStats.putClientProperty( FlatClientProperties.STYLE, "arc: 8" );
         setLayout(new BorderLayout());
         add(panelPantallas, BorderLayout.CENTER);
 
