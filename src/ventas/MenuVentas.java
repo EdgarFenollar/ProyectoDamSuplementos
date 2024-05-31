@@ -1,9 +1,8 @@
 package ventas;
 
-import managers.VentaManager;
+import managers.ClienteManager;
 import proveedores.MenuCrearProveedores;
 import proveedores.MenuEditarProveedores;
-import managers.DataManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,18 +10,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import managers.VentaManager;
-import java.util.Objects;
 
 public class MenuVentas extends JPanel {
-    private JPanel panelProveedores;
+    private JPanel panelVentas;
     private JButton btnBuscar;
     private JButton btnBorrar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
     private JTable tableInfo;
-    private JPanel panelTablaProveedores;
+    private JPanel panelTablaVentas;
     private JComboBox<String> comboBoxFiltrar;
     private JTextField txtBuscar;
     private JScrollPane scrollTable;
@@ -30,7 +27,7 @@ public class MenuVentas extends JPanel {
 
     public MenuVentas() {
         setLayout(new BorderLayout());
-        add(panelProveedores, BorderLayout.CENTER);
+        add(panelVentas, BorderLayout.CENTER);
 
 
         createTable(tableInfo);
@@ -57,21 +54,21 @@ public class MenuVentas extends JPanel {
         btnCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelProveedores.setLayout(new BorderLayout());
-                panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelProveedores.revalidate();  // Revalidate to apply layout changes
-                panelProveedores.repaint();  // Repaint to refresh the component
+                panelVentas.setLayout(new BorderLayout());
+                panelVentas.removeAll();  // Remove any existing components
+                panelVentas.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelVentas.revalidate();  // Revalidate to apply layout changes
+                panelVentas.repaint();  // Repaint to refresh the component
             }
         });
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelProveedores.setLayout(new BorderLayout());
-                panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelProveedores.revalidate();  // Revalidate to apply layout changes
-                panelProveedores.repaint();  // Repaint to refresh the component
+                panelVentas.setLayout(new BorderLayout());
+                panelVentas.removeAll();  // Remove any existing components
+                panelVentas.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelVentas.revalidate();  // Revalidate to apply layout changes
+                panelVentas.repaint();  // Repaint to refresh the component
             }
         });
     }
@@ -85,14 +82,14 @@ public class MenuVentas extends JPanel {
 
     public static void createTable(JTable tabla) {
         try {
-            if (VentaManager.ventas == null) {
-                VentaManager.ventas = new ArrayList<>();
+            if (ClienteManager.clientes == null) {
+                ClienteManager.clientes = new ArrayList<>();
             }
 
-            String[][] data = new String[VentaManager.ventas.size()][8];
-            cargarVentas(data);
+            String[][] data = new String[ClienteManager.clientes.size()][5];
+            cargarClientes(data);
 
-            String[] cabe = {"ID", "Fecha Venta", "Cantidad", "Precio", "Id Cliente", "Id Empleado", "Id Producto", "Id Promoción"};
+            String[] cabe = {"ID", "DNI", "Nombre", "Apellidos", "Correo", "Telefono", "Codigo Postal", "Direccion", "Tipo"};
 
             tabla.setModel(new DefaultTableModel(data, cabe));
             tabla.getTableHeader().setReorderingAllowed(false);
@@ -103,33 +100,35 @@ public class MenuVentas extends JPanel {
         }
     }
 
-    public static String[][] cargarVentas(String[][] data) {
+    public static String[][] cargarClientes(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
-                    if (VentaManager.ventas.get(i) != null) {
+                    if (ClienteManager.clientes.get(i) != null) {
                         if (j == 0) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getId());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getId());
                         } else if (j == 1) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getFechaVenta());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getDni());
                         } else if (j == 2) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getCantidad());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getNombre());
                         } else if (j == 3) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getPrecio());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getApellidos());
                         } else if (j == 4) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdCliente());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getCorreo());
                         } else if (j == 5) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdEmpleado());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getTelefono());
                         } else if (j == 6) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdProducto());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getCodigoPostal());
                         } else if (j == 7) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdPromocion());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getDireccion());
+                        } else if (j == 8) {
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getTipo());
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar las ventas", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error loading students", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return data;
     }

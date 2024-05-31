@@ -1,10 +1,8 @@
 package clientes;
 
 import managers.ClienteManager;
-import managers.ProveedorManager;
 import proveedores.MenuCrearProveedores;
 import proveedores.MenuEditarProveedores;
-import managers.DataManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,17 +10,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MenuClientes extends JPanel {
-    private JPanel panelClientes;
+    private JPanel panelVentas;
     private JButton btnBuscar;
     private JButton btnBorrar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
     private JTable tableInfo;
-    private JPanel panelTablaClientes;
+    private JPanel panelTablaVentas;
     private JComboBox<String> comboBoxFiltrar;
     private JTextField txtBuscar;
     private JScrollPane scrollTable;
@@ -30,7 +27,7 @@ public class MenuClientes extends JPanel {
 
     public MenuClientes() {
         setLayout(new BorderLayout());
-        add(panelClientes, BorderLayout.CENTER);
+        add(panelVentas, BorderLayout.CENTER);
 
 
         createTable(tableInfo);
@@ -57,21 +54,21 @@ public class MenuClientes extends JPanel {
         btnCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelClientes.setLayout(new BorderLayout());
-                panelClientes.removeAll();  // Remove any existing components
-                panelClientes.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelClientes.revalidate();  // Revalidate to apply layout changes
-                panelClientes.repaint();  // Repaint to refresh the component
+                panelVentas.setLayout(new BorderLayout());
+                panelVentas.removeAll();  // Remove any existing components
+                panelVentas.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelVentas.revalidate();  // Revalidate to apply layout changes
+                panelVentas.repaint();  // Repaint to refresh the component
             }
         });
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelClientes.setLayout(new BorderLayout());
-                panelClientes.removeAll();  // Remove any existing components
-                panelClientes.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelClientes.revalidate();  // Revalidate to apply layout changes
-                panelClientes.repaint();  // Repaint to refresh the component
+                panelVentas.setLayout(new BorderLayout());
+                panelVentas.removeAll();  // Remove any existing components
+                panelVentas.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelVentas.revalidate();  // Revalidate to apply layout changes
+                panelVentas.repaint();  // Repaint to refresh the component
             }
         });
     }

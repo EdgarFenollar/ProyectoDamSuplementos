@@ -7,9 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuCrearVentas extends JPanel{
-    private JPanel panelventas;
-    private JPanel panelCrearVentas;
+public class MenuEditarVentas extends JPanel{
+    private JPanel panelVentas;
+    private JPanel panelEditarVentas;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JLabel imgProveedor;
@@ -20,9 +20,9 @@ public class MenuCrearVentas extends JPanel{
     private JTextField txtDireccion;
     private JLabel imgProveedorGrande;
 
-    public MenuCrearVentas(){
+    public MenuEditarVentas(){
         setLayout(new BorderLayout());
-        add(panelventas, BorderLayout.CENTER);
+        add(panelVentas, BorderLayout.CENTER);
 
         btnConfirmar.setBorder(null);
         btnConfirmar.setOpaque(false);
@@ -58,11 +58,11 @@ public class MenuCrearVentas extends JPanel{
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelventas.setLayout(new BorderLayout());
-                panelventas.removeAll();  // Remove any existing components
-                panelventas.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelventas.revalidate();  // Revalidate to apply layout changes
-                panelventas.repaint();  // Repaint to refresh the component
+                panelEditarVentas.setLayout(new BorderLayout());
+                panelEditarVentas.removeAll();  // Remove any existing components
+                panelEditarVentas.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelEditarVentas.revalidate();  // Revalidate to apply layout changes
+                panelEditarVentas.repaint();  // Repaint to refresh the component
             }
         });
     }
