@@ -27,8 +27,10 @@ public class MenuCrearProveedores extends JPanel{
         add(panelVentas, BorderLayout.CENTER);
 
         btnConfirmar.setBorder(null);
+        btnConfirmar.setBackground(null);
         btnConfirmar.setOpaque(false);
         btnCancelar.setBorder(null);
+        btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
 
         txtNombre.setSize(new Dimension(100, 100));

@@ -25,8 +25,10 @@ public class MenuCrearVentas extends JPanel{
         add(panelventas, BorderLayout.CENTER);
 
         btnConfirmar.setBorder(null);
+        btnConfirmar.setBackground(null);
         btnConfirmar.setOpaque(false);
         btnCancelar.setBorder(null);
+        btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
 
         txtCliente.setSize(new Dimension(100, 100));

@@ -34,14 +34,19 @@ public class MenuClientes extends JPanel {
 
         // Establecer bordes y apariencia de los botones
         btnBorrar.setBorder(null);
+        btnBorrar.setBackground(null);
         btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
+        btnCrear.setBackground(null);
         btnCrear.setOpaque(false);
         btnEditar.setBorder(null);
+        btnEditar.setBackground(null);
         btnEditar.setOpaque(false);
         btnBuscar.setBorder(null);
+        btnBuscar.setBackground(null);
         btnBuscar.setOpaque(false);
         btnFiltrar.setBorder(null);
+        btnFiltrar.setBackground(null);
         btnFiltrar.setOpaque(false);
 
         // Redimensionar e insertar iconos en los botones
@@ -76,7 +81,7 @@ public class MenuClientes extends JPanel {
     private void setButtonIcon(JButton button, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
-        Image scaledIconImage = iconImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Image scaledIconImage = iconImage.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         button.setIcon(new ImageIcon(scaledIconImage));
     }
 

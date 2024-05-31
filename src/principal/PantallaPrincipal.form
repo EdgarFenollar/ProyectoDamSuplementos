@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="principal.PantallaPrincipal">
-  <grid id="27dc6" binding="panelDashboard" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelDashboard" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="897" height="636"/>
+      <xy x="20" y="20" width="897" height="715"/>
     </constraints>
     <properties>
       <background color="-9342607"/>
@@ -30,14 +30,14 @@
               </grid>
             </constraints>
             <properties>
-              <dividerLocation value="163"/>
+              <dividerLocation value="185"/>
               <enabled value="false"/>
             </properties>
             <border type="line">
               <color color="-9342607"/>
             </border>
             <children>
-              <grid id="8bbed" layout-manager="GridLayoutManager" row-count="17" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="8bbed" layout-manager="GridLayoutManager" row-count="19" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <splitpane position="left"/>
@@ -54,7 +54,7 @@
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-12828864"/>
+                      <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
                       <text value="Dashboard"/>
@@ -70,7 +70,7 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-12828864"/>
+                      <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
                       <text value="Proveedor"/>
@@ -81,7 +81,7 @@
                       <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-12828864"/>
+                      <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
                       <text value="Promociones"/>
@@ -92,7 +92,7 @@
                       <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-7551259"/>
+                      <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
                       <text value="Clientes"/>
@@ -108,7 +108,7 @@
                       <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-7551259"/>
+                      <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
                       <text value="Categorias"/>
@@ -119,7 +119,7 @@
                       <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-7551259"/>
+                      <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
                       <text value="Ventas"/>
@@ -130,10 +130,10 @@
                       <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-7551259"/>
+                      <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
-                      <text value="Pedidos"/>
+                      <text value="Compras"/>
                     </properties>
                   </component>
                   <vspacer id="fb8a4">
@@ -171,15 +171,32 @@
                       <grid row="15" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-7551259"/>
+                      <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
                       <text value="Empleados"/>
                     </properties>
                   </component>
-                  <vspacer id="6e78f">
+                  <component id="f7249" class="javax.swing.JButton" binding="productosBtn">
+                    <constraints>
+                      <grid row="17" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-9266501"/>
+                      <enabled value="true"/>
+                      <font size="18" style="1"/>
+                      <foreground color="-1"/>
+                      <text value="Productos"/>
+                    </properties>
+                  </component>
+                  <vspacer id="23070">
                     <constraints>
                       <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
+                  <vspacer id="5d865">
+                    <constraints>
+                      <grid row="18" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                     </constraints>
                   </vspacer>
                 </children>
@@ -190,6 +207,7 @@
                   <splitpane position="right"/>
                 </constraints>
                 <properties>
+                  <background color="-14933183"/>
                   <foreground color="-394241"/>
                 </properties>
                 <border type="none"/>
@@ -285,6 +303,22 @@
           </grid>
         </children>
       </toolbar>
+      <component id="79bf3" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="25c40" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

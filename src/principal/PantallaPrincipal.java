@@ -1,6 +1,7 @@
 package principal;
 
 import clientes.MenuClientes;
+import com.formdev.flatlaf.FlatClientProperties;
 import promociones.MenuPromociones;
 import proveedores.MenuProveedores;
 import ventas.MenuVentas;
@@ -31,6 +32,7 @@ public class PantallaPrincipal extends JFrame{
     private JPanel panelPantallas;
     private JPanel panelAzul;
     private JPanel panelGeneral;
+    private JButton productosBtn;
 
     public PantallaPrincipal(){
         super("Menu Principal - PeekPerformance");
@@ -39,39 +41,6 @@ public class PantallaPrincipal extends JFrame{
         btnLogout.setBackground(null);
         String usr = System.getProperty("user.name");
         txtNombre.setText(usr);
-
-        //Menu Botones
-        dashboardButton.setBorder(null);
-        dashboardButton.setBackground(null);
-        dashboardButton.setOpaque(false);
-
-        promocionesBtn.setBorder(null);
-        promocionesBtn.setBackground(null);
-        promocionesBtn.setOpaque(false);
-
-        clientesBtn.setBorder(null);
-        clientesBtn.setBackground(null);
-        clientesBtn.setOpaque(false);
-
-        categoriasBtn.setBorder(null);
-        categoriasBtn.setBackground(null);
-        categoriasBtn.setOpaque(false);
-
-        ventasBtn.setBorder(null);
-        ventasBtn.setBackground(null);
-        ventasBtn.setOpaque(false);
-
-        proveedoresBtn.setBorder(null);
-        proveedoresBtn.setBackground(null);
-        proveedoresBtn.setOpaque(false);
-
-        pedidosBtn.setBorder(null);
-        pedidosBtn.setBackground(null);
-        pedidosBtn.setOpaque(false);
-
-        empleadosBtn.setBorder(null);
-        empleadosBtn.setBackground(null);
-        empleadosBtn.setOpaque(false);
 
         //Redimensionar Imagen MINILOGO//
         ImageIcon miniLogoPrinc = new ImageIcon("imagenes/miniLogo.png");
@@ -159,6 +128,14 @@ public class PantallaPrincipal extends JFrame{
         Image empleadosPrincImageScaledInstance = empleadosPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon empleados = new ImageIcon(empleadosPrincImageScaledInstance);
         empleadosBtn.setIcon(empleados);
+        //////////////////////////////
+
+        //Redimensionar Imagen PRODUCTOS//
+        ImageIcon productosPrinc = new ImageIcon("imagenes/productos.png");
+        Image productosPrincImage = productosPrinc.getImage();
+        Image productosPrincImageScaledInstance = productosPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
+        ImageIcon productos = new ImageIcon(productosPrincImageScaledInstance);
+        productosBtn.setIcon(productos);
         //////////////////////////////
 
         panelPantallas.setLayout(new BorderLayout());

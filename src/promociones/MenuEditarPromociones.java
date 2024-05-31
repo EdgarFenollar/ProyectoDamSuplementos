@@ -33,9 +33,13 @@ public class MenuEditarPromociones extends JPanel{
         add(panelPromociones, BorderLayout.CENTER);
 
         btnConfirmar.setBorder(null);
+        btnConfirmar.setBackground(null);
         btnConfirmar.setOpaque(false);
         btnCancelar.setBorder(null);
+        btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
+
+        // FECHAS//
         panelFecha1.setLayout(new FlowLayout());
         dateChooser1.setDateFormatString("yyyy-MM-dd");
         JTextField dateEditor1 = (JTextField) dateChooser1.getDateEditor().getUiComponent();
@@ -48,6 +52,7 @@ public class MenuEditarPromociones extends JPanel{
         dateEditor2.setEditable(false);
         panelFecha2.add(dateChooser2);
         dateChooser2.setPreferredSize(new Dimension(485, 40));
+        ///////////
 
         //Redimensionar Imagen CANCELAR//
         ImageIcon cancelPrinc = new ImageIcon("imagenes/x.png");
