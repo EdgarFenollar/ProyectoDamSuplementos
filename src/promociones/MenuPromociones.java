@@ -1,3 +1,7 @@
+package promociones;
+
+import managers.DataManager;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -6,23 +10,28 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MenuClientes extends JPanel {
-    private JPanel panelClientes;
+/**
+ * Esta clase sirve para crear el panel utilizado el cual servira para visualizar las promociones, y poder editar, borrar o crear otras promociones.
+ * @version: 0.1
+ */
+
+public class MenuPromociones extends JPanel {
+    private JPanel panelProveedores;
     private JButton btnBuscar;
     private JButton btnBorrar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
     private JTable tableInfo;
-    private JPanel panelTablaClientes;
+    private JPanel panelTablaPromociones;
     private JComboBox<String> comboBoxFiltrar;
     private JTextField txtBuscar;
     private JScrollPane scrollTable;
     private JLabel lblBuscar;
 
-    public MenuClientes() {
+    public MenuPromociones() {
         setLayout(new BorderLayout());
-        add(panelClientes, BorderLayout.CENTER);
+        add(panelProveedores, BorderLayout.CENTER);
 
 
         createTable(tableInfo);
@@ -49,21 +58,30 @@ public class MenuClientes extends JPanel {
         btnCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelClientes.setLayout(new BorderLayout());
-                panelClientes.removeAll();  // Remove any existing components
-                panelClientes.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelClientes.revalidate();  // Revalidate to apply layout changes
-                panelClientes.repaint();  // Repaint to refresh the component
+                panelProveedores.setLayout(new BorderLayout());
+                panelProveedores.removeAll();  // Remove any existing components
+                panelProveedores.add(new MenuCrearPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.revalidate();  // Revalidate to apply layout changes
+                panelProveedores.repaint();  // Repaint to refresh the component
             }
         });
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelClientes.setLayout(new BorderLayout());
-                panelClientes.removeAll();  // Remove any existing components
-                panelClientes.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelClientes.revalidate();  // Revalidate to apply layout changes
-                panelClientes.repaint();  // Repaint to refresh the component
+                panelProveedores.setLayout(new BorderLayout());
+                panelProveedores.removeAll();  // Remove any existing components
+                panelProveedores.add(new MenuEditarPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.revalidate();  // Revalidate to apply layout changes
+                panelProveedores.repaint();  // Repaint to refresh the component
+            }
+        });
+        btnBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar la promoción?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (eliminar == 0){
+
+                }
             }
         });
     }
@@ -77,14 +95,14 @@ public class MenuClientes extends JPanel {
 
     public static void createTable(JTable tabla) {
         try {
-            if (DataManager.proveedores == null) {
-                DataManager.proveedores = new ArrayList<>();
+            if (DataManager.promociones == null) {
+                DataManager.promociones = new ArrayList<>();
             }
 
-            String[][] data = new String[DataManager.proveedores.size()][5];
-            cargarProveedores(data);
+            String[][] data = new String[DataManager.promociones.size()][5];
+            cargarPromociones(data);
 
-            String[] cabe = {"ID", "Nombre", "Correo Electrónico", "Código Postal", "Dirección"};
+            String[] cabe = {"ID", "Descripción", "Descuento", "Fecha Inicio", "Fecha Fin"};
 
             tabla.setModel(new DefaultTableModel(data, cabe));
             tabla.getTableHeader().setReorderingAllowed(false);
@@ -95,27 +113,27 @@ public class MenuClientes extends JPanel {
         }
     }
 
-    public static String[][] cargarProveedores(String[][] data) {
+    public static String[][] cargarPromociones(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
-                    if (DataManager.proveedores.get(i) != null) {
+                    if (DataManager.promociones.get(i) != null) {
                         if (j == 0) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getId());
+                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getId());
                         } else if (j == 1) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getNombre());
+                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getDescripcion());
                         } else if (j == 2) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getCorreo());
+                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getDescuento());
                         } else if (j == 3) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getCp());
+                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getFechaInicio());
                         } else if (j == 4) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getDireccion());
+                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getFechaFin());
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error loading students", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al cargar las promociones", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return data;
     }

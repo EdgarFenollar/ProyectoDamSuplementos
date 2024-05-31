@@ -1,4 +1,7 @@
+package promociones;
+
 import com.toedter.calendar.JDateChooser;
+import promociones.MenuPromociones;
 
 import javax.swing.*;
 import java.awt.*;

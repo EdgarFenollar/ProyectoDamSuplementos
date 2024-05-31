@@ -1,15 +1,14 @@
+package clientes;
+
+import proveedores.MenuProveedores;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-/**
- * Esta clase sirve para crear el panel utilizado para crear los proveedores.
- * @version: 0.1
- */
-
-public class MenuCrearProveedores extends JPanel{
+public class MenuEditarClientes extends JPanel{
     private JPanel panelProveedores;
     private JPanel panelCrearProveedores;
     private JButton btnConfirmar;
@@ -19,9 +18,12 @@ public class MenuCrearProveedores extends JPanel{
     private JTextField txtCorreo;
     private JTextField txtPostal;
     private JTextField txtDireccion;
+    private JTextField textField1;
+    private JRadioButton radioButtonMinorista;
+    private JRadioButton radioButtonMayorista;
     private JLabel imgProveedorGrande;
 
-    public MenuCrearProveedores(){
+    public MenuEditarClientes(){
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 
@@ -51,7 +53,7 @@ public class MenuCrearProveedores extends JPanel{
         //Redimensionar Imagen PROVEEDOR//
         ImageIcon proveedorPrinc = new ImageIcon(Objects.requireNonNull(getClass().getResource("imagenes/proveedor.png")));
         Image proveedorPrincImage = proveedorPrinc.getImage();
-        Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
+        Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);
         imgProveedor.setIcon(proveedor);
         //////////////////////////////

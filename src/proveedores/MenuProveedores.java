@@ -1,3 +1,7 @@
+package proveedores;
+
+import managers.DataManager;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

@@ -1,3 +1,10 @@
+package principal;
+
+import principal.Dashboard;
+import principal.Login;
+import promociones.MenuPromociones;
+import proveedores.MenuProveedores;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

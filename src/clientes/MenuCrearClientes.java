@@ -1,10 +1,14 @@
+package clientes;
+
+import proveedores.MenuProveedores;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class MenuEditarClientes extends JPanel{
+public class MenuCrearClientes extends JPanel{
     private JPanel panelProveedores;
     private JPanel panelCrearProveedores;
     private JButton btnConfirmar;
@@ -19,7 +23,7 @@ public class MenuEditarClientes extends JPanel{
     private JRadioButton radioButtonMayorista;
     private JLabel imgProveedorGrande;
 
-    public MenuEditarClientes(){
+    public MenuCrearClientes(){
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 

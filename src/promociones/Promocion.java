@@ -1,3 +1,5 @@
+package promociones;
+
 import java.time.LocalDate;
 
 public class Promocion {

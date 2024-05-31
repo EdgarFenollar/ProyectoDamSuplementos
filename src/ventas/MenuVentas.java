@@ -1,3 +1,9 @@
+package ventas;
+
+import proveedores.MenuCrearProveedores;
+import proveedores.MenuEditarProveedores;
+import managers.DataManager;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -6,12 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- * Esta clase sirve para crear el panel utilizado el cual servira para visualizar las promociones, y poder editar, borrar o crear otras promociones.
- * @version: 0.1
- */
-
-public class MenuPromociones extends JPanel {
+public class MenuVentas extends JPanel {
     private JPanel panelProveedores;
     private JButton btnBuscar;
     private JButton btnBorrar;
@@ -19,13 +20,13 @@ public class MenuPromociones extends JPanel {
     private JButton btnCrear;
     private JButton btnFiltrar;
     private JTable tableInfo;
-    private JPanel panelTablaPromociones;
+    private JPanel panelTablaProveedores;
     private JComboBox<String> comboBoxFiltrar;
     private JTextField txtBuscar;
     private JScrollPane scrollTable;
     private JLabel lblBuscar;
 
-    public MenuPromociones() {
+    public MenuVentas() {
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 
@@ -56,7 +57,7 @@ public class MenuPromociones extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 panelProveedores.setLayout(new BorderLayout());
                 panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuCrearPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelProveedores.revalidate();  // Revalidate to apply layout changes
                 panelProveedores.repaint();  // Repaint to refresh the component
             }
@@ -66,18 +67,9 @@ public class MenuPromociones extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 panelProveedores.setLayout(new BorderLayout());
                 panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuEditarPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelProveedores.revalidate();  // Revalidate to apply layout changes
                 panelProveedores.repaint();  // Repaint to refresh the component
-            }
-        });
-        btnBorrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar la promoción?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (eliminar == 0){
-
-                }
             }
         });
     }
@@ -91,14 +83,14 @@ public class MenuPromociones extends JPanel {
 
     public static void createTable(JTable tabla) {
         try {
-            if (DataManager.promociones == null) {
-                DataManager.promociones = new ArrayList<>();
+            if (DataManager.proveedores == null) {
+                DataManager.proveedores = new ArrayList<>();
             }
 
-            String[][] data = new String[DataManager.promociones.size()][5];
-            cargarPromociones(data);
+            String[][] data = new String[DataManager.proveedores.size()][5];
+            cargarProveedores(data);
 
-            String[] cabe = {"ID", "Descripción", "Descuento", "Fecha Inicio", "Fecha Fin"};
+            String[] cabe = {"ID", "Nombre", "Correo Electrónico", "Código Postal", "Dirección"};
 
             tabla.setModel(new DefaultTableModel(data, cabe));
             tabla.getTableHeader().setReorderingAllowed(false);
@@ -109,27 +101,27 @@ public class MenuPromociones extends JPanel {
         }
     }
 
-    public static String[][] cargarPromociones(String[][] data) {
+    public static String[][] cargarProveedores(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
-                    if (DataManager.promociones.get(i) != null) {
+                    if (DataManager.proveedores.get(i) != null) {
                         if (j == 0) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getId());
+                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getId());
                         } else if (j == 1) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getDescripcion());
+                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getNombre());
                         } else if (j == 2) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getDescuento());
+                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getCorreo());
                         } else if (j == 3) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getFechaInicio());
+                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getCp());
                         } else if (j == 4) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getFechaFin());
+                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getDireccion());
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar las promociones", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error loading students", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return data;
     }
