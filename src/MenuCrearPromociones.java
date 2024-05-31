@@ -29,10 +29,14 @@ public class MenuCrearPromociones extends JPanel{
         btnCancelar.setOpaque(false);
         panelFecha1.setLayout(new FlowLayout());
         dateChooser1.setDateFormatString("yyyy-MM-dd");
+        JTextField dateEditor1 = (JTextField) dateChooser1.getDateEditor().getUiComponent();
+        dateEditor1.setEditable(false);
         panelFecha1.add(dateChooser1);
         dateChooser1.setPreferredSize(new Dimension(485, 40));
         panelFecha2.setLayout(new FlowLayout());
         dateChooser2.setDateFormatString("yyyy-MM-dd");
+        JTextField dateEditor2 = (JTextField) dateChooser2.getDateEditor().getUiComponent();
+        dateEditor2.setEditable(false);
         panelFecha2.add(dateChooser2);
         dateChooser2.setPreferredSize(new Dimension(485, 40));
 
