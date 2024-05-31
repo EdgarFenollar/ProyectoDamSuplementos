@@ -1,6 +1,7 @@
 package proveedores;
 
 import managers.DataManager;
+import managers.ProveedorManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -96,11 +97,11 @@ public class MenuProveedores extends JPanel {
 
     public static void createTable(JTable tabla) {
         try {
-            if (DataManager.proveedores == null) {
-                DataManager.proveedores = new ArrayList<>();
+            if (ProveedorManager.proveedores == null) {
+                ProveedorManager.proveedores = new ArrayList<>();
             }
 
-            String[][] data = new String[DataManager.proveedores.size()][5];
+            String[][] data = new String[ProveedorManager.proveedores.size()][5];
             cargarProveedores(data);
 
             String[] cabe = {"ID", "Nombre", "Correo Electrónico", "Código Postal", "Dirección"};
@@ -118,17 +119,17 @@ public class MenuProveedores extends JPanel {
         try {
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
-                    if (DataManager.proveedores.get(i) != null) {
+                    if (ProveedorManager.proveedores.get(i) != null) {
                         if (j == 0) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getId());
+                            data[i][j] = String.valueOf(ProveedorManager.proveedores.get(i).getId());
                         } else if (j == 1) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getNombre());
+                            data[i][j] = String.valueOf(ProveedorManager.proveedores.get(i).getNombre());
                         } else if (j == 2) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getCorreo());
+                            data[i][j] = String.valueOf(ProveedorManager.proveedores.get(i).getCorreo());
                         } else if (j == 3) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getCp());
+                            data[i][j] = String.valueOf(ProveedorManager.proveedores.get(i).getCp());
                         } else if (j == 4) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getDireccion());
+                            data[i][j] = String.valueOf(ProveedorManager.proveedores.get(i).getDireccion());
                         }
                     }
                 }

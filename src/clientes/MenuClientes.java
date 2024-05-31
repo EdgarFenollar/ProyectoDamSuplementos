@@ -1,5 +1,7 @@
 package clientes;
 
+import managers.ClienteManager;
+import managers.ProveedorManager;
 import proveedores.MenuCrearProveedores;
 import proveedores.MenuEditarProveedores;
 import managers.DataManager;
@@ -83,14 +85,14 @@ public class MenuClientes extends JPanel {
 
     public static void createTable(JTable tabla) {
         try {
-            if (DataManager.proveedores == null) {
-                DataManager.proveedores = new ArrayList<>();
+            if (ClienteManager.clientes == null) {
+                ClienteManager.clientes = new ArrayList<>();
             }
 
-            String[][] data = new String[DataManager.proveedores.size()][5];
-            cargarProveedores(data);
+            String[][] data = new String[ClienteManager.clientes.size()][5];
+            cargarClientes(data);
 
-            String[] cabe = {"ID", "Nombre", "Correo Electrónico", "Código Postal", "Dirección"};
+            String[] cabe = {"ID", "DNI", "Nombre", "Apellidos", "Correo", "Telefono", "Codigo Postal", "Direccion", "Tipo"};
 
             tabla.setModel(new DefaultTableModel(data, cabe));
             tabla.getTableHeader().setReorderingAllowed(false);
@@ -101,21 +103,29 @@ public class MenuClientes extends JPanel {
         }
     }
 
-    public static String[][] cargarProveedores(String[][] data) {
+    public static String[][] cargarClientes(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
-                    if (DataManager.proveedores.get(i) != null) {
+                    if (ClienteManager.clientes.get(i) != null) {
                         if (j == 0) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getId());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getId());
                         } else if (j == 1) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getNombre());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getDni());
                         } else if (j == 2) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getCorreo());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getNombre());
                         } else if (j == 3) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getCp());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getApellidos());
                         } else if (j == 4) {
-                            data[i][j] = String.valueOf(DataManager.proveedores.get(i).getDireccion());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getCorreo());
+                        } else if (j == 5) {
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getTelefono());
+                        } else if (j == 6) {
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getCodigoPostal());
+                        } else if (j == 7) {
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getDireccion());
+                        } else if (j == 8) {
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getTipo());
                         }
                     }
                 }

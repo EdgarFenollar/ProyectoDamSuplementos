@@ -1,6 +1,7 @@
 package promociones;
 
 import managers.DataManager;
+import managers.PromocionManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -95,11 +96,11 @@ public class MenuPromociones extends JPanel {
 
     public static void createTable(JTable tabla) {
         try {
-            if (DataManager.promociones == null) {
-                DataManager.promociones = new ArrayList<>();
+            if (PromocionManager.promociones == null) {
+                PromocionManager.promociones = new ArrayList<>();
             }
 
-            String[][] data = new String[DataManager.promociones.size()][5];
+            String[][] data = new String[PromocionManager.promociones.size()][5];
             cargarPromociones(data);
 
             String[] cabe = {"ID", "Descripción", "Descuento", "Fecha Inicio", "Fecha Fin"};
@@ -117,17 +118,17 @@ public class MenuPromociones extends JPanel {
         try {
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
-                    if (DataManager.promociones.get(i) != null) {
+                    if (PromocionManager.promociones.get(i) != null) {
                         if (j == 0) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getId());
+                            data[i][j] = String.valueOf(PromocionManager.promociones.get(i).getId());
                         } else if (j == 1) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getDescripcion());
+                            data[i][j] = String.valueOf(PromocionManager.promociones.get(i).getDescripcion());
                         } else if (j == 2) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getDescuento());
+                            data[i][j] = String.valueOf(PromocionManager.promociones.get(i).getDescuento());
                         } else if (j == 3) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getFechaInicio());
+                            data[i][j] = String.valueOf(PromocionManager.promociones.get(i).getFechaInicio());
                         } else if (j == 4) {
-                            data[i][j] = String.valueOf(DataManager.promociones.get(i).getFechaFin());
+                            data[i][j] = String.valueOf(PromocionManager.promociones.get(i).getFechaFin());
                         }
                     }
                 }

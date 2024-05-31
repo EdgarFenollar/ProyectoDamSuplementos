@@ -1,7 +1,9 @@
 package principal;
 
+import clientes.MenuClientes;
 import promociones.MenuPromociones;
 import proveedores.MenuProveedores;
+import ventas.MenuVentas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -194,6 +196,28 @@ public class PantallaPrincipal extends JFrame{
                 panelPantallas.setLayout(new BorderLayout());
                 panelPantallas.removeAll();  // Remove any existing components
                 panelPantallas.add(new MenuPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelPantallas.revalidate();  // Revalidate to apply layout changes
+                panelPantallas.repaint();  // Repaint to refresh the component
+            }
+        });
+
+        clientesBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelPantallas.setLayout(new BorderLayout());
+                panelPantallas.removeAll();  // Remove any existing components
+                panelPantallas.add(new MenuClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelPantallas.revalidate();  // Revalidate to apply layout changes
+                panelPantallas.repaint();  // Repaint to refresh the component
+            }
+        });
+
+        ventasBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelPantallas.setLayout(new BorderLayout());
+                panelPantallas.removeAll();  // Remove any existing components
+                panelPantallas.add(new MenuVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelPantallas.revalidate();  // Revalidate to apply layout changes
                 panelPantallas.repaint();  // Repaint to refresh the component
             }
