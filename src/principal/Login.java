@@ -1,5 +1,13 @@
 package principal;
 
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import managers.DataManager;
 
 import javax.swing.*;
@@ -17,6 +25,7 @@ public class Login extends JFrame{
     private JLabel imgLineaAzul;
 
     public Login(){
+        super("Login - PeekPerformance");
         setContentPane(panelLogin);
 
         //Redimensionar Imagen LOGO//
@@ -52,9 +61,17 @@ public class Login extends JFrame{
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
+            public FlatArcIJTheme FlatLightLaf;
+
             @Override
 
             public void run() {
+                FlatArcIJTheme.setup();
+                try {
+                    UIManager.setLookAndFeel(new FlatLightOwlIJTheme());
+                } catch( Exception ex ) {
+                    System.err.println( "Failed to initialize LaF" );
+                }
                 JFrame menuLogin = new Login();
                 menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
                 menuLogin.setVisible(true);
@@ -63,6 +80,7 @@ public class Login extends JFrame{
                 menuLogin.setResizable(false);
                 menuLogin.setDefaultCloseOperation(EXIT_ON_CLOSE);
                 DataManager.cargarDatos();
+
             }
         });
     }

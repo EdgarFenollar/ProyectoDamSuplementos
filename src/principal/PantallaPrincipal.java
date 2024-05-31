@@ -6,6 +6,8 @@ import proveedores.MenuProveedores;
 import ventas.MenuVentas;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,8 +29,11 @@ public class PantallaPrincipal extends JFrame{
     private JButton proveedoresBtn;
     private JButton empleadosBtn;
     private JPanel panelPantallas;
+    private JPanel panelAzul;
+    private JPanel panelGeneral;
 
     public PantallaPrincipal(){
+        super("Menu Principal - PeekPerformance");
         setContentPane(panelDashboard);
         btnLogout.setBorder(null);
         btnLogout.setBackground(null);
@@ -37,27 +42,35 @@ public class PantallaPrincipal extends JFrame{
 
         //Menu Botones
         dashboardButton.setBorder(null);
+        dashboardButton.setBackground(null);
         dashboardButton.setOpaque(false);
 
         promocionesBtn.setBorder(null);
+        promocionesBtn.setBackground(null);
         promocionesBtn.setOpaque(false);
 
         clientesBtn.setBorder(null);
+        clientesBtn.setBackground(null);
         clientesBtn.setOpaque(false);
 
         categoriasBtn.setBorder(null);
+        categoriasBtn.setBackground(null);
         categoriasBtn.setOpaque(false);
 
         ventasBtn.setBorder(null);
+        ventasBtn.setBackground(null);
         ventasBtn.setOpaque(false);
 
         proveedoresBtn.setBorder(null);
+        proveedoresBtn.setBackground(null);
         proveedoresBtn.setOpaque(false);
 
         pedidosBtn.setBorder(null);
+        pedidosBtn.setBackground(null);
         pedidosBtn.setOpaque(false);
 
         empleadosBtn.setBorder(null);
+        empleadosBtn.setBackground(null);
         empleadosBtn.setOpaque(false);
 
         //Redimensionar Imagen MINILOGO//

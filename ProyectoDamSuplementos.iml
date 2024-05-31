@@ -12,5 +12,7 @@
     <orderEntry type="library" name="jgoodies-looks-2.4.1" level="project" />
     <orderEntry type="library" name="junit-4.6" level="project" />
     <orderEntry type="library" name="mysql-connector-j-8.4.0" level="project" />
+    <orderEntry type="library" name="flatlaf-intellij-themes-3.4.1" level="project" />
+    <orderEntry type="library" name="flatlaf-3.4.1" level="project" />
   </component>
 </module>
