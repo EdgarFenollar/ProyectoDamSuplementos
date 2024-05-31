@@ -1,4 +1,6 @@
-package proveedores;
+package ventas;
+
+import proveedores.MenuProveedores;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +12,9 @@ import java.awt.event.ActionListener;
  * @version: 0.1
  */
 
-public class MenuCrearProveedores extends JPanel{
+public class MenuCrearVentas extends JPanel{
     private JPanel panelVentas;
-    private JPanel panelCrearVentas;
+    private JPanel panelEditarVentas;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JLabel imgProveedor;
@@ -22,7 +24,7 @@ public class MenuCrearProveedores extends JPanel{
     private JTextField txtDireccion;
     private JLabel imgProveedorGrande;
 
-    public MenuCrearProveedores(){
+    public MenuCrearVentas(){
         setLayout(new BorderLayout());
         add(panelVentas, BorderLayout.CENTER);
 
@@ -52,7 +54,7 @@ public class MenuCrearProveedores extends JPanel{
         //Redimensionar Imagen PROVEEDOR//
         ImageIcon proveedorPrinc = new ImageIcon("imagenes/proveedor.png");
         Image proveedorPrincImage = proveedorPrinc.getImage();
-        Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH);
+        Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);
         imgProveedor.setIcon(proveedor);
         //////////////////////////////
