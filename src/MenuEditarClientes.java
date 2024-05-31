@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class MenuEditarProveedores extends JPanel{
+public class MenuEditarClientes extends JPanel{
     private JPanel panelProveedores;
-    private JPanel panelEditarProveedores;
+    private JPanel panelCrearProveedores;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JLabel imgProveedor;
@@ -14,9 +14,12 @@ public class MenuEditarProveedores extends JPanel{
     private JTextField txtCorreo;
     private JTextField txtPostal;
     private JTextField txtDireccion;
+    private JTextField textField1;
+    private JRadioButton radioButtonMinorista;
+    private JRadioButton radioButtonMayorista;
     private JLabel imgProveedorGrande;
 
-    public MenuEditarProveedores(){
+    public MenuEditarClientes(){
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 
