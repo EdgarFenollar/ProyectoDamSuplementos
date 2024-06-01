@@ -2,6 +2,7 @@ package empleados;
 
 import managers.ClienteManager;
 import managers.EmpleadoManager;
+import proveedores.MenuCrearProveedores;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -58,12 +59,40 @@ public class MenuEmpleados extends JPanel {
         setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
 
+        btnCrear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelEmpleados.setLayout(new BorderLayout());
+                panelEmpleados.removeAll();  // Remove any existing components
+                panelEmpleados.add(new MenuCrearEmpleados(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelEmpleados.revalidate();  // Revalidate to apply layout changes
+                panelEmpleados.repaint();  // Repaint to refresh the component
+            }
+        });
+
+
+        btnEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelEmpleados.setLayout(new BorderLayout());
+                panelEmpleados.removeAll();  // Remove any existing components
+                panelEmpleados.add(new MenuEditarEmpleados(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelEmpleados.revalidate();  // Revalidate to apply layout changes
+                panelEmpleados.repaint();  // Repaint to refresh the component
+            }
+        });
+
+
         btnBorrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el Empleado?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (eliminar == 0){
 
+                }
             }
         });
+
     }
 
     private void setButtonIcon(JButton button, String iconPath) {
