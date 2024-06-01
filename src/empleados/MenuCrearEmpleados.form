@@ -3,7 +3,7 @@
   <grid id="27dc6" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1070" height="665"/>
+      <xy x="20" y="20" width="1014" height="488"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -46,7 +46,7 @@
                 <properties>
                   <font size="18"/>
                   <foreground color="-16777216"/>
-                  <text value="Añadir Nuevo Empleado:"/>
+                  <text value="Crear Nuevo Empleado:"/>
                 </properties>
               </component>
               <hspacer id="7d69b">
@@ -147,7 +147,7 @@
                 <constraints/>
                 <properties>
                   <background color="-7551259"/>
-                  <text value="Crear"/>
+                  <text value="Crear Empleado"/>
                 </properties>
               </component>
               <hspacer id="2c27b">
@@ -191,7 +191,7 @@
               </grid>
             </constraints>
             <properties>
-              <dividerLocation value="0"/>
+              <dividerLocation value="131"/>
               <dividerSize value="0"/>
             </properties>
             <border type="none"/>

@@ -1,13 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="empleados.MenuEmpleados">
-  <grid id="27dc6" row-count="1" column-count="1" layout-manager="GridLayoutManager">
+  <grid id="27dc6" binding="panelEmpleados" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
-      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+      <xy x="20" y="20" width="585" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
-    <children/>
+    <children>
+      <grid id="fcfab" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="line">
+          <color color="-9342607"/>
+        </border>
+        <children>
+          <grid id="cbab3" binding="panelTablaEmpleados" layout-manager="GridLayoutManager" row-count="4" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none" title=""/>
+            <children>
+              <component id="52f05" class="javax.swing.JButton" binding="btnEditar">
+                <constraints>
+                  <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-7551259"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="f63d4" class="javax.swing.JButton" binding="btnBorrar">
+                <constraints>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-7551259"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="c098d" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Acciones:"/>
+                </properties>
+              </component>
+              <component id="4449e" class="javax.swing.JButton" binding="btnCrear">
+                <constraints>
+                  <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-7551259"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <toolbar id="94c1">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="-1" height="20"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <borderPainted value="false"/>
+                  <enabled value="false"/>
+                  <floatable value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="5659b" class="javax.swing.JComboBox" binding="comboBoxFiltrar">
+                    <constraints/>
+                    <properties>
+                      <model>
+                        <item value="Id"/>
+                        <item value="Dni"/>
+                        <item value="Nombre"/>
+                        <item value="Apellidos"/>
+                        <item value="Correo"/>
+                        <item value="Teléfono"/>
+                        <item value="Dirección"/>
+                        <item value="Fecha de Nacimiento"/>
+                        <item value="Usuario"/>
+                      </model>
+                    </properties>
+                  </component>
+                  <component id="c0cc7" class="javax.swing.JLabel">
+                    <constraints/>
+                    <properties>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="a7dfa" class="javax.swing.JButton" binding="btnFiltrar">
+                    <constraints/>
+                    <properties>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="5625c" class="javax.swing.JLabel" binding="lblBuscar">
+                    <constraints/>
+                    <properties>
+                      <text value="Buscar por Nombre:"/>
+                    </properties>
+                  </component>
+                  <component id="a5a6f" class="javax.swing.JTextField" binding="txtBuscar">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                  <component id="fa841" class="javax.swing.JButton" binding="btnBuscar">
+                    <constraints/>
+                    <properties>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </toolbar>
+              <hspacer id="493a">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="3ae35" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="c674e" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="4de7e" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="10622" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Registro de Empleados:"/>
+                </properties>
+              </component>
+              <scrollpane id="d240c" binding="scrollTable">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="6" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <alignmentX value="0.1"/>
+                  <alignmentY value="0.5"/>
+                  <autoscrolls value="false"/>
+                  <background color="-14933183"/>
+                  <doubleBuffered value="false"/>
+                  <focusCycleRoot value="false"/>
+                  <font name="Dialog" size="20" style="1"/>
+                  <foreground color="-394241"/>
+                  <opaque value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="67163" class="javax.swing.JTable" binding="tableInfo">
+                    <constraints/>
+                    <properties>
+                      <alignmentX value="0.0"/>
+                      <background color="-14933183"/>
+                      <enabled value="true"/>
+                      <font name="Dialog" size="16" style="1"/>
+                      <foreground color="-394241"/>
+                      <gridColor color="-394241"/>
+                      <selectionBackground color="-9266501"/>
+                      <selectionForeground color="-394241"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
   </grid>
 </form>
