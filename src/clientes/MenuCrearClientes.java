@@ -1,12 +1,9 @@
 package clientes;
 
-import proveedores.MenuProveedores;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class MenuCrearClientes extends JPanel{
     private JPanel panelProveedores;
@@ -17,10 +14,10 @@ public class MenuCrearClientes extends JPanel{
     private JTextField txtNombre;
     private JTextField txtCorreo;
     private JTextField txtPostal;
-    private JTextField txtDireccion;
-    private JTextField textField1;
+    private JTextField txtTelefono;
     private JRadioButton radioButtonMinorista;
     private JRadioButton radioButtonMayorista;
+    private JTextField txtDireccion;
     private JLabel imgProveedorGrande;
 
     public MenuCrearClientes(){
@@ -52,8 +49,8 @@ public class MenuCrearClientes extends JPanel{
         btnConfirmar.setIcon(crear);
         //////////////////////////////
 
-        //Redimensionar Imagen PROVEEDOR//
-        ImageIcon proveedorPrinc = new ImageIcon("imagenes/proveedor.png");
+        //Redimensionar Imagen CLIENTES//
+        ImageIcon proveedorPrinc = new ImageIcon("imagenes/clientes.png");
         Image proveedorPrincImage = proveedorPrinc.getImage();
         Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);
@@ -65,7 +62,7 @@ public class MenuCrearClientes extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 panelProveedores.setLayout(new BorderLayout());
                 panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.add(new MenuClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelProveedores.revalidate();  // Revalidate to apply layout changes
                 panelProveedores.repaint();  // Repaint to refresh the component
             }

@@ -64,7 +64,7 @@ public class MenuClientes extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 panelVentas.setLayout(new BorderLayout());
                 panelVentas.removeAll();  // Remove any existing components
-                panelVentas.add(new MenuCrearProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelVentas.add(new MenuCrearClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelVentas.revalidate();  // Revalidate to apply layout changes
                 panelVentas.repaint();  // Repaint to refresh the component
             }
@@ -74,7 +74,7 @@ public class MenuClientes extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 panelVentas.setLayout(new BorderLayout());
                 panelVentas.removeAll();  // Remove any existing components
-                panelVentas.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelVentas.add(new MenuEditarClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelVentas.revalidate();  // Revalidate to apply layout changes
                 panelVentas.repaint();  // Repaint to refresh the component
             }

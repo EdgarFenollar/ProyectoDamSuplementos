@@ -49,8 +49,8 @@ public class MenuEditarVentas extends JPanel{
         btnConfirmar.setIcon(crear);
         //////////////////////////////
 
-        //Redimensionar Imagen PROVEEDOR//
-        ImageIcon proveedorPrinc = new ImageIcon("imagenes/proveedor.png");
+        //Redimensionar Imagen VENTA//
+        ImageIcon proveedorPrinc = new ImageIcon("imagenes/cart.png");
         Image proveedorPrincImage = proveedorPrinc.getImage();
         Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);
@@ -62,7 +62,7 @@ public class MenuEditarVentas extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 panelEditarVentas.setLayout(new BorderLayout());
                 panelEditarVentas.removeAll();  // Remove any existing components
-                panelEditarVentas.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelEditarVentas.add(new MenuVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelEditarVentas.revalidate();  // Revalidate to apply layout changes
                 panelEditarVentas.repaint();  // Repaint to refresh the component
             }

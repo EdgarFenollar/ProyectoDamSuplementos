@@ -54,6 +54,15 @@ public class MenuEditarEmpleados extends JPanel {
         ImageIcon crear = new ImageIcon(crearPrincImageScaledInstance);
         btnConfirmar.setIcon(crear);
         //////////////////////////////
+
+        //Redimensionar Imagen EMPLEADO//
+        ImageIcon proveedorPrinc = new ImageIcon("imagenes/employe.png");
+        Image proveedorPrincImage = proveedorPrinc.getImage();
+        Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
+        ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);
+        imgPromocion.setIcon(proveedor);
+        //////////////////////////////
+
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

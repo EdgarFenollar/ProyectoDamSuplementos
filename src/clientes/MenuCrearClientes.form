@@ -229,7 +229,7 @@
                   <text value="Telefono"/>
                 </properties>
               </component>
-              <component id="273fe" class="javax.swing.JTextField" binding="txtDireccion">
+              <component id="273fe" class="javax.swing.JTextField" binding="txtTelefono">
                 <constraints>
                   <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="80" height="40"/>
@@ -239,14 +239,6 @@
                   <font size="16"/>
                   <text value=""/>
                 </properties>
-              </component>
-              <component id="d79be" class="javax.swing.JTextField" binding="textField1" default-binding="true">
-                <constraints>
-                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties/>
               </component>
               <component id="69e10" class="javax.swing.JLabel">
                 <constraints>
@@ -290,6 +282,17 @@
                 </constraints>
                 <properties>
                   <text value="Mayorista"/>
+                </properties>
+              </component>
+              <component id="2e786" class="javax.swing.JTextField" binding="txtDireccion">
+                <constraints>
+                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="80" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font size="16"/>
+                  <text value=""/>
                 </properties>
               </component>
             </children>
