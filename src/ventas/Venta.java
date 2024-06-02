@@ -1,10 +1,11 @@
 package ventas;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Venta {
     private int id;
-    private Date fechaVenta;
+    private LocalDate fechaVenta;
     private int cantidad;
     private double precioUnitario;
     private int idCliente;
@@ -12,9 +13,9 @@ public class Venta {
     private int idProducto;
     private int idPromocion;
 
-    public Venta(int id, Date fechaVenta, int cantidad, double precioUnitario, int idCliente, int idEmpleado, int idProducto, int idPromocion) {
+    public Venta(int id, String fechaVenta, int cantidad, double precioUnitario, int idCliente, int idEmpleado, int idProducto, int idPromocion) {
         this.id = id;
-        this.fechaVenta = fechaVenta;
+        this.fechaVenta = LocalDate.parse(fechaVenta);
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.idCliente = idCliente;
@@ -27,7 +28,7 @@ public class Venta {
         return id;
     }
 
-    public Date getFechaVenta() {
+    public LocalDate getFechaVenta() {
         return fechaVenta;
     }
 
