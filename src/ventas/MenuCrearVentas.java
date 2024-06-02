@@ -1,6 +1,6 @@
 package ventas;
 
-import proveedores.MenuProveedores;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,11 +14,14 @@ public class MenuCrearVentas extends JPanel{
     private JButton btnCancelar;
     private JLabel imgProveedor;
     private JTextField txtCliente;
+    private JTextField txtCantidad;
+    private JTextField txtPrecio;
     private JTextField txtEmpleado;
+    private JPanel panelFecha1;
+    private JTextField txtIdPromo;
     private JTextField txtProducto;
-    private JTextField txtPromocion;
-    private JTextField txtDireccion;
     private JLabel imgProveedorGrande;
+    private JDateChooser dateChooser1 = new JDateChooser();
 
     public MenuCrearVentas(){
         setLayout(new BorderLayout());
@@ -30,6 +33,14 @@ public class MenuCrearVentas extends JPanel{
         btnCancelar.setBorder(null);
         btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
+
+        // FECHAS//
+        panelFecha1.setLayout(new FlowLayout());
+        dateChooser1.setDateFormatString("yyyy-MM-dd");
+        JTextField dateEditor1 = (JTextField) dateChooser1.getDateEditor().getUiComponent();
+        dateEditor1.setEditable(false);
+        panelFecha1.add(dateChooser1);
+        dateChooser1.setPreferredSize(new Dimension(485, 40));
 
         txtCliente.setSize(new Dimension(100, 100));
 

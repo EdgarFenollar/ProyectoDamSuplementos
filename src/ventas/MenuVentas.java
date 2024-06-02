@@ -1,6 +1,7 @@
 package ventas;
 
 import managers.ClienteManager;
+import managers.VentaManager;
 import proveedores.MenuCrearProveedores;
 import proveedores.MenuEditarProveedores;
 
@@ -85,14 +86,14 @@ public class MenuVentas extends JPanel {
 
     public static void createTable(JTable tabla) {
         try {
-            if (ClienteManager.clientes == null) {
-                ClienteManager.clientes = new ArrayList<>();
+            if (VentaManager.ventas == null) {
+                VentaManager.ventas = new ArrayList<>();
             }
 
-            String[][] data = new String[ClienteManager.clientes.size()][5];
+            String[][] data = new String[VentaManager.ventas.size()][8];
             cargarClientes(data);
 
-            String[] cabe = {"ID", "DNI", "Nombre", "Apellidos", "Correo", "Telefono", "Codigo Postal", "Direccion", "Tipo"};
+            String[] cabe = {"ID", "Fecha Venta", "Cantidad", "Precio Unitario", "ID Cliente", "ID Empleado", "ID Producto", "ID Promocion"};
 
             tabla.setModel(new DefaultTableModel(data, cabe));
             tabla.getTableHeader().setReorderingAllowed(false);
@@ -109,29 +110,27 @@ public class MenuVentas extends JPanel {
                 for (int j = 0; j < data[0].length; j++) {
                     if (ClienteManager.clientes.get(i) != null) {
                         if (j == 0) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getId());
+                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getId());
                         } else if (j == 1) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getDni());
+                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getFechaVenta());
                         } else if (j == 2) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getNombre());
+                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getCantidad());
                         } else if (j == 3) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getApellidos());
+                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getPrecioUnitario());
                         } else if (j == 4) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getCorreo());
+                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdCliente());
                         } else if (j == 5) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getTelefono());
+                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdEmpleado());
                         } else if (j == 6) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getCodigoPostal());
+                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdProducto());
                         } else if (j == 7) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getDireccion());
-                        } else if (j == 8) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getTipo());
+                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdPromocion());
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error loading students", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al cargar las ventas", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return data;
     }

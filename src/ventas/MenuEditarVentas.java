@@ -1,6 +1,6 @@
 package ventas;
 
-import proveedores.MenuProveedores;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,21 +8,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuEditarVentas extends JPanel{
-    private JPanel panelVentas;
-    private JPanel panelEditarVentas;
+    private JPanel panelventas;
+    private JPanel panelCrearVentas;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JLabel imgProveedor;
     private JTextField txtCliente;
+    private JTextField txtCantidad;
+    private JTextField txtPrecio;
     private JTextField txtEmpleado;
+    private JPanel panelFecha1;
+    private JTextField txtIdPromo;
     private JTextField txtProducto;
-    private JTextField txtPromocion;
-    private JTextField txtDireccion;
     private JLabel imgProveedorGrande;
+    private JDateChooser dateChooser1 = new JDateChooser();
 
     public MenuEditarVentas(){
         setLayout(new BorderLayout());
-        add(panelVentas, BorderLayout.CENTER);
+        add(panelventas, BorderLayout.CENTER);
 
         btnConfirmar.setBorder(null);
         btnConfirmar.setBackground(null);
@@ -30,6 +33,14 @@ public class MenuEditarVentas extends JPanel{
         btnCancelar.setBorder(null);
         btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
+
+        // FECHAS//
+        panelFecha1.setLayout(new FlowLayout());
+        dateChooser1.setDateFormatString("yyyy-MM-dd");
+        JTextField dateEditor1 = (JTextField) dateChooser1.getDateEditor().getUiComponent();
+        dateEditor1.setEditable(false);
+        panelFecha1.add(dateChooser1);
+        dateChooser1.setPreferredSize(new Dimension(485, 40));
 
         txtCliente.setSize(new Dimension(100, 100));
 
@@ -60,11 +71,11 @@ public class MenuEditarVentas extends JPanel{
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelEditarVentas.setLayout(new BorderLayout());
-                panelEditarVentas.removeAll();  // Remove any existing components
-                panelEditarVentas.add(new MenuVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelEditarVentas.revalidate();  // Revalidate to apply layout changes
-                panelEditarVentas.repaint();  // Repaint to refresh the component
+                panelventas.setLayout(new BorderLayout());
+                panelventas.removeAll();  // Remove any existing components
+                panelventas.add(new MenuVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelventas.revalidate();  // Revalidate to apply layout changes
+                panelventas.repaint();  // Repaint to refresh the component
             }
         });
     }

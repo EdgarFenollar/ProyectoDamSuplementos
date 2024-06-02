@@ -79,10 +79,13 @@
                     <properties>
                       <model>
                         <item value="ID"/>
-                        <item value="Cliente"/>
-                        <item value="Empleado"/>
-                        <item value="Producto"/>
-                        <item value="Promocion"/>
+                        <item value="Fecha Venta"/>
+                        <item value="Cantidad"/>
+                        <item value="Precio Unitario"/>
+                        <item value="ID Cliente"/>
+                        <item value="ID Empleado"/>
+                        <item value="ID Producto"/>
+                        <item value="ID Promomcion"/>
                       </model>
                     </properties>
                   </component>
