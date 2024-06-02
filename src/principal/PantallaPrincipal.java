@@ -4,6 +4,7 @@ import categorias.MenuCategorias;
 import clientes.MenuClientes;
 import com.formdev.flatlaf.FlatClientProperties;
 import empleados.MenuEmpleados;
+import productos.MenuProductos;
 import promociones.MenuPromociones;
 import proveedores.MenuProveedores;
 import ventas.MenuVentas;
@@ -229,6 +230,16 @@ public class PantallaPrincipal extends JFrame{
                 panelPantallas.setLayout(new BorderLayout());
                 panelPantallas.removeAll();  // Remove any existing components
                 panelPantallas.add(new MenuCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelPantallas.revalidate();  // Revalidate to apply layout changes
+                panelPantallas.repaint();  // Repaint to refresh the component
+            }
+        });
+        productosBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelPantallas.setLayout(new BorderLayout());
+                panelPantallas.removeAll();  // Remove any existing components
+                panelPantallas.add(new MenuProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelPantallas.revalidate();  // Revalidate to apply layout changes
                 panelPantallas.repaint();  // Repaint to refresh the component
             }
