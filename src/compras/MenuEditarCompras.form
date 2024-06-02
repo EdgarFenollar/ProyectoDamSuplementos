@@ -46,7 +46,7 @@
                 <properties>
                   <font size="18"/>
                   <foreground color="-16777216"/>
-                  <text value="Crear Nueva Compra:"/>
+                  <text value="Editar Compra:"/>
                 </properties>
               </component>
               <hspacer id="13302">

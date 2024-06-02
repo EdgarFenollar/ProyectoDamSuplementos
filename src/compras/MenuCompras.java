@@ -76,7 +76,7 @@ public class MenuCompras extends JPanel {
         btnBorrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el Empleado?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar la compra?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (eliminar == 0){
 
                 }
