@@ -51,12 +51,13 @@
                 <children>
                   <component id="69135" class="javax.swing.JButton" binding="dashboardButton" default-binding="true">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Dashboard"/>
                     </properties>
                   </component>
@@ -67,34 +68,37 @@
                   </vspacer>
                   <component id="6a420" class="javax.swing.JButton" binding="proveedoresBtn">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Proveedores"/>
                     </properties>
                   </component>
                   <component id="e025" class="javax.swing.JButton" binding="promocionesBtn">
                     <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Promociones"/>
                     </properties>
                   </component>
                   <component id="81ca2" class="javax.swing.JButton" binding="clientesBtn">
                     <constraints>
-                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Clientes"/>
                     </properties>
                   </component>
@@ -105,34 +109,37 @@
                   </vspacer>
                   <component id="816ae" class="javax.swing.JButton" binding="categoriasBtn">
                     <constraints>
-                      <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Categorias"/>
                     </properties>
                   </component>
                   <component id="b2e1f" class="javax.swing.JButton" binding="ventasBtn">
                     <constraints>
-                      <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Ventas"/>
                     </properties>
                   </component>
                   <component id="57272" class="javax.swing.JButton" binding="pedidosBtn">
                     <constraints>
-                      <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Compras"/>
                     </properties>
                   </component>
@@ -168,24 +175,26 @@
                   </vspacer>
                   <component id="3fe46" class="javax.swing.JButton" binding="empleadosBtn">
                     <constraints>
-                      <grid row="15" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="15" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Empleados"/>
                     </properties>
                   </component>
                   <component id="f7249" class="javax.swing.JButton" binding="productosBtn">
                     <constraints>
-                      <grid row="17" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="17" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-9266501"/>
                       <enabled value="true"/>
                       <font size="18" style="1"/>
                       <foreground color="-1"/>
+                      <horizontalAlignment value="2"/>
                       <text value="Productos"/>
                     </properties>
                   </component>

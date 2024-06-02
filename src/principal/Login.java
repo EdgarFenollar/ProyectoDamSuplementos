@@ -1,13 +1,12 @@
 package principal;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.*;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import managers.DataManager;
 
 import javax.swing.*;
@@ -68,7 +67,7 @@ public class Login extends JFrame{
             public void run() {
                 FlatArcIJTheme.setup();
                 try {
-                    UIManager.setLookAndFeel(new FlatLightOwlIJTheme());
+                    UIManager.setLookAndFeel(new FlatMacLightLaf());
                 } catch( Exception ex ) {
                     System.err.println( "Error al cargar el tema" );
                 }
