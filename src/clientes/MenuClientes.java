@@ -79,6 +79,16 @@ public class MenuClientes extends JPanel {
                 panelVentas.repaint();  // Repaint to refresh the component
             }
         });
+
+        btnBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el cliente?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (eliminar == 0){
+
+                }
+            }
+        });
     }
 
     private void setButtonIcon(JButton button, String iconPath) {

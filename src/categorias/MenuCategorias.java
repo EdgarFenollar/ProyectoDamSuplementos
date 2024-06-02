@@ -1,7 +1,7 @@
-package ventas;
+package categorias;
 
-import managers.ClienteManager;
-import managers.VentaManager;
+import managers.CategoriaManager;
+import managers.ProveedorManager;
 import proveedores.MenuCrearProveedores;
 import proveedores.MenuEditarProveedores;
 
@@ -12,31 +12,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MenuVentas extends JPanel {
-    private JPanel panelVentas;
+/**
+ * Esta clase sirve para crear el panel utilizado el cual servira para visualizar las categorias, y poder editar, borrar o crear otras categorias.
+ * @version: 0.1
+ */
+
+public class MenuCategorias extends JPanel {
+    private JPanel panelCategorias;
     private JButton btnBuscar;
     private JButton btnBorrar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
     private JTable tableInfo;
-    private JPanel panelTablaVentas;
+    private JPanel panelTablaCategorias;
     private JComboBox<String> comboBoxFiltrar;
     private JTextField txtBuscar;
     private JScrollPane scrollTable;
     private JLabel lblBuscar;
 
-    public MenuVentas() {
+    public MenuCategorias() {
         setLayout(new BorderLayout());
-        add(panelVentas, BorderLayout.CENTER);
+        add(panelCategorias, BorderLayout.CENTER);
 
+        btnBorrar.setBackground(null);
+        btnEditar.setBackground(null);
+        btnCrear.setBackground(null);
 
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
-        btnBorrar.setBackground(null);
-        btnEditar.setBackground(null);
-        btnCrear.setBackground(null);
         btnBorrar.setBorder(null);
         btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
@@ -58,28 +63,28 @@ public class MenuVentas extends JPanel {
         btnCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelVentas.setLayout(new BorderLayout());
-                panelVentas.removeAll();  // Remove any existing components
-                panelVentas.add(new MenuCrearVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelVentas.revalidate();  // Revalidate to apply layout changes
-                panelVentas.repaint();  // Repaint to refresh the component
+                panelCategorias.setLayout(new BorderLayout());
+                panelCategorias.removeAll();  // Remove any existing components
+                panelCategorias.add(new MenuCrearCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelCategorias.revalidate();  // Revalidate to apply layout changes
+                panelCategorias.repaint();  // Repaint to refresh the component
             }
         });
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelVentas.setLayout(new BorderLayout());
-                panelVentas.removeAll();  // Remove any existing components
-                panelVentas.add(new MenuEditarVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelVentas.revalidate();  // Revalidate to apply layout changes
-                panelVentas.repaint();  // Repaint to refresh the component
+                panelCategorias.setLayout(new BorderLayout());
+                panelCategorias.removeAll();  // Remove any existing components
+                panelCategorias.add(new MenuEditarCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelCategorias.revalidate();  // Revalidate to apply layout changes
+                panelCategorias.repaint();  // Repaint to refresh the component
             }
         });
 
         btnBorrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar la venta?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar la categoria?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (eliminar == 0){
 
                 }
@@ -96,14 +101,14 @@ public class MenuVentas extends JPanel {
 
     public static void createTable(JTable tabla) {
         try {
-            if (VentaManager.ventas == null) {
-                VentaManager.ventas = new ArrayList<>();
+            if (CategoriaManager.categorias == null) {
+                CategoriaManager.categorias = new ArrayList<>();
             }
 
-            String[][] data = new String[VentaManager.ventas.size()][8];
-            cargarClientes(data);
+            String[][] data = new String[CategoriaManager.categorias.size()][5];
+            cargarProveedores(data);
 
-            String[] cabe = {"ID", "Fecha Venta", "Cantidad", "Precio Unitario", "ID Cliente", "ID Empleado", "ID Producto", "ID Promocion"};
+            String[] cabe = {"ID", "Nombre", "Descripcion"};
 
             tabla.setModel(new DefaultTableModel(data, cabe));
             tabla.getTableHeader().setReorderingAllowed(false);
@@ -114,33 +119,23 @@ public class MenuVentas extends JPanel {
         }
     }
 
-    public static String[][] cargarClientes(String[][] data) {
+    public static String[][] cargarProveedores(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
-                    if (ClienteManager.clientes.get(i) != null) {
+                    if (CategoriaManager.categorias.get(i) != null) {
                         if (j == 0) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getId());
+                            data[i][j] = String.valueOf(CategoriaManager.categorias.get(i).getId());
                         } else if (j == 1) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getFechaVenta());
+                            data[i][j] = String.valueOf(CategoriaManager.categorias.get(i).getNombre());
                         } else if (j == 2) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getCantidad());
-                        } else if (j == 3) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getPrecioUnitario());
-                        } else if (j == 4) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdCliente());
-                        } else if (j == 5) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdEmpleado());
-                        } else if (j == 6) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdProducto());
-                        } else if (j == 7) {
-                            data[i][j] = String.valueOf(VentaManager.ventas.get(i).getIdPromocion());
+                            data[i][j] = String.valueOf(CategoriaManager.categorias.get(i).getDescripcion());
                         }
                     }
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar las ventas", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al cargar las categorias", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return data;
     }

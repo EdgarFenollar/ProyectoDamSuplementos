@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class MenuEditarVentas extends JPanel{
     private JPanel panelventas;
-    private JPanel panelCrearVentas;
+    private JPanel panelEditarVentas;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JLabel imgProveedor;
