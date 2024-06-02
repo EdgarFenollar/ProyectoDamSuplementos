@@ -12,7 +12,7 @@ public class Cliente {
     private String tipo;
     private EnumTipoCliente tipoCli;
 
-    public Cliente(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion, String tipo, EnumTipoCliente tipoCli) {
+    public Cliente(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion,EnumTipoCliente tipoCli) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -21,7 +21,6 @@ public class Cliente {
         this.telefono = telefono;
         this.codigoPostal = codigoPostal;
         this.direccion = direccion;
-        this.tipo = tipo;
         this.tipoCli = tipoCli;
     }
 
@@ -57,9 +56,6 @@ public class Cliente {
         return direccion;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
 
     public EnumTipoCliente getTipoCli() {
         return tipoCli;
