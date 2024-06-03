@@ -104,8 +104,12 @@ public class DBManager {
 
     public static boolean insertarClientes(Cliente cliente){
         try(ResultSet rs = getTableDataBase("SELECT * FROM CLIENTES")) {
-            System.out.println("Introduciendo cliente.");
+            if (rs==null){
+                System.out.println("Error ResultSet");
+                return false;
+            }
 
+            System.out.println("Introduciendo cliente.");
             rs.moveToInsertRow();
             rs.updateString("DNI", cliente.getDni());
             rs.updateString("NOMBRE", cliente.getNombre());
@@ -125,47 +129,13 @@ public class DBManager {
         }
     }
 
-    //////////////////////// EMPLEADOS //////////////////////////
-
-    public static ResultSet getTablaEmpleados(int rsType, int rsConcurrency) {
-        try {
-            Statement stmt = conn.createStatement(rsType, rsConcurrency);
-            ResultSet rs = stmt.executeQuery(TB_Empleados_SelectTodo);
-            return rs;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static ResultSet getTablaEmpleados() {
-        return getTablaEmpleados(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-    }
-
-    public static ResultSet getEmpleado(String nombre) {
-        try {
-            String sql = TB_Empleados_SelectTodo + " WHERE " + TB_Empleados_Nombre + " = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            pstmt.setString(1, nombre);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (!rs.first()) {
-                return null;
-            }
-
-            return rs;
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    //////////////////////////////////////////////////////////////////////
-
     public static boolean insertarPromociones(Promocion promocion){
         try(ResultSet rs = getTableDataBase("SELECT * FROM PROMOCIONES")) {
+            if (rs==null){
+                System.out.println("Error ResultSet");
+                return false;
+            }
+
             System.out.println("Introduciendo promocion.");
             rs.moveToInsertRow();
             rs.updateString("DESCRIPCION", promocion.getDescripcion());
@@ -184,6 +154,11 @@ public class DBManager {
 
     public static boolean insertarVentas(Venta venta){
         try(ResultSet rs = getTableDataBase("SELECT * FROM VENTAS")) {
+            if (rs==null){
+                System.out.println("Error ResultSet");
+                return false;
+            }
+
             System.out.println("Introduciendo venta.");
             rs.moveToInsertRow();
             rs.updateDate("FechaVenta", Date.valueOf(venta.getFechaVenta()));
@@ -205,6 +180,11 @@ public class DBManager {
 
     public static boolean insertarCompras(Compra compra){
         try(ResultSet rs = getTableDataBase("SELECT * FROM COMPRAS")) {
+            if (rs==null){
+                System.out.println("Error ResultSet");
+                return false;
+            }
+
             System.out.println("Introduciendo venta.");
             rs.moveToInsertRow();
             rs.updateDate("FechaCompra", Date.valueOf(compra.getFecha_compra()));
@@ -225,14 +205,19 @@ public class DBManager {
 
     public static boolean insertarCategorias(Categoria categoria){
         try(ResultSet rs = getTableDataBase("SELECT * FROM CATEGORIAS")) {
+            if (rs==null){
+                System.out.println("Error ResultSet");
+                return false;
+            }
+
             System.out.println("Introduciendo categoria.");
             rs.moveToInsertRow();
-            rs.updateString("NOMBRE",categoria.getNombre());
-
-
             rs.insertRow();
+            rs.updateString("NOMBRE", categoria.getNombre());
+            rs.updateString("DESCRIPCION", categoria.getDescripcion());
+            rs.insertRow();
+            System.out.println("Introduciendo valores de categoria a la BD");
             return true;
-
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error introduciendo categoria a la BD.");
@@ -242,14 +227,121 @@ public class DBManager {
 
     public static boolean insertarProveedores(Proveedor proveedor){
         try(ResultSet rs = getTableDataBase("SELECT * FROM PROVEEDOR")) {
+            if (rs==null){
+                System.out.println("Error ResultSet");
+                return false;
+            }
+
+            System.out.println("Introduciendo proveedor.");
+            rs.moveToInsertRow();
+            rs.updateString("NOMBRE", proveedor.getNombre());
+            rs.updateString("CORREO", proveedor.getCorreo());
+            rs.updateString("CodioPostal", proveedor.getCp());
+            rs.updateString("DIRECCIOn", proveedor.getDireccion());
+            rs.insertRow();
+            System.out.println("Introduciendo valores de proveedor a la BD");
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error introduciendo proveedor a la BD.");
             return false;
         }
-        return false;
     }
 
+    public static ResultSet getCompras (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM COMPRAS WHERE IdCompras = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    public static ResultSet getVentas (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM VENTAS WHERE IdVenta = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getPromociones (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM PROMOCIONES WHERE IdPromocion = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getEmpleados (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM EMPLEADOS WHERE IdEmpleado = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getClientes (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM CLIENTES WHERE IdCliente = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getProductos (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM PRODUCTOS WHERE IdProducto = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getCategorias (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM CATEGORIAS WHERE IdCategorias = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getProveedor (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM PROVEEDORES WHERE IdProveedor = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
