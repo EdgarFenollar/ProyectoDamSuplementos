@@ -4,12 +4,16 @@ import categorias.Categoria;
 import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
-import productos.Producto;
+import managers.PromocionManager;
 import promociones.Promocion;
+import proveedores.Proveedor;
 import ventas.Venta;
 
+import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBManager {
     // Conexión a la base de datos
@@ -18,7 +22,7 @@ public class DBManager {
     // Configuración de la conexión a la base de datos
     private static final String DB_HOST = "localhost";
     private static final String DB_PORT = "3306";
-    private static final String DB_NAME = "tienda";
+    private static final String DB_NAME = "tienda_suplementos";
     private static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?serverTimezone=UTC";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
@@ -182,34 +186,14 @@ public class DBManager {
         }
     }
 
-    public static boolean insertarProductos(Producto producto){
-        try(ResultSet rs = getTableDataBase("SELECT * FROM PRODUCTOS")) {
-            System.out.println("Introduciendo producto.");
-            rs.moveToInsertRow();
-            rs.updateString("NOMBRE", producto.getNombre());
-            rs.updateInt("STOCK", producto.getStock());
-            rs.updateDouble("PESO", producto.getPeso());
-            rs.updateDouble("PrecioVenta", producto.getPrecioVenta());
-            rs.updateDouble("PrecioCompra", producto.getPrecioCompra());
-            rs.updateDate("FechaEntrega", Date.valueOf(producto.getFechaEntrega().toString()));
-            rs.updateDate("FechaCaducidad", Date.valueOf(producto.getFechaCaducidad().toString()));
-            rs.updateString("DESCRIPCION", producto.getDescripcion());
-            rs.updateInt("IdCategoria", producto.getIdCategoria());
-            rs.updateInt("IdProveedor", producto.getIdProveedor());
-            rs.insertRow();
-            System.out.println("Introduciendo valores de producto a la BD");
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error introduciendo producto a la BD.");
-            return false;
-        }
-    }
-
     public static boolean insertarCategorias(Categoria categoria){
         try(ResultSet rs = getTableDataBase("SELECT * FROM CATEGORIAS")) {
             System.out.println("Introduciendo categoria.");
             rs.moveToInsertRow();
+            rs.updateString("NOMBRE",categoria.getNombre());
+
+
+            rs.insertRow();
             return true;
 
         } catch (SQLException e) {
@@ -217,5 +201,16 @@ public class DBManager {
             System.out.println("Error introduciendo categoria a la BD.");
             return false;
         }
+    }
+
+    public static boolean insertarProveedores(Proveedor proveedor){
+        try(ResultSet rs = getTableDataBase("SELECT * FROM PROVEEDOR")) {
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error introduciendo proveedor a la BD.");
+            return false;
+        }
+        return false;
     }
 }

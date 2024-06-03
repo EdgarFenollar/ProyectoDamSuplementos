@@ -1,11 +1,18 @@
 package promociones;
 
+import DBManager.DBManager;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Formatter;
 import java.util.Objects;
 
 /**
@@ -88,5 +95,35 @@ public class MenuCrearPromociones extends JPanel{
                 panelPromociones.repaint();  // Repaint to refresh the component
             }
         });
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    LocalDate fechaInicio = convertToLocalDateViaInstant(dateChooser1.getDate());
+                    LocalDate fechaFin = convertToLocalDateViaInstant(dateChooser2.getDate());
+
+                    DBManager.insertarPromociones(new Promocion(
+                            txtDescripcion.getText(),
+                            Double.parseDouble(txtDescuento.getText()),
+                            fechaInicio,
+                            fechaFin
+                    ));
+                    JOptionPane.showMessageDialog(null, "Datos introducidos en la base de datos correctamente.", "EXITO!", JOptionPane.INFORMATION_MESSAGE);
+                    txtDescripcion.setText("");
+                    txtDescuento.setText("");
+                    dateChooser1.setDate(null);
+                    dateChooser2.setDate(null);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error al introducir los datos en la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    }
+
+    private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 }
