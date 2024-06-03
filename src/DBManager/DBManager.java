@@ -29,6 +29,24 @@ public class DBManager {
     private static final String DB_MSQ_CONN_OK = "CONEXIÓN CORRECTA";
     private static final String DB_MSQ_CONN_NO = "ERROR EN LA CONEXIÓN";
 
+    // Datos para Empleados
+    private static final String TB_Empleados = "empleados";
+    private static final String TB_Empleados_SelectTodo = "SELECT * FROM " + TB_Empleados;
+    private static final String TB_Empleados_ID = "idEmpleado";
+    private static final String TB_Empleados_DNI = "DNI";
+    private static final String TB_Empleados_Nombre = "Nombre";
+    private static final String TB_Empleados_Apellidos = "Apellidos";
+    private static final String TB_Empleados_Correo = "Correo";
+    private static final String TB_Empleados_Telefono = "Telefono";
+    private static final String TB_Empleados_Direccion = "Direccion";
+    private static final String TB_Empleados_FechaNac = "FechaNacimiento";
+    private static final String TB_Empleados_Usuario = "Usuario";
+    private static final String TB_Empleados_Contrasenya = "Contrasenya";
+    private static final String TB_Empleados_Administrador = "Administrador";
+
+
+
+
     public static boolean loadDriver() {
         try {
             System.out.print("Cargando Driver...");
@@ -107,25 +125,44 @@ public class DBManager {
         }
     }
 
-    public static boolean insertarEmpleados(Empleado empleado){
-        try(ResultSet rs = getTableDataBase("SELECT * FROM EMPLEADOS")) {
-            System.out.println("Introduciendo empleado.");
-            rs.moveToInsertRow();
-            rs.updateString("DNI", empleado.getDni());
-            rs.updateString("NOMBRE", empleado.getNombre());
-            rs.updateString("CORREO", empleado.getCorreo());
-            rs.updateString("TELEFONO", empleado.getTelefono());
-            rs.updateString("DIRECCION", empleado.getDireccion());
-            rs.updateDate("FechaNacimiento", Date.valueOf(empleado.getFechaNacimiento()));
-            rs.insertRow();
-            System.out.println("Introduciendo valores de empleado a la BD");
-            return true;
+    //////////////////////// EMPLEADOS //////////////////////////
+
+    public static ResultSet getTablaEmpleados(int rsType, int rsConcurrency) {
+        try {
+            Statement stmt = conn.createStatement(rsType, rsConcurrency);
+            ResultSet rs = stmt.executeQuery(TB_Empleados_SelectTodo);
+            return rs;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error introduciendo empleado a la BD.");
-            return false;
+            return null;
         }
     }
+
+    public static ResultSet getTablaEmpleados() {
+        return getTablaEmpleados(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+    }
+
+    public static ResultSet getEmpleado(String nombre) {
+        try {
+            String sql = TB_Empleados_SelectTodo + " WHERE " + TB_Empleados_Nombre + " = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pstmt.setString(1, nombre);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (!rs.first()) {
+                return null;
+            }
+
+            return rs;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////
 
     public static boolean insertarPromociones(Promocion promocion){
         try(ResultSet rs = getTableDataBase("SELECT * FROM PROMOCIONES")) {
@@ -213,4 +250,6 @@ public class DBManager {
         }
         return false;
     }
+
+
 }
