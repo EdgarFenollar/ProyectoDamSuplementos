@@ -2,6 +2,7 @@ package principal;
 
 import categorias.MenuCategorias;
 import clientes.MenuClientes;
+import com.mysql.cj.log.Log;
 import compras.MenuCompras;
 import empleados.MenuEmpleados;
 import managers.EmpleadoManager;
@@ -35,14 +36,13 @@ public class PantallaPrincipalAdmin extends JFrame{
     private JPanel panelAzul;
     private JPanel panelGeneral;
     private JButton productosBtn;
-    static String nombre;
 
     public PantallaPrincipalAdmin(){
         super("Menu Principal - PeekPerformance");
         setContentPane(panelDashboard);
         btnLogout.setBorder(null);
         btnLogout.setBackground(null);
-        txtNombre.setText(nombre);
+        txtNombre.setText(Login.nombre);
 
         //Redimensionar Imagen MINILOGO//
         ImageIcon miniLogoPrinc = new ImageIcon("imagenes/miniLogo.png");

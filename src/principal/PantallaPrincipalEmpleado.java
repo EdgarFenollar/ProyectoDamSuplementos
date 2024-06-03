@@ -37,14 +37,13 @@ public class PantallaPrincipalEmpleado extends JFrame{
     private JPanel panelGeneral;
     private JButton productosBtn;
     private static boolean admin = true;
-    static String nombre;
 
     public PantallaPrincipalEmpleado(){
         super("Menu Principal - PeekPerformance");
         setContentPane(panelDashboard);
         btnLogout.setBorder(null);
         btnLogout.setBackground(null);
-        txtNombre.setText(nombre);
+        txtNombre.setText(Login.nombre);
 
         //Redimensionar Imagen MINILOGO//
         ImageIcon miniLogoPrinc = new ImageIcon("imagenes/miniLogo.png");

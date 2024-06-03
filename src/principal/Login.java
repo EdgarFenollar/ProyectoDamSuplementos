@@ -19,6 +19,8 @@ public class Login extends JFrame{
     private JButton LOGINButton;
     private JLabel imgLogo;
     private JLabel imgLineaAzul;
+    public static String nombre;
+    public static int id;
 
     public Login(){
         super("Login - PeekPerformance");
@@ -113,6 +115,7 @@ public class Login extends JFrame{
             for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
                 // Si acierta el usuario de algun empleado devuelve true
                 if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario) && EmpleadoManager.empleados.get(i).getContrasenya().equals(password.toString())){
+                    id = EmpleadoManager.empleados.get(i).getId();
                     admin(usuario);
                     return true;
                 }
@@ -129,8 +132,7 @@ public class Login extends JFrame{
 
     // Funcion para saber si un usuario logueado es admin.
     public static boolean admin(String usuario){
-        PantallaPrincipalEmpleado.nombre = usuario;
-        PantallaPrincipalAdmin.nombre = usuario;
+        nombre = usuario;
         for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
             if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario)){
                 if (EmpleadoManager.empleados.get(i).getAdministrador() == 1){
