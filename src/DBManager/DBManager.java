@@ -1,8 +1,10 @@
 package DBManager;
 
+import categorias.Categoria;
 import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
+import productos.Producto;
 import promociones.Promocion;
 import ventas.Venta;
 
@@ -180,5 +182,38 @@ public class DBManager {
         }
     }
 
+    public static boolean insertarProductos(Producto producto){
+        try(ResultSet rs = getTableDataBase("SELECT * FROM PRODUCTOS")) {
+            System.out.println("Introduciendo producto.");
+            rs.moveToInsertRow();
+            rs.updateString("NOMBRE", producto.getNombre());
+            rs.updateInt("STOCK", producto.getStock());
+            rs.updateDouble("PESO", producto.getPeso());
+            rs.updateDouble("PrecioVenta", producto.getPrecioVenta());
+            rs.updateDouble("PrecioCompra", producto.getPrecioCompra());
+            rs.updateDate("FechaEntrega", Date.valueOf(producto.getFechaEntrega().toString()));
+            rs.updateDate("FechaCaducidad", Date.valueOf(producto.getFechaCaducidad().toString()));
+            rs.updateString("DESCRIPCION", producto.getDescripcion());
+            rs.updateInt("IdCategoria", producto.getIdCategoria());
+            rs.updateInt("IdProveedor", producto.getIdProveedor());
+            rs.insertRow();
+            System.out.println("Introduciendo valores de producto a la BD");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error introduciendo producto a la BD.");
+            return false;
+        }
+    }
 
+    public static boolean insertarCategorias(Categoria categoria){
+        try(ResultSet rs = getTableDataBase("SELECT * FROM CATEGORIAS")) {
+            System.out.println("Introduciendo categoria.");
+            rs.moveToInsertRow();
+            rs.
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error introduciendo categoria a la BD.");
+        }
+    }
 }
