@@ -210,10 +210,12 @@ public class DBManager {
         try(ResultSet rs = getTableDataBase("SELECT * FROM CATEGORIAS")) {
             System.out.println("Introduciendo categoria.");
             rs.moveToInsertRow();
-            rs.
+            return true;
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error introduciendo categoria a la BD.");
+            return false;
         }
     }
 }
