@@ -42,18 +42,30 @@ public class Login extends JFrame{
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EmpleadoManager.anyadirEmpleado();
                 if (login(txtUsuario.getText(), txtPassword.getPassword())) {
-                        JFrame dashboard = new PantallaPrincipalEmpleado();
-                        dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
-                        dashboard.setVisible(true);
-                        dashboard.setSize(1500, 900);
-                        dashboard.setLocationRelativeTo(null);
-                        dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                        dashboard.setResizable(false);
-                        dashboard.revalidate();
-                        dashboard.repaint();
-                        dispose();
+                        if (admin(txtUsuario.getText())){
+                            JFrame dashboard = new PantallaPrincipalAdmin();
+                            dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
+                            dashboard.setVisible(true);
+                            dashboard.setSize(1500, 900);
+                            dashboard.setLocationRelativeTo(null);
+                            dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                            dashboard.setResizable(false);
+                            dashboard.revalidate();
+                            dashboard.repaint();
+                            dispose();
+                        } else {
+                            JFrame dashboard = new PantallaPrincipalEmpleado();
+                            dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
+                            dashboard.setVisible(true);
+                            dashboard.setSize(1500, 900);
+                            dashboard.setLocationRelativeTo(null);
+                            dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                            dashboard.setResizable(false);
+                            dashboard.revalidate();
+                            dashboard.repaint();
+                            dispose();
+                        }
                 }
             }
         });
@@ -101,7 +113,7 @@ public class Login extends JFrame{
             for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
                 // Si acierta el usuario de algun empleado devuelve true
                 if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario) && EmpleadoManager.empleados.get(i).getContrasenya().equals(password.toString())){
-                    PantallaPrincipalEmpleado.admin(usuario);
+                    admin(usuario);
                     return true;
                 }
             }
@@ -112,6 +124,20 @@ public class Login extends JFrame{
         }
         // Si no devuelve false
         JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    // Funcion para saber si un usuario logueado es admin.
+    public static boolean admin(String usuario){
+        PantallaPrincipalEmpleado.nombre = usuario;
+        PantallaPrincipalAdmin.nombre = usuario;
+        for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
+            if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario)){
+                if (EmpleadoManager.empleados.get(i).getAdministrador() == 1){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 }

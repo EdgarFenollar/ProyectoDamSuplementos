@@ -35,8 +35,7 @@ public class PantallaPrincipalAdmin extends JFrame{
     private JPanel panelAzul;
     private JPanel panelGeneral;
     private JButton productosBtn;
-    private static boolean admin = true;
-    private static String nombre;
+    static String nombre;
 
     public PantallaPrincipalAdmin(){
         super("Menu Principal - PeekPerformance");
@@ -44,9 +43,6 @@ public class PantallaPrincipalAdmin extends JFrame{
         btnLogout.setBorder(null);
         btnLogout.setBackground(null);
         txtNombre.setText(nombre);
-
-        // Es admin?
-        login(admin);
 
         //Redimensionar Imagen MINILOGO//
         ImageIcon miniLogoPrinc = new ImageIcon("imagenes/miniLogo.png");
@@ -257,28 +253,5 @@ public class PantallaPrincipalAdmin extends JFrame{
                 panelPantallas.repaint();  // Repaint to refresh the component
             }
         });
-    }
-
-    // Funcion para saber si un usuario logueado es admin.
-    public static void admin(String usuario){
-        nombre = usuario;
-        for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
-            if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario)){
-                if (EmpleadoManager.empleados.get(i).getAdministrador() == 1){
-                    return;
-                }
-            }
-        }
-        admin = false;
-    }
-
-    private void login(boolean isAdmin) {
-        admin = isAdmin;
-        updateButtons();
-    }
-
-    private void updateButtons() {
-        proveedoresBtn.setEnabled(admin);
-        empleadosBtn.setEnabled(admin);
     }
 }

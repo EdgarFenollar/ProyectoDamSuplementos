@@ -32,14 +32,12 @@ public class PantallaPrincipalEmpleado extends JFrame{
     private JButton ventasBtn;
     private JPanel panelOpciones;
     private JButton pedidosBtn;
-    private JButton proveedoresBtn;
-    private JButton empleadosBtn;
     private JPanel panelPantallas;
     private JPanel panelAzul;
     private JPanel panelGeneral;
     private JButton productosBtn;
     private static boolean admin = true;
-    private static String nombre;
+    static String nombre;
 
     public PantallaPrincipalEmpleado(){
         super("Menu Principal - PeekPerformance");
@@ -47,9 +45,6 @@ public class PantallaPrincipalEmpleado extends JFrame{
         btnLogout.setBorder(null);
         btnLogout.setBackground(null);
         txtNombre.setText(nombre);
-
-        // Es admin?
-        login(admin);
 
         //Redimensionar Imagen MINILOGO//
         ImageIcon miniLogoPrinc = new ImageIcon("imagenes/miniLogo.png");
@@ -83,13 +78,6 @@ public class PantallaPrincipalEmpleado extends JFrame{
         dashboardButton.setIcon(dashboard);
         //////////////////////////////
 
-        //Redimensionar Imagen PROVEEDOR//
-        ImageIcon proveedorPrinc = new ImageIcon("imagenes/proveedor.png");
-        Image proveedorPrincImage = proveedorPrinc.getImage();
-        Image proveedorPrincImageScaledInstance = proveedorPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
-        ImageIcon proveedor = new ImageIcon(proveedorPrincImageScaledInstance);
-        proveedoresBtn.setIcon(proveedor);
-        //////////////////////////////
 
         //Redimensionar Imagen PROMOCIONES//
         ImageIcon promocionesPrinc = new ImageIcon("imagenes/promotions.png");
@@ -131,14 +119,6 @@ public class PantallaPrincipalEmpleado extends JFrame{
         pedidosBtn.setIcon(pedidos);
         //////////////////////////////
 
-        //Redimensionar Imagen EMPLEADOS//
-        ImageIcon empleadosPrinc = new ImageIcon("imagenes/employe.png");
-        Image empleadosPrincImage = empleadosPrinc.getImage();
-        Image empleadosPrincImageScaledInstance = empleadosPrincImage.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH);
-        ImageIcon empleados = new ImageIcon(empleadosPrincImageScaledInstance);
-        empleadosBtn.setIcon(empleados);
-        //////////////////////////////
-
         //Redimensionar Imagen PRODUCTOS//
         ImageIcon productosPrinc = new ImageIcon("imagenes/productos.png");
         Image productosPrincImage = productosPrinc.getImage();
@@ -164,18 +144,6 @@ public class PantallaPrincipalEmpleado extends JFrame{
                 menuLogin.setResizable(false);
                 menuLogin.setDefaultCloseOperation(EXIT_ON_CLOSE);
                 dispose();
-            }
-        });
-        proveedoresBtn.addComponentListener(new ComponentAdapter() {
-        });
-        proveedoresBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelPantallas.setLayout(new BorderLayout());
-                panelPantallas.removeAll();  // Remove any existing components
-                panelPantallas.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelPantallas.revalidate();  // Revalidate to apply layout changes
-                panelPantallas.repaint();  // Repaint to refresh the component
             }
         });
         dashboardButton.addActionListener(new ActionListener() {
@@ -220,16 +188,6 @@ public class PantallaPrincipalEmpleado extends JFrame{
                 panelPantallas.repaint();  // Repaint to refresh the component
             }
         });
-        empleadosBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelPantallas.setLayout(new BorderLayout());
-                panelPantallas.removeAll();  // Remove any existing components
-                panelPantallas.add(new MenuEmpleados(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelPantallas.revalidate();  // Revalidate to apply layout changes
-                panelPantallas.repaint();  // Repaint to refresh the component
-            }
-        });
         categoriasBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -260,28 +218,5 @@ public class PantallaPrincipalEmpleado extends JFrame{
                 panelPantallas.repaint();  // Repaint to refresh the component
             }
         });
-    }
-
-    // Funcion para saber si un usuario logueado es admin.
-    public static void admin(String usuario){
-        nombre = usuario;
-        for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
-            if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario)){
-                if (EmpleadoManager.empleados.get(i).getAdministrador() == 1){
-                    return;
-                }
-            }
-        }
-        admin = false;
-    }
-
-    private void login(boolean isAdmin) {
-        admin = isAdmin;
-        updateButtons();
-    }
-
-    private void updateButtons() {
-        proveedoresBtn.setEnabled(admin);
-        empleadosBtn.setEnabled(admin);
     }
 }
