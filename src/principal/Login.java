@@ -9,6 +9,7 @@ import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.*;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import managers.DataManager;
+import managers.EmpleadoManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,14 +47,17 @@ public class Login extends JFrame{
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame dashboard = new PantallaPrincipal();
-                dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
-                dashboard.setVisible(true);
-                dashboard.setSize(1500,900);
-                dashboard.setLocationRelativeTo(null);
-                dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                dashboard.setResizable(false);
-                dispose();
+                EmpleadoManager.anyadirEmpleado();
+                if (login(txtUsuario.getText(), txtPassword.getPassword())) {
+                        JFrame dashboard = new PantallaPrincipal();
+                        dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
+                        dashboard.setVisible(true);
+                        dashboard.setSize(1500, 900);
+                        dashboard.setLocationRelativeTo(null);
+                        dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                        dashboard.setResizable(false);
+                        dispose();
+                }
             }
         });
     }
@@ -92,5 +96,27 @@ public class Login extends JFrame{
 
             }
         });
+    }
+
+    //Funcion de login
+    private static boolean login(String usuario, char[] pass){
+        try{
+            String password = String.valueOf(pass);
+            // Recorre la lista de empleados
+            for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
+                // Si acierta el usuario de algun empleado devuelve true
+                if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario) && EmpleadoManager.empleados.get(i).getContrasenya().equals(password.toString())){
+                    PantallaPrincipal.admin(usuario);
+                    return true;
+                }
+            }
+        }catch (NullPointerException e){
+            e.fillInStackTrace();
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        // Si no devuelve false
+        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        return false;
     }
 }

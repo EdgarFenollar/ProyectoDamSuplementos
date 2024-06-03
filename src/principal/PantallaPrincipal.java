@@ -5,6 +5,7 @@ import clientes.MenuClientes;
 import com.formdev.flatlaf.FlatClientProperties;
 import compras.MenuCompras;
 import empleados.MenuEmpleados;
+import managers.EmpleadoManager;
 import productos.MenuProductos;
 import promociones.MenuPromociones;
 import proveedores.MenuProveedores;
@@ -37,14 +38,24 @@ public class PantallaPrincipal extends JFrame{
     private JPanel panelAzul;
     private JPanel panelGeneral;
     private JButton productosBtn;
+    private static boolean admin = true;
+    private static String nombre;
 
     public PantallaPrincipal(){
         super("Menu Principal - PeekPerformance");
         setContentPane(panelDashboard);
         btnLogout.setBorder(null);
         btnLogout.setBackground(null);
-        String usr = System.getProperty("user.name");
-        txtNombre.setText(usr);
+        txtNombre.setText(nombre);
+
+        // Es admin?
+        if (admin){
+            proveedoresBtn.setEnabled(true);
+            empleadosBtn.setEnabled(true);
+        } else {
+            proveedoresBtn.setEnabled(false);
+            empleadosBtn.setEnabled(false);
+        }
 
         //Redimensionar Imagen MINILOGO//
         ImageIcon miniLogoPrinc = new ImageIcon("imagenes/miniLogo.png");
@@ -255,5 +266,18 @@ public class PantallaPrincipal extends JFrame{
                 panelPantallas.repaint();  // Repaint to refresh the component
             }
         });
+    }
+
+    // Funcion para saber si un usuario logueado es admin.
+    public static void admin(String usuario){
+        nombre = usuario;
+        for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
+            if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario)){
+                if (EmpleadoManager.empleados.get(i).getAdministrador() == 1){
+                    return;
+                }
+            }
+        }
+        admin = false;
     }
 }
