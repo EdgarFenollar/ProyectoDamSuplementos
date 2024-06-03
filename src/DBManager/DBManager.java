@@ -3,11 +3,15 @@ package DBManager;
 import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
+import managers.PromocionManager;
 import promociones.Promocion;
 import ventas.Venta;
 
+import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBManager {
     // Conexión a la base de datos
@@ -16,7 +20,7 @@ public class DBManager {
     // Configuración de la conexión a la base de datos
     private static final String DB_HOST = "localhost";
     private static final String DB_PORT = "3306";
-    private static final String DB_NAME = "tienda";
+    private static final String DB_NAME = "tienda_suplementos";
     private static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?serverTimezone=UTC";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
@@ -180,5 +184,18 @@ public class DBManager {
         }
     }
 
-
+    public static void cargarDatosPromociones(){
+        try{
+            Connection con = DriverManager.getConnection(DBManager.DB_URL, DB_USER, DB_PASS);
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from promociones");
+            while(resultSet.next()) {
+                PromocionManager.promociones.add(new Promocion(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getString(6)));
+            }
+            statement.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

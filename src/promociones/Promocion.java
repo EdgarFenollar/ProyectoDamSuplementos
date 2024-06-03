@@ -17,6 +17,13 @@ public class Promocion {
         this.fechaFin = fechaFin;
     }
 
+    public Promocion(String descripcion, double descuento, LocalDate fechaInicio, LocalDate fechaFin) {
+        this.descripcion = descripcion;
+        this.descuento = descuento;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+    }
+
     public int getId() {
         return id;
     }

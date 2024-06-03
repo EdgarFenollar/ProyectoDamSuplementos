@@ -1,5 +1,6 @@
 package principal;
 
+import DBManager.DBManager;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
@@ -71,14 +72,23 @@ public class Login extends JFrame{
                 } catch( Exception ex ) {
                     System.err.println( "Error al cargar el tema" );
                 }
-                JFrame menuLogin = new Login();
-                menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
-                menuLogin.setVisible(true);
-                menuLogin.setSize(800,450);
-                menuLogin.setLocationRelativeTo(null);
-                menuLogin.setResizable(false);
-                menuLogin.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                DataManager.cargarDatos();
+                if (DBManager.loadDriver()){
+                    if (DBManager.connect()){
+                        JFrame menuLogin = new Login();
+                        menuLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
+                        menuLogin.setVisible(true);
+                        menuLogin.setSize(800,450);
+                        menuLogin.setLocationRelativeTo(null);
+                        menuLogin.setResizable(false);
+                        menuLogin.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                        DataManager.cargarDatos();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al cargar el driver", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+
 
             }
         });
