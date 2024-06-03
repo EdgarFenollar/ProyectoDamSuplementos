@@ -1,12 +1,7 @@
 package principal;
 
 import DBManager.DBManager;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.*;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import managers.DataManager;
 import managers.EmpleadoManager;
@@ -49,13 +44,15 @@ public class Login extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 EmpleadoManager.anyadirEmpleado();
                 if (login(txtUsuario.getText(), txtPassword.getPassword())) {
-                        JFrame dashboard = new PantallaPrincipal();
+                        JFrame dashboard = new PantallaPrincipalEmpleado();
                         dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
                         dashboard.setVisible(true);
                         dashboard.setSize(1500, 900);
                         dashboard.setLocationRelativeTo(null);
                         dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
                         dashboard.setResizable(false);
+                        dashboard.revalidate();
+                        dashboard.repaint();
                         dispose();
                 }
             }
@@ -65,8 +62,6 @@ public class Login extends JFrame{
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
-            public FlatArcIJTheme FlatLightLaf;
-
             @Override
 
             public void run() {
@@ -106,7 +101,7 @@ public class Login extends JFrame{
             for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
                 // Si acierta el usuario de algun empleado devuelve true
                 if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario) && EmpleadoManager.empleados.get(i).getContrasenya().equals(password.toString())){
-                    PantallaPrincipal.admin(usuario);
+                    PantallaPrincipalEmpleado.admin(usuario);
                     return true;
                 }
             }
