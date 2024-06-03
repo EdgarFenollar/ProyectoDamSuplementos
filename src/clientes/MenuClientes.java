@@ -140,7 +140,7 @@ public class MenuClientes extends JPanel {
                         } else if (j == 7) {
                             data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getDireccion());
                         } else if (j == 8) {
-                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getTipo());
+                            data[i][j] = String.valueOf(ClienteManager.clientes.get(i).getTipoCli());
                         }
                     }
                 }
