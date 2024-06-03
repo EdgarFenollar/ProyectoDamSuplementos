@@ -102,7 +102,12 @@ public class MenuCompras extends JPanel {
 
             String[] columnNames = {"ID", "Fecha de Compra", "ID del Proveedor", "ID del Producto", "Cantidad", "Precio Unitario", "Fecha de Recepción", "Fecha de Recepción", "ID del Empleado"};
 
-            tabla.setModel(new DefaultTableModel(data, columnNames));
+            tabla.setModel(new DefaultTableModel(data, columnNames) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
             tabla.getTableHeader().setReorderingAllowed(false);
             tabla.setEnabled(true);
             tabla.setDefaultEditor(Object.class, null);

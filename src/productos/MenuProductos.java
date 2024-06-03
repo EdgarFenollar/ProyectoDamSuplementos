@@ -108,7 +108,12 @@ public class MenuProductos extends JPanel {
 
             String[] cabe = {"ID", "Nombre", "Stock", "Peso", "Precio Venta", "Precio Compra", "Fecha Entrega", "Fecha Caducidad", "Descripcion", "ID Categoria", "ID Proveedor"};
 
-            tabla.setModel(new DefaultTableModel(data, cabe));
+            tabla.setModel(new DefaultTableModel(data, cabe) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
             tabla.getTableHeader().setReorderingAllowed(false);
             tabla.setEnabled(true);
             tabla.setDefaultEditor(Object.class, null);
