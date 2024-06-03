@@ -12,3 +12,6 @@
 <li> <a href="https://dev.mysql.com/downloads/file/?id=527658">Connector/J 8.4.0</a>
 
 ## ✨ | Contributors
+<a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo = EdgarFenollar/ProyectoDamSuplementos"/>
+</a>
