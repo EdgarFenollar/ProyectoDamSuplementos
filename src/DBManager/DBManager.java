@@ -1,10 +1,12 @@
 package DBManager;
 
+import categorias.Categoria;
 import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
 import managers.PromocionManager;
 import promociones.Promocion;
+import proveedores.Proveedor;
 import ventas.Venta;
 
 import javax.swing.*;
@@ -184,18 +186,31 @@ public class DBManager {
         }
     }
 
-    public static void cargarDatosPromociones(){
-        try{
-            Connection con = DriverManager.getConnection(DBManager.DB_URL, DB_USER, DB_PASS);
-            Statement statement = con.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from promociones");
-            while(resultSet.next()) {
-                PromocionManager.promociones.add(new Promocion(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5), resultSet.getString(6)));
-            }
-            statement.close();
-            resultSet.close();
+    public static boolean insertarCategorias(Categoria categoria){
+        try(ResultSet rs = getTableDataBase("SELECT * FROM CATEGORIAS")) {
+            System.out.println("Introduciendo categoria.");
+            rs.moveToInsertRow();
+            rs.updateString("NOMBRE",categoria.getNombre());
+
+
+            rs.insertRow();
+            return true;
+
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error introduciendo categoria a la BD.");
+            return false;
         }
+    }
+
+    public static boolean insertarProveedores(Proveedor proveedor){
+        try(ResultSet rs = getTableDataBase("SELECT * FROM PROVEEDOR")) {
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error introduciendo proveedor a la BD.");
+            return false;
+        }
+        return false;
     }
 }
