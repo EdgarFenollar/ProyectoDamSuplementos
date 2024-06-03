@@ -344,4 +344,162 @@ public class DBManager {
             return null;
         }
     }
+
+    public static boolean actualizarPromociones(Promocion promocion){
+        try(ResultSet rs = getPromociones(promocion.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("DESCRIPCION", promocion.getDescripcion());
+                rs.updateDouble("DESCUENTO",promocion.getDescuento());
+                rs.updateDate("FechaInicio", Date.valueOf(promocion.getFechaInicio()));
+                rs.updateDate("FechaFin", Date.valueOf(promocion.getFechaFin()));
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean actualizarClientes(Cliente cliente){
+        try(ResultSet rs = getClientes(cliente.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("DNI", cliente.getDni());
+                rs.updateString("NOMBRE", cliente.getNombre());
+                rs.updateString("APELLIDOS", cliente.getApellidos());
+                rs.updateString("CORREO", cliente.getCorreo());
+                rs.updateString("TELEFONO",cliente.getTelefono());
+                rs.updateString("CodigoPostal",cliente.getCodigoPostal());
+                rs.updateString("DIRECCION", cliente.getDireccion());
+                rs.updateString("TIPO", String.valueOf(cliente.getTipoCli()));
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean actualizarCategorias(Categoria categoria){
+        try(ResultSet rs = getCategorias(categoria.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("NOMBRE", categoria.getNombre());
+                rs.updateString("DESCRIPCION", categoria.getDescripcion());
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean actualizarProveedor(Proveedor proveedor){
+        try(ResultSet rs = getProveedor(proveedor.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("NOMBRE", proveedor.getNombre());
+                rs.updateString("CORREO", proveedor.getCorreo());
+                rs.updateString("CodioPostal", proveedor.getCp());
+                rs.updateString("DIRECCIOn", proveedor.getDireccion());
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarPromocion (int id){
+        try(ResultSet rs = getPromociones(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarCliente (int id){
+        try(ResultSet rs = getClientes(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarCategoria (int id){
+        try(ResultSet rs = getCategorias(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarProveedor (int id){
+        try(ResultSet rs = getProveedor(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
