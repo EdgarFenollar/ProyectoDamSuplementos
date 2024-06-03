@@ -113,7 +113,12 @@ public class MenuEmpleados extends JPanel {
 
             String[] columnNames = {"ID", "DNI", "Nombre", "Apellidos", "Correo", "Telefono", "Dirección", "Fecha Nacimiento", "Usuario"};
 
-            tabla.setModel(new DefaultTableModel(data, columnNames));
+            tabla.setModel(new DefaultTableModel(data, columnNames) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
             tabla.getTableHeader().setReorderingAllowed(false);
             tabla.setEnabled(true);
             tabla.setDefaultEditor(Object.class, null);
