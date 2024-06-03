@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="jgoodies-looks-2.4.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libraries/jgoodies-looks-2.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../librerias/jgoodies-looks-2.4.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

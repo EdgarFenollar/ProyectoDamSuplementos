@@ -1,6 +1,8 @@
 package ventas;
 
 import com.toedter.calendar.JDateChooser;
+import principal.Login;
+import principal.PantallaPrincipalAdmin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +35,8 @@ public class MenuCrearVentas extends JPanel{
         btnCancelar.setBorder(null);
         btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
+
+        txtEmpleado.setText(String.valueOf(Login.id));
 
         // FECHAS//
         panelFecha1.setLayout(new FlowLayout());

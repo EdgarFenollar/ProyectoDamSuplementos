@@ -1,12 +1,7 @@
 package principal;
 
 import DBManager.DBManager;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.*;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import managers.DataManager;
 import managers.EmpleadoManager;
@@ -24,6 +19,8 @@ public class Login extends JFrame{
     private JButton LOGINButton;
     private JLabel imgLogo;
     private JLabel imgLineaAzul;
+    public static String nombre;
+    public static int id;
 
     public Login(){
         super("Login - PeekPerformance");
@@ -47,16 +44,30 @@ public class Login extends JFrame{
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EmpleadoManager.anyadirEmpleado();
                 if (login(txtUsuario.getText(), txtPassword.getPassword())) {
-                        JFrame dashboard = new PantallaPrincipal();
-                        dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
-                        dashboard.setVisible(true);
-                        dashboard.setSize(1500, 900);
-                        dashboard.setLocationRelativeTo(null);
-                        dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                        dashboard.setResizable(false);
-                        dispose();
+                        if (admin(txtUsuario.getText())){
+                            JFrame dashboard = new PantallaPrincipalAdmin();
+                            dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
+                            dashboard.setVisible(true);
+                            dashboard.setSize(1500, 900);
+                            dashboard.setLocationRelativeTo(null);
+                            dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                            dashboard.setResizable(false);
+                            dashboard.revalidate();
+                            dashboard.repaint();
+                            dispose();
+                        } else {
+                            JFrame dashboard = new PantallaPrincipalEmpleado();
+                            dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
+                            dashboard.setVisible(true);
+                            dashboard.setSize(1500, 900);
+                            dashboard.setLocationRelativeTo(null);
+                            dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                            dashboard.setResizable(false);
+                            dashboard.revalidate();
+                            dashboard.repaint();
+                            dispose();
+                        }
                 }
             }
         });
@@ -65,8 +76,6 @@ public class Login extends JFrame{
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
-            public FlatArcIJTheme FlatLightLaf;
-
             @Override
 
             public void run() {
@@ -106,7 +115,8 @@ public class Login extends JFrame{
             for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
                 // Si acierta el usuario de algun empleado devuelve true
                 if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario) && EmpleadoManager.empleados.get(i).getContrasenya().equals(password.toString())){
-                    PantallaPrincipal.admin(usuario);
+                    id = EmpleadoManager.empleados.get(i).getId();
+                    admin(usuario);
                     return true;
                 }
             }
@@ -117,6 +127,19 @@ public class Login extends JFrame{
         }
         // Si no devuelve false
         JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    // Funcion para saber si un usuario logueado es admin.
+    public static boolean admin(String usuario){
+        nombre = usuario;
+        for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
+            if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario)){
+                if (EmpleadoManager.empleados.get(i).getAdministrador() == 1){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 }
