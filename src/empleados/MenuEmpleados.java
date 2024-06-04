@@ -108,10 +108,10 @@ public class MenuEmpleados extends JPanel {
                 EmpleadoManager.empleados = new ArrayList<>();
             }
 
-            String[][] data = new String[EmpleadoManager.empleados.size()][9];
+            String[][] data = new String[EmpleadoManager.empleados.size()][10];
             cargarEmpleados(data);
 
-            String[] columnNames = {"ID", "DNI", "Nombre", "Apellidos", "Correo", "Telefono", "Dirección", "Fecha Nacimiento", "Usuario"};
+            String[] columnNames = {"ID", "DNI", "Nombre", "Apellidos", "Correo", "Telefono", "Dirección", "Fecha Nacimiento", "Usuario", "Contraseña"};
 
             tabla.setModel(new DefaultTableModel(data, columnNames) {
                 @Override
@@ -150,6 +150,8 @@ public class MenuEmpleados extends JPanel {
                             data[i][j] = String.valueOf(EmpleadoManager.empleados.get(i).getFechaNacimiento());
                         } else if (j == 8) {
                             data[i][j] = String.valueOf(EmpleadoManager.empleados.get(i).getUsuario());
+                        } else if (j == 9) {
+                            data[i][j] = String.valueOf(EmpleadoManager.empleados.get(i).getContrasenya());
                         }
                     }
                 }

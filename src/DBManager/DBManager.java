@@ -240,6 +240,30 @@ public class DBManager {
         }
     }
 
+    public static boolean insertarEmpleado(Empleado empleado){
+        try(ResultSet rs = getTableDataBase("SELECT * FROM EMPLEADOS")) {
+            System.out.println("Introduciendo empleado.");
+            rs.moveToInsertRow();
+            rs.updateString("DNI",empleado.getDni());
+            rs.updateString("NOMBRE",empleado.getNombre());
+            rs.updateString("APELLIDOS",empleado.getApellidos());
+            rs.updateString("CORREO",empleado.getCorreo());
+            rs.updateString("TELEFONO",empleado.getTelefono());
+            rs.updateString("DIRECCION",empleado.getDireccion());
+            rs.updateDate("FECHANACIMIENTO", Date.valueOf(empleado.getFechaNacimiento()));
+            rs.updateString("USUARIO",empleado.getUsuario());
+            rs.updateString("CONTRASENYA",empleado.getContrasenya());
+            rs.updateInt("ADMINISTRADOR",empleado.getAdministrador());
+            rs.insertRow();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error introduciendo categoria a la BD.");
+            return false;
+        }
+    }
+
     public static boolean insertarProveedores(Proveedor proveedor){
         try(ResultSet rs = getTableDataBase("SELECT * FROM PROVEEDOR")) {
 
@@ -251,5 +275,52 @@ public class DBManager {
         return false;
     }
 
+    public static ResultSet getEmpleados (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM EMPLEADOS WHERE IdEmpleado = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    public static boolean actualizarEmpleados(Empleado empleado){
+        try(ResultSet rs = getEmpleados(empleado.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("NOMBRE", empleado.getDni());
+                rs.updateString("DESCRIPCION", empleado.getNombre());
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarEmpleado (int id){
+        try(ResultSet rs = getEmpleados(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
