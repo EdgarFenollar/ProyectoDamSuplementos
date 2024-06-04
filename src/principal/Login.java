@@ -180,7 +180,8 @@ public class Login extends JFrame{
 
             // Convert decrypted bytes to string using UTF-8 encoding
             return new String(decryptedBytes, "UTF-8");
-        } catch (Exception ignored){
+        } catch (Exception e){
+            e.printStackTrace();
         }
         return null;
     }
