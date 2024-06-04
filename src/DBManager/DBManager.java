@@ -338,4 +338,246 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+
+    public static ResultSet getCompras (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM COMPRAS WHERE IdCompras = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getVentas (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM VENTAS WHERE IdVenta = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getPromociones (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM PROMOCIONES WHERE IdPromocion = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getClientes (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM CLIENTES WHERE IdCliente = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getProductos (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM PRODUCTOS WHERE IdProducto = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getCategorias (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM CATEGORIAS WHERE IdCategorias = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static ResultSet getProveedor (int codigo){
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            String sql = "SELECT * FROM PROVEEDORES WHERE IdProveedor = " + codigo;
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean actualizarPromociones(Promocion promocion){
+        try(ResultSet rs = getPromociones(promocion.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("DESCRIPCION", promocion.getDescripcion());
+                rs.updateDouble("DESCUENTO",promocion.getDescuento());
+                rs.updateDate("FechaInicio", Date.valueOf(promocion.getFechaInicio()));
+                rs.updateDate("FechaFin", Date.valueOf(promocion.getFechaFin()));
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean actualizarClientes(Cliente cliente){
+        try(ResultSet rs = getClientes(cliente.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("DNI", cliente.getDni());
+                rs.updateString("NOMBRE", cliente.getNombre());
+                rs.updateString("APELLIDOS", cliente.getApellidos());
+                rs.updateString("CORREO", cliente.getCorreo());
+                rs.updateString("TELEFONO",cliente.getTelefono());
+                rs.updateString("CodigoPostal",cliente.getCodigoPostal());
+                rs.updateString("DIRECCION", cliente.getDireccion());
+                rs.updateString("TIPO", String.valueOf(cliente.getTipoCli()));
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean actualizarCategorias(Categoria categoria){
+        try(ResultSet rs = getCategorias(categoria.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("NOMBRE", categoria.getNombre());
+                rs.updateString("DESCRIPCION", categoria.getDescripcion());
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean actualizarProveedor(Proveedor proveedor){
+        try(ResultSet rs = getProveedor(proveedor.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("NOMBRE", proveedor.getNombre());
+                rs.updateString("CORREO", proveedor.getCorreo());
+                rs.updateString("CodioPostal", proveedor.getCp());
+                rs.updateString("DIRECCIOn", proveedor.getDireccion());
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarPromocion (int id){
+        try(ResultSet rs = getPromociones(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarCliente (int id){
+        try(ResultSet rs = getClientes(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarCategoria (int id){
+        try(ResultSet rs = getCategorias(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarProveedor (int id){
+        try(ResultSet rs = getProveedor(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
