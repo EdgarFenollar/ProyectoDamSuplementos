@@ -1,5 +1,7 @@
 package empleados;
 
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,9 +24,11 @@ public class MenuEditarEmpleados extends JPanel {
     private JTextField txtCorreo;
     private JTextField txtTelefono;
     private JTextField txtDireccion;
-    private JTextField txtFechaNacimiento;
     private JTextField txtUsuario;
     private JPasswordField passwordField1;
+    private JPanel panelFecha1;
+    private JCheckBox checkAdmin;
+    private JDateChooser dateChooser1 = new JDateChooser();
 
     public MenuEditarEmpleados() {
         setLayout(new BorderLayout());
@@ -37,7 +41,14 @@ public class MenuEditarEmpleados extends JPanel {
         btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
 
-        txtNombre.setSize(new Dimension(100, 100));
+        // FECHAS//
+        panelFecha1.setLayout(new FlowLayout());
+        dateChooser1.setDateFormatString("yyyy-MM-dd");
+        JTextField dateEditor1 = (JTextField) dateChooser1.getDateEditor().getUiComponent();
+        dateEditor1.setEditable(false);
+        panelFecha1.add(dateChooser1);
+        dateChooser1.setPreferredSize(new Dimension(485, 40));
+
 
         //Redimensionar Imagen CANCELAR//
         ImageIcon cancelPrinc = new ImageIcon("imagenes/x.png");

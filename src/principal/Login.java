@@ -6,10 +6,18 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import managers.DataManager;
 import managers.EmpleadoManager;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.security.Key;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class Login extends JFrame{
 
@@ -21,6 +29,7 @@ public class Login extends JFrame{
     private JLabel imgLineaAzul;
     public static String nombre;
     public static int id;
+    public static String ENCRYPT_KEY = loadSecret();
 
     public Login(){
         super("Login - PeekPerformance");
@@ -44,31 +53,31 @@ public class Login extends JFrame{
         LOGINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (login(txtUsuario.getText(), txtPassword.getPassword())) {
-                        if (admin(txtUsuario.getText())){
-                            JFrame dashboard = new PantallaPrincipalAdmin();
-                            dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
-                            dashboard.setVisible(true);
-                            dashboard.setSize(1500, 900);
-                            dashboard.setLocationRelativeTo(null);
-                            dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                            dashboard.setResizable(false);
-                            dashboard.revalidate();
-                            dashboard.repaint();
-                            dispose();
-                        } else {
-                            JFrame dashboard = new PantallaPrincipalEmpleado();
-                            dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
-                            dashboard.setVisible(true);
-                            dashboard.setSize(1500, 900);
-                            dashboard.setLocationRelativeTo(null);
-                            dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                            dashboard.setResizable(false);
-                            dashboard.revalidate();
-                            dashboard.repaint();
-                            dispose();
-                        }
-                }
+                 if (login(txtUsuario.getText(), txtPassword.getPassword())) {
+                     if (admin(txtUsuario.getText())) {
+                         JFrame dashboard = new PantallaPrincipalAdmin();
+                         dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
+                         dashboard.setVisible(true);
+                         dashboard.setSize(1500, 900);
+                         dashboard.setLocationRelativeTo(null);
+                         dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                         dashboard.setResizable(false);
+                         dashboard.revalidate();
+                         dashboard.repaint();
+                         dispose();
+                     } else {
+                         JFrame dashboard = new PantallaPrincipalEmpleado();
+                         dashboard.setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/miniLogo.png"));
+                         dashboard.setVisible(true);
+                         dashboard.setSize(1500, 900);
+                         dashboard.setLocationRelativeTo(null);
+                         dashboard.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                         dashboard.setResizable(false);
+                         dashboard.revalidate();
+                         dashboard.repaint();
+                         dispose();
+                     }
+                 }
             }
         });
     }
@@ -114,7 +123,8 @@ public class Login extends JFrame{
             // Recorre la lista de empleados
             for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
                 // Si acierta el usuario de algun empleado devuelve true
-                if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario) && EmpleadoManager.empleados.get(i).getContrasenya().equals(password.toString())){
+                String decryptedText = decrypt(EmpleadoManager.empleados.get(i).getContrasenya());
+                if (EmpleadoManager.empleados.get(i).getUsuario().equals(usuario) && decryptedText.equals(password)){
                     id = EmpleadoManager.empleados.get(i).getId();
                     admin(usuario);
                     return true;
@@ -124,6 +134,8 @@ public class Login extends JFrame{
             e.fillInStackTrace();
             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         // Si no devuelve false
         JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -141,5 +153,46 @@ public class Login extends JFrame{
             }
         }
         return false;
+    }
+
+    public static String decrypt(String encrypted) throws Exception {
+        try {
+            // Decode the Base64 encoded key
+            byte[] decodedKey = Base64.getDecoder().decode(ENCRYPT_KEY);
+
+            // Check if the decoded key length is valid for AES (16, 24, or 32 bytes)
+            if (decodedKey.length != 16 && decodedKey.length != 24 && decodedKey.length != 32) {
+                throw new IllegalArgumentException("Invalid AES key length: " + decodedKey.length + " bytes");
+            }
+
+            // Decode the Base64 encoded string
+            byte[] encryptedBytes = Base64.getDecoder().decode(encrypted.replace("\n", ""));
+
+            // Create AES key
+            Key aesKey = new SecretKeySpec(decodedKey, "AES");
+
+            // Create and initialize cipher with padding
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.DECRYPT_MODE, aesKey);
+
+            // Perform decryption
+            byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+
+            // Convert decrypted bytes to string using UTF-8 encoding
+            return new String(decryptedBytes, "UTF-8");
+        } catch (Exception ignored){
+        }
+        return null;
+    }
+
+    private static String loadSecret(){
+        try (BufferedReader br = new BufferedReader(new FileReader("SECRET_KEY.txt"))){
+            System.out.println("KEY cargada correctamente");
+            return br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar la secret KEY");
+        }
+        return null;
     }
 }
