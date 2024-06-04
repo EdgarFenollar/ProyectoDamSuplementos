@@ -28,7 +28,7 @@ public class ClienteManager {
                     String codigoPostal = rs.getString(7);
                     String direccion = rs.getString(8);
                     String tipoCli = rs.getString(9);
-                    clientes.add(new Cliente(id,dni,nombre,apellidos,correo,telefono,codigoPostal,direccion, EnumTipoCliente.valueOf(tipoCli)));
+                    clientes.add(new Cliente(id,dni,nombre,apellidos,correo,telefono,codigoPostal,direccion, tipoCli));
                 }
                 return true;
             } catch (SQLException e) {
@@ -40,14 +40,15 @@ public class ClienteManager {
         }
     }
 
-    public static List<Cliente> getCategoriasList(){
+    public static List<Cliente> getClientesList(){
         return clientes;
     }
 
-    public static boolean anyadirCategoria(Categoria categoria){
-        if (DBManager.connect() & DBManager.insertarCategorias(categoria)){
+    public static boolean anyadirCliente(Cliente cliente){
+        if (DBManager.connect() & DBManager.insertarClientes(cliente)){
             try {
-                clientes.add(new Categoria(categoria.getId(), categoria.getNombre(), categoria.getDescripcion()));
+                clientes.add(new Cliente(cliente.getId(), cliente.getDni(), cliente.getNombre(), cliente.getApellidos(),
+                        cliente.getCorreo(), cliente.getTelefono(), cliente.getCodigoPostal(), cliente.getDireccion(), cliente.getTipoCli()));
             }catch (Exception ex){
                 ex.printStackTrace();
                 return false;
@@ -60,12 +61,12 @@ public class ClienteManager {
         }
     }
 
-    public static boolean actualizarcategoria(Categoria categoria){
+    public static boolean actualizarCliente(Cliente cliente){
         try {
             if (DBManager.connect()) {
-                if (DBManager.actualizarCategorias(categoria)) {
-                    borrarColumnaPorId(categoria.getId());
-                    clientes.add(categoria);
+                if (DBManager.actualizarClientes(cliente)) {
+                    borrarColumnaPorId(cliente.getId());
+                    clientes.add(cliente);
                     return true;
                 }
             }
@@ -78,11 +79,11 @@ public class ClienteManager {
         return false;
     }
 
-    public static boolean eliminarCategoria(Categoria categoria){
+    public static boolean eliminarCliente(Cliente cliente){
         try {
             if (DBManager.connect()) {
-                if (DBManager.eliminarCategoria(categoria.getId())) {
-                    borrarColumnaPorId(categoria.getId());
+                if (DBManager.eliminarCliente(cliente.getId())) {
+                    borrarColumnaPorId(cliente.getId());
                     return true;
                 }
             }

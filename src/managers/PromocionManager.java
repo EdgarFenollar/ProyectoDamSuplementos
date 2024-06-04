@@ -1,6 +1,7 @@
 package managers;
 
 import DBManager.DBManager;
+import clientes.Cliente;
 import promociones.Promocion;
 
 import javax.swing.*;
@@ -56,6 +57,24 @@ public class PromocionManager {
         }
     }
 
+    public static boolean actualizarCliente(Promocion promocion){
+        try {
+            if (DBManager.connect()) {
+                if (DBManager.actualizarPromociones(promocion)) {
+                    borrarColumnaPorId(promocion.getId());
+                    promociones.add(promocion);
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            DBManager.close();
+        }
+        return false;
+    }
+
     public static boolean eliminarPromocion(Promocion promocion){
         if (DBManager.connect() && borrarColumnaPorId(promocion.getId())){
             borrarColumnaPorId(promocion.getId());
@@ -63,10 +82,6 @@ public class PromocionManager {
             return true;
         }
         return false;
-    }
-
-    public static boolean actualizarImc(){
-        return true;
     }
 
     public static boolean borrarColumnaPorId(int id){

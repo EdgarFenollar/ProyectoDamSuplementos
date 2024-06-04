@@ -10,9 +10,9 @@ public class Cliente {
     private String codigoPostal;
     private String direccion;
     private String tipo;
-    private EnumTipoCliente tipoCli;
+    private String tipoCli;
 
-    public Cliente(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion,EnumTipoCliente tipoCli) {
+    public Cliente(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion,String tipoCli) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -57,7 +57,13 @@ public class Cliente {
     }
 
 
-    public EnumTipoCliente getTipoCli() {
+    public String getTipoCli() {
         return tipoCli;
+    }
+
+    public void setTipoCli(String tipoCli) throws InvalidEnumTipoClienteException {
+        if (EnumTipoCliente.validarTipoCliente(tipoCli)){
+         this.tipoCli = tipoCli;
+        }else throw new InvalidEnumTipoClienteException("Error con el tipo de cliente");
     }
 }
