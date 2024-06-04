@@ -7,12 +7,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="flatlaf-3.4.1" level="project" />
+    <orderEntry type="library" name="flatlaf-intellij-themes-3.4.1" level="project" />
     <orderEntry type="library" name="jcalendar-1.4" level="project" />
     <orderEntry type="library" name="jgoodies-common-1.2.0" level="project" />
     <orderEntry type="library" name="jgoodies-looks-2.4.1" level="project" />
     <orderEntry type="library" name="junit-4.6" level="project" />
     <orderEntry type="library" name="mysql-connector-j-8.4.0" level="project" />
-    <orderEntry type="library" name="flatlaf-intellij-themes-3.4.1" level="project" />
-    <orderEntry type="library" name="flatlaf-3.4.1" level="project" />
   </component>
 </module>

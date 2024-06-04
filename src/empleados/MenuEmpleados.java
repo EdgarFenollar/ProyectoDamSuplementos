@@ -108,7 +108,7 @@ public class MenuEmpleados extends JPanel {
                 EmpleadoManager.empleados = new ArrayList<>();
             }
 
-            String[][] data = new String[EmpleadoManager.empleados.size()][5];
+            String[][] data = new String[EmpleadoManager.empleados.size()][10];
             cargarEmpleados(data);
 
             String[] columnNames = {"ID", "DNI", "Nombre", "Apellidos", "Correo", "Telefono", "Dirección", "Fecha Nacimiento", "Usuario", "Contraseña"};

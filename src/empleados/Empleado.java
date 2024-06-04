@@ -30,6 +30,19 @@ public class Empleado {
         this.contrasenya = contrasenya;
     }
 
+    public Empleado(String dni, String nombre, String apellidos, String correo, String telefono, String direccion, LocalDate fechaNacimiento, int administrador, String usuario, String contrasenya) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.fechaNacimiento = fechaNacimiento;
+        this.administrador = administrador;
+        this.usuario = usuario;
+        this.contrasenya = contrasenya;
+    }
+
     public int getId() {
         return id;
     }
