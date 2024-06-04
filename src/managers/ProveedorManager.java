@@ -8,5 +8,4 @@ import java.util.List;
 
 public class ProveedorManager {
     public static List<Proveedor> proveedores = new ArrayList<>();
-
 }

@@ -1,10 +1,13 @@
 package principal;
 
+import DBManager.DBManager;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.ui.FlatLineBorder;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.Statement;
+import java.sql.ResultSet;
 import java.util.Objects;
 
 public class Dashboard extends JPanel{
@@ -23,6 +26,10 @@ public class Dashboard extends JPanel{
         txtBienvenida.setText(usr);
         txtBienvenida.setText("BIENVENIDO " + usr);
 
+        txtTotalVentas.setText(String.valueOf(getVentas()));
+        txtTotalClientes.setText(String.valueOf(getClientes()));
+        txtTotalEmpleados.setText(String.valueOf(getEmpleados()));
+
         panelStats.setBorder( new FlatLineBorder( new Insets( 16, 16, 16, 16 ), Color.blue, 1, 8 ) );
         panelStats.putClientProperty( FlatClientProperties.STYLE, "arc: 8" );
         setLayout(new BorderLayout());
@@ -39,5 +46,17 @@ public class Dashboard extends JPanel{
         Image iconImage = icon.getImage();
         Image scaledIconImage = iconImage.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         lbl.setIcon(new ImageIcon(scaledIconImage));
+    }
+
+    private int getVentas(){
+        return DBManager.contarColumnas("SELECT * FROM VENTAS");
+    }
+
+    private int getClientes(){
+        return DBManager.contarColumnas("SELECT * FROM CLIENTES");
+    }
+
+    private int getEmpleados(){
+        return DBManager.contarColumnas("SELECT * FROM EMPLEADOS");
     }
 }

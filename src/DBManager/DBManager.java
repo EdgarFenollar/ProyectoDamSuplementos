@@ -4,16 +4,11 @@ import categorias.Categoria;
 import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
-import managers.PromocionManager;
 import promociones.Promocion;
 import proveedores.Proveedor;
 import ventas.Venta;
 
-import javax.swing.*;
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DBManager {
     // Conexión a la base de datos
@@ -294,8 +289,16 @@ public class DBManager {
             }
 
             if (rs.first()){//Primer valor encontrado por el id
-                rs.updateString("NOMBRE", empleado.getDni());
-                rs.updateString("DESCRIPCION", empleado.getNombre());
+                rs.updateString("DNI",empleado.getDni());
+                rs.updateString("NOMBRE",empleado.getNombre());
+                rs.updateString("APELLIDOS",empleado.getApellidos());
+                rs.updateString("CORREO",empleado.getCorreo());
+                rs.updateString("TELEFONO",empleado.getTelefono());
+                rs.updateString("DIRECCION",empleado.getDireccion());
+                rs.updateDate("FECHANACIMIENTO", Date.valueOf(empleado.getFechaNacimiento()));
+                rs.updateString("USUARIO",empleado.getUsuario());
+                rs.updateString("CONTRASENYA",empleado.getContrasenya());
+                rs.updateInt("ADMINISTRADOR",empleado.getAdministrador());
                 rs.updateRow();
                 return true;
             }else {
@@ -321,6 +324,18 @@ public class DBManager {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public static int contarColumnas(String sql) {
+        try {
+            Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stm.executeQuery(sql);
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            return rsmd.getColumnCount();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
