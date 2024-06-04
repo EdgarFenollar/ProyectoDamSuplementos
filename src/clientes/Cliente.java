@@ -9,10 +9,9 @@ public class Cliente {
     private String telefono;
     private String codigoPostal;
     private String direccion;
-    private String tipo;
     private EnumTipoCliente tipoCli;
 
-    public Cliente(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion,EnumTipoCliente tipoCli) {
+    public Cliente(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion, EnumTipoCliente tipoCli) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
