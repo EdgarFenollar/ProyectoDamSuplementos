@@ -746,7 +746,9 @@ public class DBManager {
         }
     }
 
-    // EJEMPLO ELIMINAR //
+    // FUNCION ELIMINAR //
+    //Funciona eliminada debido a que vamos a quitar la funcion de eliminar datos porque no seria necesario dentro de la empresa debido a que se debe de llevar el registro de todo.
+    /*
     public static void eliminarEmpleado(int row) {
         Connection con;
         try {
@@ -769,4 +771,5 @@ public class DBManager {
             throw new RuntimeException(e);
         }
     }
+     */
 }

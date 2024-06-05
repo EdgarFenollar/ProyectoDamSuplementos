@@ -103,6 +103,7 @@ public class MenuEmpleados extends JPanel {
             }
         });
 
+        /*
         btnBorrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -117,6 +118,7 @@ public class MenuEmpleados extends JPanel {
                 }
             }
         });
+         */
     }
 
     private void setButtonIcon(JButton button, String iconPath) {
