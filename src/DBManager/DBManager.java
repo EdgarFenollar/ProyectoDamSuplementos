@@ -4,6 +4,7 @@ import categorias.Categoria;
 import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
+import managers.EmpleadoManager;
 import productos.Producto;
 import promociones.Promocion;
 import proveedores.Proveedor;
@@ -327,23 +328,6 @@ public class DBManager {
                 rs.updateString("CONTRASENYA",empleado.getContrasenya());
                 rs.updateInt("ADMINISTRADOR",empleado.getAdministrador());
                 rs.updateRow();
-                return true;
-            }else {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public static boolean eliminarEmpleado (int id){
-        try(ResultSet rs = getEmpleados(id)) {
-
-            if (rs == null) return false;
-
-            if (rs.first()){
-                rs.deleteRow();
                 return true;
             }else {
                 return false;
@@ -763,24 +747,26 @@ public class DBManager {
     }
 
     // EJEMPLO ELIMINAR //
-    /*
-    public static void eliminarPaciente(int paciente) {
+    public static void eliminarEmpleado(int row) {
         Connection con;
         try {
-            con = DriverManager.getConnection(DBManager.DB_URL, DBManager.DB_USER, DBManager.DB_PASS);
-            Statement statement = con.createStatement();
-            int rowCount = statement.executeUpdate(DBManager.DROP_BD_PACIENTES + paciente);
-            statement.close();
-            con.close();
-            if (rowCount > 0) {
-                JOptionPane.showMessageDialog(null, "Paciente eliminado correctamente", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "El paciente no existe o no se pudo eliminar", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+            for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
+                if (i == row){
+                    con = DriverManager.getConnection(DBManager.DB_URL, DBManager.DB_USER, DBManager.DB_PASS);
+                    Statement statement = con.createStatement();
+                    int rowCount = statement.executeUpdate("DELETE FROM EMPLEADOS WHERE IDEMPLEADO=" + i);
+                    statement.close();
+                    con.close();
+                    if (rowCount > 0) {
+                        JOptionPane.showMessageDialog(null, "Empleado eliminado correctamente", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El empleado no existe o no se pudo eliminar", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar el paciente", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al eliminar el empleado", "ERROR", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
-     */
 }

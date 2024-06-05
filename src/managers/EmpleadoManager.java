@@ -93,23 +93,6 @@ public class EmpleadoManager {
         return false;
     }
 
-    public static boolean eliminarEmpleado(Empleado empleado){
-        try {
-            if (DBManager.connect()) {
-                if (DBManager.eliminarEmpleado(empleado.getId())) {
-                    borrarColumnaPorId(empleado.getId());
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            DBManager.close();
-        }
-        return false;
-    }
-
     public static boolean borrarColumnaPorId(int id){
         for (int i = 0; i < empleados.size(); i++) {
             if (empleados.get(i).getId()==id){

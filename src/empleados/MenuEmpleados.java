@@ -112,7 +112,7 @@ public class MenuEmpleados extends JPanel {
                     int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el Empleado?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (eliminar == 0){
                         DBManager.eliminarEmpleado(tableInfo.getSelectedRow());
-                        EmpleadoManager.borrarColumnaPorId(tableInfo.getSelectedRow());
+                        EmpleadoManager.getEmpleados();
                     }
                 }
             }
