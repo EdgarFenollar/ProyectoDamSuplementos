@@ -113,11 +113,11 @@ public class MenuEditarEmpleados extends JPanel {
                 panelEmpleados.repaint();  // Repaint to refresh the component
             }
         });
-        /* btnConfirmar.addActionListener(new ActionListener() {
+
+        btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String pass = String.valueOf(txtContrasenya.getPassword());
-                LocalDate fechanac = dateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 int admin;
                 if (checkAdmin.isEnabled()){
                     admin = 1;
@@ -126,24 +126,24 @@ public class MenuEditarEmpleados extends JPanel {
                 }
                 try {
                     for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
-                        if (id == i){
-                            EmpleadoManager.empleados.set(i, new Empleado(
+                        if (id == EmpleadoManager.empleados.get(i).getId()){
+                            LocalDate fechanac = dateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                            DBManager.editarEmpleado(
+                                    id,
                                     txtDni.getText(),
                                     txtNombre.getText(),
                                     txtApellidos.getText(),
                                     txtCorreo.getText(),
                                     txtTelefono.getText(),
                                     txtDireccion.getText(),
-                                    fechanac,
-                                    admin,
                                     txtUsuario.getText(),
-                                    encrypt(pass)));
-                            EmpleadoManager.eliminarEmpleado(EmpleadoManager.empleados.get(i));
-                            EmpleadoManager.anyadirEmpleado(EmpleadoManager.empleados.get(i));
+                                    encrypt(pass),
+                                    fechanac,
+                                    admin
+                            );
                             EmpleadoManager.getEmpleados();
                         }
                     }
-                    EmpleadoManager.getEmpleados();
                     // Volver Atras
                     panelEmpleados.setLayout(new BorderLayout());
                     panelEmpleados.removeAll();  // Remove any existing components
@@ -156,7 +156,6 @@ public class MenuEditarEmpleados extends JPanel {
             }
         });
 
-         */
 
         //// EJEMPO PRUEBA /////
         /*

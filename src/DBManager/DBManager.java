@@ -9,7 +9,9 @@ import promociones.Promocion;
 import proveedores.Proveedor;
 import ventas.Venta;
 
+import javax.swing.*;
 import java.sql.*;
+import java.time.LocalDate;
 
 public class DBManager {
     // Conexión a la base de datos
@@ -735,30 +737,30 @@ public class DBManager {
         }
     }
 
-    // EJEMPLO EDITAR//
-    /*
-    public static void editarDatosBDPacientes(int id, String nombre, String direccion, String ciudad, int telefono, int diabetico, java.util.Date fechaNac, int turno){
+    public static void editarEmpleado(int id, String dni, String nombre, String apellidos, String correo, String telefono, String direccion, String usuario, String contrasenya, LocalDate fechaNac, int admin){
         try{
             Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM PACIENTES WHERE CODIGO=" + id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLEADOS WHERE IDEMPLEADO=" + id);
             if (rs.next()) {
-            rs.updateString(2,nombre);
-            rs.updateString(3,direccion);
-            rs.updateString(4,ciudad);
-            rs.updateInt(5, telefono);
-            rs.updateInt(6,diabetico);
-            rs.updateDate(7, new java.sql.Date(fechaNac.getTime()));
-            rs.updateInt(8,turno);
-            rs.updateRow();
-            rs.close();
-            stmt.close();
+                rs.updateString(2,dni);
+                rs.updateString(3,nombre);
+                rs.updateString(4,apellidos);
+                rs.updateString(5, correo);
+                rs.updateString(6,telefono);
+                rs.updateString(7,direccion);
+                rs.updateDate(8, Date.valueOf(fechaNac.toString()));
+                rs.updateString(9,usuario);
+                rs.updateString(10,contrasenya);
+                rs.updateInt(11, admin);
+                rs.updateRow();
+                rs.close();
+                stmt.close();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-     */
 
     // EJEMPLO ELIMINAR //
     /*
