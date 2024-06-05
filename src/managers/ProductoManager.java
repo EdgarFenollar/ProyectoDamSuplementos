@@ -49,7 +49,7 @@ public class ProductoManager {
     }
 
     public static boolean anyadirProducto(Producto producto){
-        if (DBManager.connect() & DBManager.insertarProductos(producto)){
+        if (DBManager.connect() & DBManager.insertarProducto(producto)){
             try {
                 productos.add(new Producto(producto.getId(), producto.getNombre(), producto.getStock(), producto.getPeso(), producto.getPrecioVenta(), producto.getPrecioCompra(),
                         producto.getFechaEntrega(), producto.getFechaCaducidad(), producto.getDescripcion(), producto.getIdCategoria(), producto.getIdProveedor()));
@@ -70,7 +70,7 @@ public class ProductoManager {
             if (DBManager.connect()) {
                 if (DBManager.actualizarProducto(producto)) {
                     borrarColumnaPorId(producto.getId());
-                    producto.add(producto);
+                    productos.add(producto);
                     return true;
                 }
             }
