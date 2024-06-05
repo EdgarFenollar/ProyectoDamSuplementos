@@ -4,6 +4,7 @@ import categorias.Categoria;
 import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
+import productos.Producto;
 import promociones.Promocion;
 import proveedores.Proveedor;
 import ventas.Venta;
@@ -254,7 +255,31 @@ public class DBManager {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error introduciendo categoria a la BD.");
+            System.out.println("Error introduciendo empleado a la BD.");
+            return false;
+        }
+    }
+
+    public static boolean insertarProducto(Producto producto){
+        try(ResultSet rs = getTableDataBase("SELECT * FROM PRODUCTOS")) {
+            System.out.println("Introduciendo producto.");
+            rs.moveToInsertRow();
+            rs.updateString("Nombre", producto.getNombre());
+            rs.updateInt("Stock", producto.getStock());
+            rs.updateDouble("Peso", producto.getPeso());
+            rs.updateDouble("PrecioVenta", producto.getPrecioVenta());
+            rs.updateDouble("PrecioCompra", producto.getPrecioCompra());
+            rs.updateDate("FechaEntrega", (Date) producto.getFechaEntrega());
+            rs.updateDate("FechaCaducidad", (Date) producto.getFechaCaducidad());
+            rs.updateString("Descripcion", producto.getDescripcion());
+            rs.updateInt("idCategoria", producto.getIdCategoria());
+            rs.updateInt("idProveedor", producto.getIdProveedor());
+            rs.insertRow();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error introduciendo producto a la BD.");
             return false;
         }
     }
@@ -491,6 +516,31 @@ public class DBManager {
         }
     }
 
+    public static boolean actualizarCompras(Compra compra){
+        try(ResultSet rs = getCompras(compra.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateDate("FechaCompra", Date.valueOf(compra.getFecha_compra()));
+                rs.updateInt("idProveedor", compra.getId_proveedor());
+                rs.updateInt("idProducto", compra.getId_producto());
+                rs.updateInt("Cantidad", compra.getCantidad());
+                rs.updateDouble("PrecioUnitario", compra.getPrecio_unitario());
+                rs.updateDate("FechaRecepcion", (Date) compra.getFecha_recepcion());
+                rs.updateInt("idEmpleado", compra.getId_empleado());
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static boolean actualizarProveedor(Proveedor proveedor){
         try(ResultSet rs = getProveedor(proveedor.getId())) {
             if (rs==null){
@@ -513,8 +563,78 @@ public class DBManager {
         }
     }
 
+    public static boolean actualizarProducto(Producto producto){
+        try(ResultSet rs = getProductos(producto.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateString("Nombre", producto.getNombre());
+                rs.updateInt("Stock", producto.getStock());
+                rs.updateDouble("Peso", producto.getPeso());
+                rs.updateDouble("PrecioVenta", producto.getPrecioVenta());
+                rs.updateDouble("PrecioCompra", producto.getPrecioCompra());
+                rs.updateDate("FechaEntrega", (Date) producto.getFechaEntrega());
+                rs.updateDate("FechaCaducidad", (Date) producto.getFechaCaducidad());
+                rs.updateString("Descripcion", producto.getDescripcion());
+                rs.updateInt("idCategoria", producto.getIdCategoria());
+                rs.updateInt("idProveedor", producto.getIdProveedor());
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean actualizarVentas(Venta venta){
+        try(ResultSet rs = getVentas(venta.getId())) {
+            if (rs==null){
+                return false;
+            }
+
+            if (rs.first()){//Primer valor encontrado por el id
+                rs.updateDate("FechaVenta", Date.valueOf(venta.getFechaVenta()));
+                rs.updateInt("Cantidad", venta.getCantidad());
+                rs.updateDouble("PrecioUnitario", venta.getPrecioUnitario());
+                rs.updateInt("idCliente", venta.getIdCliente());
+                rs.updateInt("idEmpleado", venta.getIdEmpleado());
+                rs.updateInt("idProducto", venta.getIdProducto());
+                rs.updateInt("idPromocion", venta.getIdPromocion());
+                rs.updateRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static boolean eliminarPromocion (int id){
         try(ResultSet rs = getPromociones(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarCompra(int id){
+        try(ResultSet rs = getCompras(id)) {
 
             if (rs == null) return false;
 
@@ -566,6 +686,40 @@ public class DBManager {
 
     public static boolean eliminarProveedor (int id){
         try(ResultSet rs = getProveedor(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public static boolean eliminarProducto(int id){
+        try(ResultSet rs = getProductos(id)) {
+
+            if (rs == null) return false;
+
+            if (rs.first()){
+                rs.deleteRow();
+                return true;
+            }else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarVenta(int id){
+        try(ResultSet rs = getVentas(id)) {
 
             if (rs == null) return false;
 
