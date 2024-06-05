@@ -1,11 +1,17 @@
 package productos;
 
 import com.toedter.calendar.JDateChooser;
+import empleados.Empleado;
+import empleados.MenuEmpleados;
+import managers.EmpleadoManager;
+import managers.ProductoManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 /**
  * Esta clase sirve para crear el panel utilizado para crear los productos.
@@ -91,6 +97,41 @@ public class MenuCrearProductos extends JPanel{
                 panelProductos.add(new MenuProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelProductos.revalidate();  // Revalidate to apply layout changes
                 panelProductos.repaint();  // Repaint to refresh the component
+            }
+        });
+
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    LocalDate fechaEntrega = dateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate fechaCaducidad = dateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    if (!txtNombre.getText().isEmpty() && !txtStock.getText().isEmpty() && !txtPeso.getText().isEmpty() && !txtPrecioVenta.getText().isEmpty() && !txtPrecioCompra.getText().isEmpty() && !txtDescripcion.getText().isEmpty() && !txtCategoria.getText().isEmpty() && !txtProveedor.getText().isEmpty()){
+                    ProductoManager.anyadirProducto(new Producto(txtNombre.getText(),
+                            Integer.parseInt(txtStock.getText()),
+                            Double.parseDouble(txtPeso.getText()),
+                            Double.parseDouble(txtPrecioVenta.getText()),
+                            Double.parseDouble(txtPrecioCompra.getText()),
+                            fechaEntrega,
+                            fechaCaducidad,
+                            txtDescripcion.getText(),
+                            Integer.parseInt(txtCategoria.getText()),
+                            Integer.parseInt(txtProveedor.getText()))
+                    );
+                    ProductoManager.getProductos();
+                    // Volver Atras
+                    panelProductos.setLayout(new BorderLayout());
+                    panelProductos.removeAll();  // Remove any existing components
+                    panelProductos.add(new MenuProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelProductos.revalidate();  // Revalidate to apply layout changes
+                    panelProductos.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

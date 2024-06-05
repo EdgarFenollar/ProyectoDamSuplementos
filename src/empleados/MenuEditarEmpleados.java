@@ -125,6 +125,7 @@ public class MenuEditarEmpleados extends JPanel {
                     admin = 0;
                 }
                 try {
+                    if (!txtNombre.getText().isEmpty() && !txtApellidos.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtDireccion.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !pass.isEmpty()){
                     for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
                         if (id == EmpleadoManager.empleados.get(i).getId()){
                             LocalDate fechanac = dateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -150,6 +151,9 @@ public class MenuEditarEmpleados extends JPanel {
                     panelEmpleados.add(new MenuEmpleados(), BorderLayout.CENTER);  // Add new Dashboard panel
                     panelEmpleados.revalidate();  // Revalidate to apply layout changes
                     panelEmpleados.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

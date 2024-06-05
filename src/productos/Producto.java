@@ -1,5 +1,6 @@
 package productos;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Producto {
@@ -9,14 +10,27 @@ public class Producto {
     private double peso;
     private double precioVenta;
     private double precioCompra;
-    private Date fechaEntrega;
-    private Date fechaCaducidad;
+    private LocalDate fechaEntrega;
+    private LocalDate fechaCaducidad;
     private String descripcion;
     private int idCategoria;
     private int idProveedor;
 
-    public Producto(int id, String nombre, int stock, double peso, double precioVenta, double precioCompra, Date fechaEntrega, Date fechaCaducidad, String descripcion, int idCategoria, int idProveedor) {
+    public Producto(int id, String nombre, int stock, double peso, double precioVenta, double precioCompra, LocalDate fechaEntrega, LocalDate fechaCaducidad, String descripcion, int idCategoria, int idProveedor) {
         this.id = id;
+        this.nombre = nombre;
+        this.stock = stock;
+        this.peso = peso;
+        this.precioVenta = precioVenta;
+        this.precioCompra = precioCompra;
+        this.fechaEntrega = fechaEntrega;
+        this.fechaCaducidad = fechaCaducidad;
+        this.descripcion = descripcion;
+        this.idCategoria = idCategoria;
+        this.idProveedor = idProveedor;
+    }
+
+    public Producto(String nombre, int stock, double peso, double precioVenta, double precioCompra, LocalDate fechaEntrega, LocalDate fechaCaducidad, String descripcion, int idCategoria, int idProveedor) {
         this.nombre = nombre;
         this.stock = stock;
         this.peso = peso;
@@ -53,11 +67,11 @@ public class Producto {
         return precioCompra;
     }
 
-    public Date getFechaEntrega() {
+    public LocalDate getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public Date getFechaCaducidad() {
+    public LocalDate getFechaCaducidad() {
         return fechaCaducidad;
     }
 

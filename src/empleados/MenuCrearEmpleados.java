@@ -99,15 +99,16 @@ public class MenuCrearEmpleados extends JPanel {
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String pass = String.valueOf(txtContrasenya.getPassword());
-                LocalDate fechanac = dateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                int admin;
-                if (checkAdmin.isEnabled()){
-                    admin = 1;
-                } else {
-                    admin = 0;
-                }
                 try {
+                    String pass = String.valueOf(txtContrasenya.getPassword());
+                    LocalDate fechanac = dateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    int admin;
+                    if (checkAdmin.isEnabled()){
+                        admin = 1;
+                    } else {
+                        admin = 0;
+                    }
+                    if (!txtNombre.getText().isEmpty() && !txtApellidos.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtDireccion.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !pass.isEmpty()){
                     EmpleadoManager.anyadirEmpleado(new Empleado(txtDni.getText(),
                             txtNombre.getText(),
                             txtApellidos.getText(),
@@ -125,8 +126,12 @@ public class MenuCrearEmpleados extends JPanel {
                     panelEmpleados.add(new MenuEmpleados(), BorderLayout.CENTER);  // Add new Dashboard panel
                     panelEmpleados.revalidate();  // Revalidate to apply layout changes
                     panelEmpleados.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

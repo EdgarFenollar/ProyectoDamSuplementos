@@ -1,5 +1,7 @@
 package productos;
 
+import empleados.MenuEditarEmpleados;
+import managers.EmpleadoManager;
 import managers.ProductoManager;
 import managers.PromocionManager;
 import promociones.MenuCrearPromociones;
@@ -20,7 +22,6 @@ import java.util.ArrayList;
 public class MenuProductos extends JPanel {
     private JPanel panelProductos;
     private JButton btnBuscar;
-    private JButton btnBorrar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
@@ -35,14 +36,13 @@ public class MenuProductos extends JPanel {
         setLayout(new BorderLayout());
         add(panelProductos, BorderLayout.CENTER);
 
-        btnBorrar.setBackground(null);
+        ProductoManager.getProductos();
+
         btnEditar.setBackground(null);
         btnCrear.setBackground(null);
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
-        btnBorrar.setBorder(null);
-        btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
         btnCrear.setOpaque(false);
         btnEditar.setBorder(null);
@@ -55,7 +55,6 @@ public class MenuProductos extends JPanel {
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
-        setButtonIcon(btnBorrar, "imagenes/delete.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
         setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
@@ -72,19 +71,31 @@ public class MenuProductos extends JPanel {
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelProductos.setLayout(new BorderLayout());
-                panelProductos.removeAll();  // Remove any existing components
-                panelProductos.add(new MenuEditarProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelProductos.revalidate();  // Revalidate to apply layout changes
-                panelProductos.repaint();  // Repaint to refresh the component
-            }
-        });
-        btnBorrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el producto?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (eliminar == 0){
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar un producto para editar.");
+                } else {
+                    for (int i = 0; i < ProductoManager.productos.size(); i++) {
+                        if (i == tableInfo.getSelectedRow()){
+                            MenuEditarProductos.insertarDatos(
+                                    ProductoManager.productos.get(i).getId(),
+                                    ProductoManager.productos.get(i).getNombre(),
+                                    ProductoManager.productos.get(i).getStock(),
+                                    ProductoManager.productos.get(i).getPeso(),
+                                    ProductoManager.productos.get(i).getPrecioVenta(),
+                                    ProductoManager.productos.get(i).getPrecioCompra(),
+                                    ProductoManager.productos.get(i).getFechaEntrega().toString(),
+                                    ProductoManager.productos.get(i).getFechaCaducidad().toString(),
+                                    ProductoManager.productos.get(i).getDescripcion(),
+                                    ProductoManager.productos.get(i).getIdCategoria(),
+                                    ProductoManager.productos.get(i).getIdProveedor());
+                        }
+                    }
 
+                    panelProductos.setLayout(new BorderLayout());
+                    panelProductos.removeAll();  // Remove any existing components
+                    panelProductos.add(new MenuEditarProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelProductos.revalidate();  // Revalidate to apply layout changes
+                    panelProductos.repaint();  // Repaint to refresh the component
                 }
             }
         });

@@ -272,8 +272,8 @@ public class DBManager {
             rs.updateDouble("Peso", producto.getPeso());
             rs.updateDouble("PrecioVenta", producto.getPrecioVenta());
             rs.updateDouble("PrecioCompra", producto.getPrecioCompra());
-            rs.updateDate("FechaEntrega", (Date) producto.getFechaEntrega());
-            rs.updateDate("FechaCaducidad", (Date) producto.getFechaCaducidad());
+            rs.updateDate("FechaEntrega", Date.valueOf(producto.getFechaEntrega()));
+            rs.updateDate("FechaCaducidad", Date.valueOf(producto.getFechaCaducidad()));
             rs.updateString("Descripcion", producto.getDescripcion());
             rs.updateInt("idCategoria", producto.getIdCategoria());
             rs.updateInt("idProveedor", producto.getIdProveedor());
@@ -561,8 +561,8 @@ public class DBManager {
                 rs.updateDouble("Peso", producto.getPeso());
                 rs.updateDouble("PrecioVenta", producto.getPrecioVenta());
                 rs.updateDouble("PrecioCompra", producto.getPrecioCompra());
-                rs.updateDate("FechaEntrega", (Date) producto.getFechaEntrega());
-                rs.updateDate("FechaCaducidad", (Date) producto.getFechaCaducidad());
+                rs.updateDate("FechaEntrega", Date.valueOf(producto.getFechaEntrega()));
+                rs.updateDate("FechaCaducidad", Date.valueOf(producto.getFechaCaducidad()));
                 rs.updateString("Descripcion", producto.getDescripcion());
                 rs.updateInt("idCategoria", producto.getIdCategoria());
                 rs.updateInt("idProveedor", producto.getIdProveedor());
@@ -736,6 +736,31 @@ public class DBManager {
                 rs.updateString(9,usuario);
                 rs.updateString(10,contrasenya);
                 rs.updateInt(11, admin);
+                rs.updateRow();
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void editarProducto(int id, String nombre, int stock, Double peso, Double precioVenta, Double precioCompra, LocalDate fechaEntrega, LocalDate fechaCaducidad, String descripcion, int idCategoria, int idProveedor){
+        try{
+            Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTOS WHERE IDPRODUCTO=" + id);
+            if (rs.next()) {
+                rs.updateString(2,nombre);
+                rs.updateInt(3,stock);
+                rs.updateDouble(4,peso);
+                rs.updateDouble(5, precioVenta);
+                rs.updateDouble(6,precioCompra);
+                rs.updateDate(7, Date.valueOf(fechaEntrega.toString()));
+                rs.updateDate(8, Date.valueOf(fechaCaducidad.toString()));
+                rs.updateString(9,descripcion);
+                rs.updateInt(10,idCategoria);
+                rs.updateInt(11, idProveedor);
                 rs.updateRow();
                 rs.close();
                 stmt.close();

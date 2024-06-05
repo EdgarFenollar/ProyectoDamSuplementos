@@ -6,6 +6,7 @@ import ventas.Venta;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,8 +26,8 @@ public class ProductoManager {
                     double peso = rs.getDouble(4);
                     double precioVenta = rs.getDouble(5);
                     double precioCompra = rs.getDouble(6);
-                    Date fechaEntrega = rs.getDate(7);
-                    Date fechaCaducidad = rs.getDate(8);
+                    LocalDate fechaEntrega = rs.getDate(7).toLocalDate();
+                    LocalDate fechaCaducidad = rs.getDate(8).toLocalDate();
                     String descripcion = rs.getString(9);
                     int idCategoria = rs.getInt(10);
                     int idProveedor = rs.getInt(11);
@@ -71,23 +72,6 @@ public class ProductoManager {
                 if (DBManager.actualizarProducto(producto)) {
                     borrarColumnaPorId(producto.getId());
                     productos.add(producto);
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            DBManager.close();
-        }
-        return false;
-    }
-
-    public static boolean eliminarProducto(Producto producto){
-        try {
-            if (DBManager.connect()) {
-                if (DBManager.eliminarProducto(producto.getId())) {
-                    borrarColumnaPorId(producto.getId());
                     return true;
                 }
             }

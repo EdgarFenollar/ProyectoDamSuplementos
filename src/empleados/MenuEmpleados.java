@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class MenuEmpleados extends JPanel {
     private JPanel panelTablaEmpleados;
     private JButton btnEditar;
-    private JButton btnBorrar;
     private JButton btnCrear;
     private JComboBox comboBoxFiltrar;
     private JButton btnFiltrar;
@@ -38,11 +37,8 @@ public class MenuEmpleados extends JPanel {
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
-        btnBorrar.setBackground(null);
         btnEditar.setBackground(null);
         btnCrear.setBackground(null);
-        btnBorrar.setBorder(null);
-        btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
         btnCrear.setOpaque(false);
         btnEditar.setBorder(null);
@@ -55,7 +51,6 @@ public class MenuEmpleados extends JPanel {
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
-        setButtonIcon(btnBorrar, "imagenes/delete.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
         setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
