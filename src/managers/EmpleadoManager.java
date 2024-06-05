@@ -114,6 +114,7 @@ public class EmpleadoManager {
         for (int i = 0; i < empleados.size(); i++) {
             if (empleados.get(i).getId()==id){
                 empleados.remove(i);
+                EmpleadoManager.getEmpleados();
                 return true;
             }
         }

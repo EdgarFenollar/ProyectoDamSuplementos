@@ -1,5 +1,6 @@
 package empleados;
 
+import DBManager.DBManager;
 import managers.ClienteManager;
 import managers.EmpleadoManager;
 import proveedores.MenuCrearProveedores;
@@ -74,25 +75,48 @@ public class MenuEmpleados extends JPanel {
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelEmpleados.setLayout(new BorderLayout());
-                panelEmpleados.removeAll();  // Remove any existing components
-                panelEmpleados.add(new MenuEditarEmpleados(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelEmpleados.revalidate();  // Revalidate to apply layout changes
-                panelEmpleados.repaint();  // Repaint to refresh the component
-            }
-        });
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar un empleado para editar.");
+                } else {
+                    for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {
+                        if (i == tableInfo.getSelectedRow()){
+                            MenuEditarEmpleados.insertarDatos(
+                                    EmpleadoManager.empleados.get(i).getId(),
+                                    EmpleadoManager.empleados.get(i).getDni(),
+                                    EmpleadoManager.empleados.get(i).getNombre(),
+                                    EmpleadoManager.empleados.get(i).getApellidos(),
+                                    EmpleadoManager.empleados.get(i).getCorreo(),
+                                    EmpleadoManager.empleados.get(i).getTelefono(),
+                                    EmpleadoManager.empleados.get(i).getDireccion(),
+                                    EmpleadoManager.empleados.get(i).getFechaNacimiento().toString(),
+                                    EmpleadoManager.empleados.get(i).getUsuario(),
+                                    EmpleadoManager.empleados.get(i).getAdministrador());
+                        }
+                    }
 
-
-        btnBorrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el Empleado?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (eliminar == 0){
-
+                    panelEmpleados.setLayout(new BorderLayout());
+                    panelEmpleados.removeAll();  // Remove any existing components
+                    panelEmpleados.add(new MenuEditarEmpleados(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelEmpleados.revalidate();  // Revalidate to apply layout changes
+                    panelEmpleados.repaint();  // Repaint to refresh the component
                 }
             }
         });
 
+        btnBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar un empleado para editar.");
+                } else {
+                    int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el Empleado?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (eliminar == 0){
+                        DBManager.eliminarEmpleado(tableInfo.getSelectedRow());
+                        EmpleadoManager.borrarColumnaPorId(tableInfo.getSelectedRow());
+                    }
+                }
+            }
+        });
     }
 
     private void setButtonIcon(JButton button, String iconPath) {

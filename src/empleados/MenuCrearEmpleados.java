@@ -118,6 +118,13 @@ public class MenuCrearEmpleados extends JPanel {
                             admin,
                             txtUsuario.getText(),
                             encrypt(pass)));
+                    EmpleadoManager.getEmpleados();
+                    // Volver Atras
+                    panelEmpleados.setLayout(new BorderLayout());
+                    panelEmpleados.removeAll();  // Remove any existing components
+                    panelEmpleados.add(new MenuEmpleados(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelEmpleados.revalidate();  // Revalidate to apply layout changes
+                    panelEmpleados.repaint();  // Repaint to refresh the component
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

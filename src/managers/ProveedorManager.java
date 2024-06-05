@@ -19,15 +19,11 @@ public class ProveedorManager {
 
                 while (rs.next()){
                     int id = rs.getInt(1);
-                    String dni = rs.getString(2);
-                    String nombre = rs.getString(3);
-                    String apellidos = rs.getString(4);
-                    String correo = rs.getString(5);
-                    String telefono = rs.getString(6);
-                    String codigoPostal = rs.getString(7);
-                    String direccion = rs.getString(8);
-                    String tipoCli = rs.getString(9);
-                    proveedores.add(new Cliente(id,dni,nombre,apellidos,correo,telefono,codigoPostal,direccion, tipoCli));
+                    String nombre = rs.getString(2);
+                    String correo = rs.getString(3);
+                    String cp = rs.getString(4);
+                    String direccion = rs.getString(5);
+                    proveedores.add(new Proveedor(id, nombre, correo, cp, direccion));
                 }
                 return true;
             } catch (SQLException e) {

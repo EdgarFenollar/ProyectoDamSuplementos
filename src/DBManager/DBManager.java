@@ -580,4 +580,51 @@ public class DBManager {
             return false;
         }
     }
+
+    // EJEMPLO EDITAR//
+    /*
+    public static void editarDatosBDPacientes(int id, String nombre, String direccion, String ciudad, int telefono, int diabetico, java.util.Date fechaNac, int turno){
+        try{
+            Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PACIENTES WHERE CODIGO=" + id);
+            if (rs.next()) {
+            rs.updateString(2,nombre);
+            rs.updateString(3,direccion);
+            rs.updateString(4,ciudad);
+            rs.updateInt(5, telefono);
+            rs.updateInt(6,diabetico);
+            rs.updateDate(7, new java.sql.Date(fechaNac.getTime()));
+            rs.updateInt(8,turno);
+            rs.updateRow();
+            rs.close();
+            stmt.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+     */
+
+    // EJEMPLO ELIMINAR //
+    /*
+    public static void eliminarPaciente(int paciente) {
+        Connection con;
+        try {
+            con = DriverManager.getConnection(DBManager.DB_URL, DBManager.DB_USER, DBManager.DB_PASS);
+            Statement statement = con.createStatement();
+            int rowCount = statement.executeUpdate(DBManager.DROP_BD_PACIENTES + paciente);
+            statement.close();
+            con.close();
+            if (rowCount > 0) {
+                JOptionPane.showMessageDialog(null, "Paciente eliminado correctamente", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "El paciente no existe o no se pudo eliminar", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el paciente", "ERROR", JOptionPane.ERROR_MESSAGE);
+            throw new RuntimeException(e);
+        }
+    }
+     */
 }

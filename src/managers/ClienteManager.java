@@ -28,7 +28,11 @@ public class ClienteManager {
                     String codigoPostal = rs.getString(7);
                     String direccion = rs.getString(8);
                     String tipoCli = rs.getString(9);
-                    clientes.add(new Cliente(id,dni,nombre,apellidos,correo,telefono,codigoPostal,direccion, tipoCli));
+                    if (tipoCli.equalsIgnoreCase("MAYORISTA")){
+                        clientes.add(new Cliente(id,dni,nombre,apellidos,correo,telefono,codigoPostal,direccion, EnumTipoCliente.MAYORISTA));
+                    } else {
+                        clientes.add(new Cliente(id,dni,nombre,apellidos,correo,telefono,codigoPostal,direccion, EnumTipoCliente.MINORISTA));
+                    }
                 }
                 return true;
             } catch (SQLException e) {

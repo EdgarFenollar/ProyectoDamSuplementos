@@ -69,5 +69,11 @@ public class MenuCrearProveedores extends JPanel{
                 panelVentas.repaint();  // Repaint to refresh the component
             }
         });
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 }
