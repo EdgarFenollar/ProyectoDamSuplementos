@@ -5,6 +5,7 @@ import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
 import managers.EmpleadoManager;
+import managers.ProductoManager;
 import managers.PromocionManager;
 import productos.Producto;
 import promociones.Promocion;
@@ -883,6 +884,37 @@ public class DBManager {
                     String administrador =rs.getString(11);
 
                     EmpleadoManager.empleados.add(new Empleado(codigo,dni, nombre,apellidos, correo, telefono, direccion, LocalDate.parse(fechanac), Integer.parseInt(administrador), usuario, contrasenya));
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean getProductosPorNombre(String nom) {
+        String query = "SELECT * FROM PRODUCTOS WHERE NOMBRE LIKE ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + nom + "%");
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                ProductoManager.productos = new ArrayList<>();
+
+                while (rs.next()) {
+                    int id = rs.getInt(1);
+                    String nombre = rs.getString(2);
+                    int stock = rs.getInt(3);
+                    double peso = rs.getDouble(4);
+                    double precioVenta = rs.getDouble(5);
+                    double precioCompra = rs.getDouble(6);
+                    LocalDate fechaEntrega = rs.getDate(7).toLocalDate();
+                    LocalDate fechaCaducidad = rs.getDate(8).toLocalDate();
+                    String descripcion = rs.getString(9);
+                    int idCategoria = rs.getInt(10);
+                    int idProveedor = rs.getInt(11);
+
+
+                    ProductoManager.productos.add(new Producto(id, nombre, stock, peso, precioVenta, precioCompra, fechaEntrega, fechaCaducidad, descripcion, idCategoria, idProveedor));
                 }
                 return true;
             }
