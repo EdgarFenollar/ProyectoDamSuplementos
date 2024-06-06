@@ -31,6 +31,9 @@ public class MenuCrearCompras extends JPanel {
     private JPanel panelPicture;
     private JPanel panelFechaCompra;
     private JPanel panelFechaRecepcion;
+    public static String nombre, descripcion, fechaEntrega, fechaCaducidad;
+    public static Double peso, precioVenta, precioCompra;
+    public static int idCategoria, idProveedor, id, stock;
     private JDateChooser fCompra = new JDateChooser();
     private JDateChooser fRecepcion = new JDateChooser();
 
@@ -103,25 +106,25 @@ public class MenuCrearCompras extends JPanel {
                                 LocalDate feCompra = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                                 LocalDate feRecepcion = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-                                DBManager.editarCompras(
-                                        id,
-                                        feCompra,
+                                CompraManager.anyadirCompra(new Compra(id,
+                                        String.valueOf(feCompra),
                                         Integer.parseInt(txtIDproveedor.getText()),
                                         Integer.parseInt(txtIDproducto.getText()),
                                         Integer.parseInt(txtCantidad.getText()),
                                         Double.parseDouble(txtPrecioUnitario.getText()),
-                                        feRecepcion,
-                                        Integer.parseInt(txtIDempleado.getText())
+                                        String.valueOf(feRecepcion),
+                                        Integer.parseInt(txtIDempleado.getText()))
+
                                 );
                                 CompraManager.getCompras();
                             }
                         }
                         // Volver Atras
-                        panelProductos.setLayout(new BorderLayout());
-                        panelProductos.removeAll();  // Remove any existing components
-                        panelProductos.add(new MenuProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
-                        panelProductos.revalidate();  // Revalidate to apply layout changes
-                        panelProductos.repaint();  // Repaint to refresh the component
+                        panelCompras.setLayout(new BorderLayout());
+                        panelCompras.removeAll();  // Remove any existing components
+                        panelCompras.add(new MenuProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelCompras.revalidate();  // Revalidate to apply layout changes
+                        panelCompras.repaint();  // Repaint to refresh the component
                     } else {
                         JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
