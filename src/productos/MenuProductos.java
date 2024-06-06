@@ -1,5 +1,6 @@
 package productos;
 
+import DBManager.DBManager;
 import empleados.MenuEditarEmpleados;
 import managers.EmpleadoManager;
 import managers.ProductoManager;
@@ -97,6 +98,14 @@ public class MenuProductos extends JPanel {
                     panelProductos.revalidate();  // Revalidate to apply layout changes
                     panelProductos.repaint();  // Repaint to refresh the component
                 }
+            }
+        });
+
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBManager.getProductosPorNombre(txtBuscar.getText());
+                createTable(tableInfo);
             }
         });
     }
