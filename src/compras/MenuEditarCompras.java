@@ -117,7 +117,7 @@ public class MenuEditarCompras extends JPanel {
                                 LocalDate feCompra = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                                 LocalDate feRecepcion = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-                                DBManager.any(
+                                DBManager.editarCompras(
                                         id,
                                         feCompra,
                                         Integer.parseInt(txtIDproveedor.getText()),
