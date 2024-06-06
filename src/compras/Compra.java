@@ -12,7 +12,7 @@ public class Compra {
     private int id_producto;
     private int cantidad;
     private double precio_unitario;
-    private Date fecha_recepcion;
+    private LocalDate fecha_recepcion;
     private int id_empleado;
 
     public Compra(int id, String fecha_compra, int id_proveedor, int id_producto, int cantidad, double precio_unitario, String fecha_recepcion, int id_empleado) {
@@ -22,7 +22,17 @@ public class Compra {
         this.id_producto = id_producto;
         this.cantidad = cantidad;
         this.precio_unitario = precio_unitario;
-        setFecha_recepcion(fecha_recepcion);
+        this.fecha_recepcion = LocalDate.parse(fecha_recepcion);
+        this.id_empleado = id_empleado;
+    }
+
+    public Compra(LocalDate fecha_compra, int id_proveedor, int id_producto, int cantidad, double precio_unitario, LocalDate fecha_recepcion, int id_empleado) {
+        this.fecha_compra = fecha_compra;
+        this.id_proveedor = id_proveedor;
+        this.id_producto = id_producto;
+        this.cantidad = cantidad;
+        this.precio_unitario = precio_unitario;
+        this.fecha_recepcion = fecha_recepcion;
         this.id_empleado = id_empleado;
     }
 
@@ -74,17 +84,12 @@ public class Compra {
         this.precio_unitario = precio_unitario;
     }
 
-    public Date getFecha_recepcion() {
+    public LocalDate getFecha_recepcion() {
         return fecha_recepcion;
     }
 
-    public void setFecha_recepcion(String fecha_recepcion) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            this.fecha_recepcion = formatter.parse(fecha_recepcion);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void setFecha_recepcion(LocalDate fecha_recepcion) {
+        this.fecha_recepcion = fecha_recepcion;
     }
 
     public int getId_empleado() {

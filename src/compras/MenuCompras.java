@@ -1,6 +1,7 @@
 package compras;
 
 import empleados.MenuCrearEmpleados;
+import empleados.MenuEditarEmpleados;
 import managers.CompraManager;
 import managers.EmpleadoManager;
 
@@ -28,6 +29,10 @@ public class MenuCompras extends JPanel {
         setLayout(new BorderLayout());
         add(panelCompras, BorderLayout.CENTER);
 
+        CompraManager.getCompras();
+
+        btnEditar.setBackground(null);
+        btnCrear.setBackground(null);
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
@@ -47,7 +52,7 @@ public class MenuCompras extends JPanel {
         setButtonIcon(btnEditar, "imagenes/edit.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
         setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
-        
+
         btnCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,17 +63,37 @@ public class MenuCompras extends JPanel {
                 panelCompras.repaint();  // Repaint to refresh the component
             }
         });
+
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelCompras.setLayout(new BorderLayout());
-                panelCompras.removeAll();  // Remove any existing components
-                panelCompras.add(new MenuEditarCompras(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelCompras.revalidate();  // Revalidate to apply layout changes
-                panelCompras.repaint();  // Repaint to refresh the component
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar una compra para editar.");
+                } else {
+                    for (int i = 0; i < CompraManager.compras.size(); i++) {
+                        if (i == tableInfo.getSelectedRow()) {
+                            MenuEditarCompras.insertarDatos(
+                                    CompraManager.compras.get(i).getId(),
+                                    CompraManager.compras.get(i).getFecha_compra(),
+                                    CompraManager.compras.get(i).getId_proveedor(),
+                                    CompraManager.compras.get(i).getId_producto(),
+                                    CompraManager.compras.get(i).getCantidad(),
+                                    CompraManager.compras.get(i).getPrecio_unitario(),
+                                    CompraManager.compras.get(i).getFecha_recepcion(),
+                                    CompraManager.compras.get(i).getId_empleado());
+                        }
+                    }
+
+                    panelCompras.setLayout(new BorderLayout());
+                    panelCompras.removeAll();  // Remove any existing components
+                    panelCompras.add(new MenuEditarCompras(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelCompras.revalidate();  // Revalidate to apply layout changes
+                    panelCompras.repaint();  // Repaint to refresh the component
+                }
             }
         });
     }
+
 
     private void setButtonIcon(JButton button, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
