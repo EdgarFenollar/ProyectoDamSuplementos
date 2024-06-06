@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static DBManager.DBManager.connect;
+
 public class PromocionManager {
     public static List<Promocion> promociones = new ArrayList<>();
 
     public static boolean getPromociones(){
-        if (DBManager.connect()){
+        if (connect()){
             try(ResultSet rs = DBManager.getTableDataBase("SELECT * FROM PROMOCIONES")) {
                promociones = new ArrayList<>();
 
@@ -42,7 +44,7 @@ public class PromocionManager {
     }
 
     public static boolean anyadirPromocion(Promocion promocion){
-        if (DBManager.connect() && DBManager.insertarPromociones(promocion)){
+        if (connect() && DBManager.insertarPromociones(promocion)){
             try {
                 promociones.add(new Promocion(promocion.getDescripcion(), promocion.getDescuento(), promocion.getFechaInicio(), promocion.getFechaFin()));
             }catch (ArrayStoreException ex){
@@ -55,42 +57,5 @@ public class PromocionManager {
         }else {
             return false;
         }
-    }
-
-    public static boolean actualizarCliente(Promocion promocion){
-        try {
-            if (DBManager.connect()) {
-                if (DBManager.actualizarPromociones(promocion)) {
-                    borrarColumnaPorId(promocion.getId());
-                    promociones.add(promocion);
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            DBManager.close();
-        }
-        return false;
-    }
-
-    public static boolean eliminarPromocion(Promocion promocion){
-        if (DBManager.connect() && borrarColumnaPorId(promocion.getId())){
-            borrarColumnaPorId(promocion.getId());
-            DBManager.close();
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean borrarColumnaPorId(int id){
-        for (int i = 0; i < promociones.size(); i++) {
-            if (promociones.get(i).getId()==id){
-                promociones.remove(i);
-                return true;
-            }
-        }
-        return false;
     }
 }

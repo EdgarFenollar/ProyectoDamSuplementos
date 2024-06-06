@@ -1,5 +1,6 @@
 package promociones;
 
+import DBManager.DBManager;
 import empleados.MenuEditarEmpleados;
 import managers.EmpleadoManager;
 import managers.PromocionManager;
@@ -87,6 +88,13 @@ public class MenuPromociones extends JPanel {
                     panelPromociones.revalidate();  // Revalidate to apply layout changes
                     panelPromociones.repaint();  // Repaint to refresh the component
                 }
+            }
+        });
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBManager.getPromocionesPorDesc(txtBuscar.getText());
+                createTable(tableInfo);
             }
         });
     }

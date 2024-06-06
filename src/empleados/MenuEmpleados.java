@@ -97,6 +97,13 @@ public class MenuEmpleados extends JPanel {
                 }
             }
         });
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBManager.getEmpleadosPorNombre(txtBuscar.getText());
+                createTable(tableInfo);
+            }
+        });
 
         /*
         btnBorrar.addActionListener(new ActionListener() {
