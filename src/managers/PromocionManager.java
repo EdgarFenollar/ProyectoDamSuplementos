@@ -39,29 +39,6 @@ public class PromocionManager {
         }
     }
 
-    public static boolean getPromocionesPorDesc(String desc) {
-        String query = "SELECT * FROM PROMOCIONES WHERE DESCRIPCION LIKE ?";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(1, "%" + desc + "%");
-            try (ResultSet rs = preparedStatement.executeQuery()) {
-                promociones = new ArrayList<>();
-
-                while (rs.next()) {
-                    int codigo = rs.getInt(1);
-                    String descripcion = rs.getString(2);
-                    double descuento = rs.getDouble(3);
-                    LocalDate fechaInicial = rs.getDate(4).toLocalDate();
-                    LocalDate fechaFinal = rs.getDate(5).toLocalDate();
-                    promociones.add(new Promocion(codigo, descripcion, descuento, fechaFinal, fechaInicial));
-                }
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     public static List<Promocion> getPromocionesList(){
         return promociones;
     }

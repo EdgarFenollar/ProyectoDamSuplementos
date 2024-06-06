@@ -5,6 +5,7 @@ import clientes.Cliente;
 import compras.Compra;
 import empleados.Empleado;
 import managers.EmpleadoManager;
+import managers.PromocionManager;
 import productos.Producto;
 import promociones.Promocion;
 import proveedores.Proveedor;
@@ -13,6 +14,7 @@ import ventas.Venta;
 import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class DBManager {
     // Conexión a la base de datos
@@ -515,7 +517,7 @@ public class DBManager {
                 rs.updateInt("idProducto", compra.getId_producto());
                 rs.updateInt("Cantidad", compra.getCantidad());
                 rs.updateDouble("PrecioUnitario", compra.getPrecio_unitario());
-                rs.updateDate("FechaRecepcion", (Date) compra.getFecha_recepcion());
+                rs.updateDate("FechaRecepcion", Date.valueOf(compra.getFecha_recepcion()));
                 rs.updateInt("idEmpleado", compra.getId_empleado());
                 rs.updateRow();
                 return true;
@@ -833,6 +835,60 @@ public class DBManager {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    ///// FUNCIONES DE BUSQUEDA
+    public static boolean getPromocionesPorDesc(String desc) {
+        String query = "SELECT * FROM PROMOCIONES WHERE DESCRIPCION LIKE ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + desc + "%");
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                PromocionManager.promociones = new ArrayList<>();
+
+                while (rs.next()) {
+                    int codigo = rs.getInt(1);
+                    String descripcion = rs.getString(2);
+                    double descuento = rs.getDouble(3);
+                    LocalDate fechaInicial = rs.getDate(4).toLocalDate();
+                    LocalDate fechaFinal = rs.getDate(5).toLocalDate();
+                    PromocionManager.promociones.add(new Promocion(codigo, descripcion, descuento, fechaFinal, fechaInicial));
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean getEmpleadosPorNombre(String nom) {
+        String query = "SELECT * FROM EMPLEADOS WHERE NOMBRE LIKE ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + nom + "%");
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                EmpleadoManager.empleados = new ArrayList<>();
+
+                while (rs.next()) {
+                    int codigo = rs.getInt(1);
+                    String dni =rs.getString(2);
+                    String nombre =rs.getString(3);
+                    String apellidos =rs.getString(4);
+                    String correo =rs.getString(5);
+                    String telefono =rs.getString(6);
+                    String direccion =rs.getString(7);
+                    String fechanac =rs.getString(8);
+                    String usuario =rs.getString(9);
+                    String contrasenya =rs.getString(10);
+                    String administrador =rs.getString(11);
+
+                    EmpleadoManager.empleados.add(new Empleado(codigo,dni, nombre,apellidos, correo, telefono, direccion, LocalDate.parse(fechanac), Integer.parseInt(administrador), usuario, contrasenya));
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

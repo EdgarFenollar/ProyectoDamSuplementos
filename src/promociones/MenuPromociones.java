@@ -1,5 +1,6 @@
 package promociones;
 
+import DBManager.DBManager;
 import empleados.MenuEditarEmpleados;
 import managers.EmpleadoManager;
 import managers.PromocionManager;
@@ -92,7 +93,8 @@ public class MenuPromociones extends JPanel {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PromocionManager.getPromocionesPorDesc(txtBuscar.getText());
+                DBManager.getPromocionesPorDesc(txtBuscar.getText());
+                createTable(tableInfo);
             }
         });
     }
