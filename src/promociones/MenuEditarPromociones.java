@@ -1,12 +1,17 @@
 package promociones;
 
+import DBManager.DBManager;
 import com.toedter.calendar.JDateChooser;
+import empleados.MenuEmpleados;
+import managers.EmpleadoManager;
+import managers.PromocionManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Objects;
 
 /**
@@ -24,6 +29,9 @@ public class MenuEditarPromociones extends JPanel{
     private JPanel panelFecha2;
     private JPanel panelFecha1;
     private JTextField txtDescripcion;
+    public static String descripcion, fechaIni, fechaFin;
+    public static int id;
+    public static double descuento;
     private JLabel imgProveedorGrande;
     private JDateChooser dateChooser1 = new JDateChooser();
     private JDateChooser dateChooser2 = new JDateChooser();
@@ -38,6 +46,9 @@ public class MenuEditarPromociones extends JPanel{
         btnCancelar.setBorder(null);
         btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
+
+        txtDescripcion.setText(descripcion);
+        txtDescuento.setText(String.valueOf(descuento));
 
         // FECHAS//
         panelFecha1.setLayout(new FlowLayout());
@@ -88,5 +99,47 @@ public class MenuEditarPromociones extends JPanel{
                 panelPromociones.repaint();  // Repaint to refresh the component
             }
         });
+
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (!txtDescripcion.getText().isEmpty() && !txtDescuento.getText().isEmpty()){
+                        for (int i = 0; i < PromocionManager.promociones.size(); i++) {
+                            if (id == PromocionManager.promociones.get(i).getId()){
+                                LocalDate fechaIn = dateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                LocalDate fechaFin = dateChooser2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                DBManager.editarPromociones(
+                                        id,
+                                        txtDescripcion.getText(),
+                                        Double.parseDouble(txtDescuento.getText()),
+                                        fechaIn,
+                                        fechaFin
+                                );
+                                PromocionManager.getPromociones();
+                            }
+                        }
+                        // Volver Atras
+                        panelPromociones.setLayout(new BorderLayout());
+                        panelPromociones.removeAll();  // Remove any existing components
+                        panelPromociones.add(new MenuPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelPromociones.revalidate();  // Revalidate to apply layout changes
+                        panelPromociones.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static void insertarDatos(int idI, String descripcionI, double descuentoI, String fechaIniI, String fechaFinI){
+        id = idI;
+        descripcion = descripcionI;
+        descuento = descuentoI;
+        fechaIni = fechaIniI;
+        fechaFin = fechaFinI;
     }
 }

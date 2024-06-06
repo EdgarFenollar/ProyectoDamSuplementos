@@ -1,6 +1,7 @@
 package promociones;
 
-import managers.DataManager;
+import empleados.MenuEditarEmpleados;
+import managers.EmpleadoManager;
 import managers.PromocionManager;
 
 import javax.swing.*;
@@ -9,7 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Esta clase sirve para crear el panel utilizado el cual servira para visualizar las promociones, y poder editar, borrar o crear otras promociones.
@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 
 public class MenuPromociones extends JPanel {
-    private JPanel panelProveedores;
+    private JPanel panelPromociones;
     private JButton btnBuscar;
     private JButton btnBorrar;
     private JButton btnEditar;
@@ -31,8 +31,9 @@ public class MenuPromociones extends JPanel {
     private JLabel lblBuscar;
 
     public MenuPromociones() {
+        PromocionManager.getPromociones();
         setLayout(new BorderLayout());
-        add(panelProveedores, BorderLayout.CENTER);
+        add(panelPromociones, BorderLayout.CENTER);
 
         btnBorrar.setBackground(null);
         btnEditar.setBackground(null);
@@ -61,29 +62,35 @@ public class MenuPromociones extends JPanel {
         btnCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelProveedores.setLayout(new BorderLayout());
-                panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuCrearPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelProveedores.revalidate();  // Revalidate to apply layout changes
-                panelProveedores.repaint();  // Repaint to refresh the component
+                panelPromociones.setLayout(new BorderLayout());
+                panelPromociones.removeAll();  // Remove any existing components
+                panelPromociones.add(new MenuCrearPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelPromociones.revalidate();  // Revalidate to apply layout changes
+                panelPromociones.repaint();  // Repaint to refresh the component
             }
         });
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelProveedores.setLayout(new BorderLayout());
-                panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuEditarPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelProveedores.revalidate();  // Revalidate to apply layout changes
-                panelProveedores.repaint();  // Repaint to refresh the component
-            }
-        });
-        btnBorrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar la promoción?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (eliminar == 0){
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar una promocion para editar.");
+                } else {
+                    for (int i = 0; i < PromocionManager.promociones.size(); i++) {
+                        if (i == tableInfo.getSelectedRow()){
+                            MenuEditarPromociones.insertarDatos(
+                                    PromocionManager.promociones.get(i).getId(),
+                                    PromocionManager.promociones.get(i).getDescripcion(),
+                                    PromocionManager.promociones.get(i).getDescuento(),
+                                    PromocionManager.promociones.get(i).getFechaInicio().toString(),
+                                    PromocionManager.promociones.get(i).getFechaFin().toString());
+                        }
+                    }
 
+                    panelPromociones.setLayout(new BorderLayout());
+                    panelPromociones.removeAll();  // Remove any existing components
+                    panelPromociones.add(new MenuEditarPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelPromociones.revalidate();  // Revalidate to apply layout changes
+                    panelPromociones.repaint();  // Repaint to refresh the component
                 }
             }
         });

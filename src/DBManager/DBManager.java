@@ -772,6 +772,25 @@ public class DBManager {
         }
     }
 
+    public static void editarPromociones(int id, String descripcion, double descuento, LocalDate fechaIn, LocalDate fechaFin){
+        try{
+            Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROMOCIONES WHERE IDPROMOCION=" + id);
+            if (rs.next()) {
+                rs.updateString(2,descripcion);
+                rs.updateDouble(3,descuento);
+                rs.updateDate(4, Date.valueOf(fechaIn.toString()));
+                rs.updateDate(5, Date.valueOf(fechaFin.toString()));
+                rs.updateRow();
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     // FUNCION ELIMINAR //
     //Funciona eliminada debido a que vamos a quitar la funcion de eliminar datos porque no seria necesario dentro de la empresa debido a que se debe de llevar el registro de todo.
     /*

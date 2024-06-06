@@ -2,6 +2,9 @@ package promociones;
 
 import DBManager.DBManager;
 import com.toedter.calendar.JDateChooser;
+import empleados.MenuEmpleados;
+import managers.EmpleadoManager;
+import managers.PromocionManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -101,21 +104,25 @@ public class MenuCrearPromociones extends JPanel{
                 try {
                     LocalDate fechaInicio = convertToLocalDateViaInstant(dateChooser1.getDate());
                     LocalDate fechaFin = convertToLocalDateViaInstant(dateChooser2.getDate());
-
+                    if (!txtDescripcion.getText().isEmpty() && !txtDescuento.getText().isEmpty()){
                     DBManager.insertarPromociones(new Promocion(
                             txtDescripcion.getText(),
                             Double.parseDouble(txtDescuento.getText()),
                             fechaInicio,
                             fechaFin
                     ));
-                    JOptionPane.showMessageDialog(null, "Datos introducidos en la base de datos correctamente.", "EXITO!", JOptionPane.INFORMATION_MESSAGE);
-                    txtDescripcion.setText("");
-                    txtDescuento.setText("");
-                    dateChooser1.setDate(null);
-                    dateChooser2.setDate(null);
+                    PromocionManager.getPromociones();
+                    panelPromociones.setLayout(new BorderLayout());
+                    panelPromociones.removeAll();  // Remove any existing components
+                    panelPromociones.add(new MenuPromociones(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelPromociones.revalidate();  // Revalidate to apply layout changes
+                    panelPromociones.repaint();  // Repaint to refresh the component
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error al introducir los datos en la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
