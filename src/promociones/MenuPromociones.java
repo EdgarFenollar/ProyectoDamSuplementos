@@ -89,6 +89,12 @@ public class MenuPromociones extends JPanel {
                 }
             }
         });
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PromocionManager.getPromocionesPorDesc(txtBuscar.getText());
+            }
+        });
     }
 
     private void setButtonIcon(JButton button, String iconPath) {
