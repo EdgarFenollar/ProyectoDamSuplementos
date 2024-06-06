@@ -48,6 +48,8 @@ public class Dashboard extends JPanel{
         lbl.setIcon(new ImageIcon(scaledIconImage));
     }
 
+    // RECIBIR CONTADORES PARA PANTALLA PRINCIPAL
+
     private int getVentas(){
         return DBManager.contarFilas("SELECT COUNT(*) FROM VENTAS");
     }
