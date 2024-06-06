@@ -21,7 +21,4 @@
   > NOTE: If you has been downloaded the .zin you don't need to donwload anything of this.
 
 ## ✨ | Contributors
-<a href="https://github.com/EdgarFenollar/ProyectoDamSuplementos/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=EdgarFenollar/ProyectoDamSuplementos" />
-</a>
-
+![image](https://github.com/EdgarFenollar/ProyectoDamSuplementos/assets/147927974/004cbb11-33f7-4a64-9ccb-a5dd172a2b08)
