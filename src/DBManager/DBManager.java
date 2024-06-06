@@ -338,16 +338,17 @@ public class DBManager {
         }
     }
 
-    public static int contarColumnas(String sql) {
-        try {
-            Statement stm = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = stm.executeQuery(sql);
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            return rsmd.getColumnCount();
+    public static int contarFilas(String query) {
+        int count = 0;
+        try (Statement statement = conn.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return count;
     }
 
     public static ResultSet getCompras (int codigo){

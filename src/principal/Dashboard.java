@@ -49,14 +49,14 @@ public class Dashboard extends JPanel{
     }
 
     private int getVentas(){
-        return DBManager.contarColumnas("SELECT * FROM VENTAS");
+        return DBManager.contarFilas("SELECT COUNT(*) FROM VENTAS");
     }
 
     private int getClientes(){
-        return DBManager.contarColumnas("SELECT * FROM CLIENTES");
+        return DBManager.contarFilas("SELECT COUNT(*) FROM CLIENTES");
     }
 
     private int getEmpleados(){
-        return DBManager.contarColumnas("SELECT * FROM EMPLEADOS");
+        return DBManager.contarFilas("SELECT COUNT(*) FROM EMPLEADOS");
     }
 }
