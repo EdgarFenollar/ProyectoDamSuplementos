@@ -17,13 +17,11 @@ public class MenuEditarCompras extends JPanel {
     private JLabel imgPromocion;
     private JButton btnCancelar;
     private JButton btnConfirmar;
-    private JTextField txtFechaCompra;
     private JTextField txtIDproveedor;
     private JTextField txtIDproducto;
     private JTextField txtCantidad;
     private JTextField txtPrecioUnitario;
     private JTextField txtIDempleado;
-    private JTextField txtFechaRecepcion;
     private JPanel panelPicture;
     private JPanel panelCompras;
     private JPanel panelFechaCompra;
@@ -38,12 +36,10 @@ public class MenuEditarCompras extends JPanel {
     public MenuEditarCompras() {
         setLayout(new BorderLayout());
 
-        txtFechaCompra.setText(fechaCompra);
         txtIDproveedor.setText(String.valueOf(idProveedor));
         txtIDproducto.setText(String.valueOf(idProducto));
         txtCantidad.setText(String.valueOf(cantidad));
         txtPrecioUnitario.setText(String.valueOf(precioUnitario));
-        txtFechaRecepcion.setText(fechaRecepcion);
         txtIDempleado.setText(String.valueOf(idEmpleado));
         try {
             fCompra.setDateFormatString(fechaCompra);
@@ -115,13 +111,13 @@ public class MenuEditarCompras extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (!txtFechaCompra.getText().isEmpty() && !txtIDproveedor.getText().isEmpty() && !txtIDproducto.getText().isEmpty() && !txtCantidad.getText().isEmpty() && !txtPrecioUnitario.getText().isEmpty() && !txtFechaRecepcion.getText().isEmpty() && !txtIDempleado.getText().isEmpty()){
+                    if (!txtIDproveedor.getText().isEmpty() && !txtIDproducto.getText().isEmpty() && !txtCantidad.getText().isEmpty() && !txtPrecioUnitario.getText().isEmpty() && !txtIDempleado.getText().isEmpty()){
                         for (int i = 0; i < CompraManager.compras.size(); i++) {
                             if (id == CompraManager.compras.get(i).getId()){
                                 LocalDate feCompra = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                                 LocalDate feRecepcion = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-                                DBManager.editarCompras(
+                                DBManager.any(
                                         id,
                                         feCompra,
                                         Integer.parseInt(txtIDproveedor.getText()),
@@ -131,7 +127,7 @@ public class MenuEditarCompras extends JPanel {
                                         feRecepcion,
                                         Integer.parseInt(txtIDempleado.getText())
                                 );
-                                EmpleadoManager.getEmpleados();
+                                CompraManager.getCompras();
                             }
                         }
                         // Volver Atras

@@ -1,6 +1,12 @@
 package compras;
 
+import DBManager.DBManager;
+import com.toedter.calendar.JDateChooser;
 import empleados.MenuEmpleados;
+import managers.CompraManager;
+import managers.ProductoManager;
+import productos.MenuProductos;
+import productos.Producto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,21 +14,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class MenuCrearCompras extends JPanel {
     private JPanel panelCrearCompras;
     private JLabel imgPromocion;
     private JButton btnCancelar;
     private JButton btnConfirmar;
-    private JTextField txtFechaCompra;
     private JTextField txtIDproveedor;
     private JTextField txtIDproducto;
     private JTextField txtCantidad;
     private JTextField txtPrecioUnitario;
     private JTextField txtIDempleado;
-    private JTextField txtFechaRecepcion;
     private JPanel panelCompras;
     private JPanel panelPicture;
+    private JPanel panelFechaCompra;
+    private JPanel panelFechaRecepcion;
+    private JDateChooser fCompra = new JDateChooser();
+    private JDateChooser fRecepcion = new JDateChooser();
 
     public MenuCrearCompras() {
         setLayout(new BorderLayout());
@@ -35,7 +45,18 @@ public class MenuCrearCompras extends JPanel {
         btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
 
-        txtIDempleado.setSize(new Dimension(100, 100));
+        // FECHAS//
+        panelFechaCompra.setLayout(new FlowLayout());
+        panelFechaRecepcion.setLayout(new FlowLayout());
+        fCompra.setDateFormatString("yyyy-MM-dd");
+        JTextField dateEditor1 = (JTextField) fCompra.getDateEditor().getUiComponent();
+        JTextField dateEditor2 = (JTextField) fRecepcion.getDateEditor().getUiComponent();
+        dateEditor1.setEditable(false);
+        dateEditor2.setEditable(false);
+        panelFechaCompra.add(fCompra);
+        panelFechaRecepcion.add(fRecepcion);
+        fCompra.setPreferredSize(new Dimension(485, 40));
+        fRecepcion.setPreferredSize(new Dimension(485, 40));
 
         //Redimensionar Imagen CANCELAR//
         ImageIcon cancelPrinc = new ImageIcon("imagenes/x.png");
@@ -73,7 +94,41 @@ public class MenuCrearCompras extends JPanel {
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    LocalDate fechaCompr = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate fechaRecep = fRecepcion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    if (!txtIDproveedor.getText().isEmpty() && !txtIDproducto.getText().isEmpty() && !txtCantidad.getText().isEmpty() && !txtPrecioUnitario.getText().isEmpty() && !txtIDempleado.getText().isEmpty()){
+                        for (int i = 0; i < CompraManager.compras.size(); i++) {
+                            if (id == CompraManager.compras.get(i).getId()){
+                                LocalDate feCompra = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                LocalDate feRecepcion = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
+                                DBManager.editarCompras(
+                                        id,
+                                        feCompra,
+                                        Integer.parseInt(txtIDproveedor.getText()),
+                                        Integer.parseInt(txtIDproducto.getText()),
+                                        Integer.parseInt(txtCantidad.getText()),
+                                        Double.parseDouble(txtPrecioUnitario.getText()),
+                                        feRecepcion,
+                                        Integer.parseInt(txtIDempleado.getText())
+                                );
+                                CompraManager.getCompras();
+                            }
+                        }
+                        // Volver Atras
+                        panelProductos.setLayout(new BorderLayout());
+                        panelProductos.removeAll();  // Remove any existing components
+                        panelProductos.add(new MenuProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelProductos.revalidate();  // Revalidate to apply layout changes
+                        panelProductos.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
