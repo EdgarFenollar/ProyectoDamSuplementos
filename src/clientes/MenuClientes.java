@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class MenuClientes extends JPanel {
     private JPanel panelVentas;
     private JButton btnBuscar;
-    private JButton btnBorrar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
@@ -33,12 +32,8 @@ public class MenuClientes extends JPanel {
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
-        btnBorrar.setBackground(null);
         btnEditar.setBackground(null);
         btnCrear.setBackground(null);
-        btnBorrar.setBorder(null);
-        btnBorrar.setBackground(null);
-        btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
         btnCrear.setBackground(null);
         btnCrear.setOpaque(false);
@@ -55,7 +50,6 @@ public class MenuClientes extends JPanel {
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
-        setButtonIcon(btnBorrar, "imagenes/delete.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
         setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
@@ -77,16 +71,6 @@ public class MenuClientes extends JPanel {
                 panelVentas.add(new MenuEditarClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelVentas.revalidate();  // Revalidate to apply layout changes
                 panelVentas.repaint();  // Repaint to refresh the component
-            }
-        });
-
-        btnBorrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar el cliente?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (eliminar == 0){
-
-                }
             }
         });
     }

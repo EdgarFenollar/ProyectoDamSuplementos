@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class MenuCompras extends JPanel {
     private JPanel panelTablaCompras;
     private JButton btnEditar;
-    private JButton btnBorrar;
     private JButton btnCrear;
     private JComboBox comboBoxFiltrar;
     private JButton btnFiltrar;
@@ -32,11 +31,8 @@ public class MenuCompras extends JPanel {
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
-        btnBorrar.setBackground(null);
         btnEditar.setBackground(null);
         btnCrear.setBackground(null);
-        btnBorrar.setBorder(null);
-        btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
         btnCrear.setOpaque(false);
         btnEditar.setBorder(null);
@@ -49,7 +45,6 @@ public class MenuCompras extends JPanel {
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
-        setButtonIcon(btnBorrar, "imagenes/delete.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
         setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
         
@@ -71,15 +66,6 @@ public class MenuCompras extends JPanel {
                 panelCompras.add(new MenuEditarCompras(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelCompras.revalidate();  // Revalidate to apply layout changes
                 panelCompras.repaint();  // Repaint to refresh the component
-            }
-        });
-        btnBorrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar la compra?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (eliminar == 0){
-
-                }
             }
         });
     }

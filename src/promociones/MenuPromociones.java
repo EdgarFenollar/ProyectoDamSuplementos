@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class MenuPromociones extends JPanel {
     private JPanel panelPromociones;
     private JButton btnBuscar;
-    private JButton btnBorrar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
@@ -35,14 +34,11 @@ public class MenuPromociones extends JPanel {
         setLayout(new BorderLayout());
         add(panelPromociones, BorderLayout.CENTER);
 
-        btnBorrar.setBackground(null);
         btnEditar.setBackground(null);
         btnCrear.setBackground(null);
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
-        btnBorrar.setBorder(null);
-        btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
         btnCrear.setOpaque(false);
         btnEditar.setBorder(null);
@@ -55,7 +51,6 @@ public class MenuPromociones extends JPanel {
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
-        setButtonIcon(btnBorrar, "imagenes/delete.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
         setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 

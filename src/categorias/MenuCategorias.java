@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class MenuCategorias extends JPanel {
     private JPanel panelCategorias;
     private JButton btnBuscar;
-    private JButton btnBorrar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
@@ -35,15 +34,12 @@ public class MenuCategorias extends JPanel {
         setLayout(new BorderLayout());
         add(panelCategorias, BorderLayout.CENTER);
 
-        btnBorrar.setBackground(null);
         btnEditar.setBackground(null);
         btnCrear.setBackground(null);
 
         createTable(tableInfo);
 
         // Establecer bordes y apariencia de los botones
-        btnBorrar.setBorder(null);
-        btnBorrar.setOpaque(false);
         btnCrear.setBorder(null);
         btnCrear.setOpaque(false);
         btnEditar.setBorder(null);
@@ -56,7 +52,6 @@ public class MenuCategorias extends JPanel {
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
-        setButtonIcon(btnBorrar, "imagenes/delete.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
         setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
@@ -78,16 +73,6 @@ public class MenuCategorias extends JPanel {
                 panelCategorias.add(new MenuEditarCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelCategorias.revalidate();  // Revalidate to apply layout changes
                 panelCategorias.repaint();  // Repaint to refresh the component
-            }
-        });
-
-        btnBorrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int eliminar = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar la categoria?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (eliminar == 0){
-
-                }
             }
         });
     }
