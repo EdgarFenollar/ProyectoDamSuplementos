@@ -791,6 +791,51 @@ public class DBManager {
         }
     }
 
+    public static void editarCompras(int id, LocalDate fechaCompra, int idProveedor, int idProducto, int cantidad, double precioUnitario, LocalDate fechaRecepcion, int idEmpleado){
+        try{
+            Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM COMPRAS WHERE IDCOMPRAS = " + id);
+            if (rs.next()) {
+                rs.updateDate(4, Date.valueOf(fechaCompra.toString()));
+                rs.updateInt(3,idProveedor);
+                rs.updateInt(3,idProducto);
+                rs.updateInt(3,cantidad);
+                rs.updateDouble(3,precioUnitario);
+                rs.updateDate(4, Date.valueOf(fechaRecepcion.toString()));
+                rs.updateInt(3,idEmpleado);
+                rs.updateRow();
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void editarClientes(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codPostal, String direccion, String tipo){
+        try{
+            Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CLIENTES WHERE IDCLIENTE = " + id);
+            if (rs.next()) {
+                rs.updateString(2,dni);
+                rs.updateString(2,nombre);
+                rs.updateString(2,apellidos);
+                rs.updateString(2,correo);
+                rs.updateString(2,telefono);
+                rs.updateString(2,codPostal);
+                rs.updateString(2,direccion);
+                rs.updateString(2,tipo);
+                rs.updateRow();
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     // FUNCION ELIMINAR //
     //Funciona eliminada debido a que vamos a quitar la funcion de eliminar datos porque no seria necesario dentro de la empresa debido a que se debe de llevar el registro de todo.
     /*
