@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Esta clase sirve para crear el panel utilizado el cual servira para visualizar las promociones, y poder editar, borrar o crear otras promociones.
@@ -22,7 +23,6 @@ public class MenuPromociones extends JPanel {
     private JButton btnBuscar;
     private JButton btnEditar;
     private JButton btnCrear;
-    private JButton btnFiltrar;
     private JTable tableInfo;
     private JPanel panelTablaPromociones;
     private JComboBox<String> comboBoxFiltrar;
@@ -46,14 +46,11 @@ public class MenuPromociones extends JPanel {
         btnEditar.setOpaque(false);
         btnBuscar.setBorder(null);
         btnBuscar.setOpaque(false);
-        btnFiltrar.setBorder(null);
-        btnFiltrar.setOpaque(false);
 
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
-        setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
         btnCrear.addActionListener(new ActionListener() {
             @Override
@@ -93,7 +90,7 @@ public class MenuPromociones extends JPanel {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DBManager.getPromocionesPorDesc(txtBuscar.getText());
+                DBManager.getPromocionesPorFiltro(Objects.requireNonNull(comboBoxFiltrar.getSelectedItem()).toString(), txtBuscar.getText());
                 createTable(tableInfo);
             }
         });

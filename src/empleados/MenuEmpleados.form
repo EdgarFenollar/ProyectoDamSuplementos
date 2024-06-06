@@ -69,25 +69,20 @@
                     <constraints/>
                     <properties>
                       <model>
-                        <item value="Id"/>
-                        <item value="Dni"/>
+                        <item value="idEmpleado&#9;"/>
+                        <item value="DNI"/>
                         <item value="Nombre"/>
                         <item value="Apellidos"/>
                         <item value="Correo"/>
-                        <item value="Teléfono"/>
-                        <item value="Dirección"/>
-                        <item value="Fecha de Nacimiento"/>
+                        <item value="Telefono"/>
+                        <item value="Direccion"/>
+                        <item value="FechaNacimiento"/>
                         <item value="Usuario"/>
+                        <item value="Administrador"/>
                       </model>
                     </properties>
                   </component>
-                  <component id="c0cc7" class="javax.swing.JLabel">
-                    <constraints/>
-                    <properties>
-                      <text value=""/>
-                    </properties>
-                  </component>
-                  <component id="a7dfa" class="javax.swing.JButton" binding="btnFiltrar">
+                  <component id="1e335" class="javax.swing.JLabel">
                     <constraints/>
                     <properties>
                       <text value=""/>
@@ -96,7 +91,7 @@
                   <component id="5625c" class="javax.swing.JLabel" binding="lblBuscar">
                     <constraints/>
                     <properties>
-                      <text value="Buscar por Nombre:"/>
+                      <text value="Buscar por Filtro:"/>
                     </properties>
                   </component>
                   <component id="a5a6f" class="javax.swing.JTextField" binding="txtBuscar">

@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Esta clase sirve para crear el panel utilizado para visualizar los Empleados, editar, borrar o crear nuevos Empleados.
@@ -22,7 +23,6 @@ public class MenuEmpleados extends JPanel {
     private JButton btnEditar;
     private JButton btnCrear;
     private JComboBox comboBoxFiltrar;
-    private JButton btnFiltrar;
     private JLabel lblBuscar;
     private JTextField txtBuscar;
     private JButton btnBuscar;
@@ -45,14 +45,11 @@ public class MenuEmpleados extends JPanel {
         btnEditar.setOpaque(false);
         btnBuscar.setBorder(null);
         btnBuscar.setOpaque(false);
-        btnFiltrar.setBorder(null);
-        btnFiltrar.setOpaque(false);
 
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
-        setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
 
         btnCrear.addActionListener(new ActionListener() {
@@ -100,7 +97,7 @@ public class MenuEmpleados extends JPanel {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DBManager.getEmpleadosPorNombre(txtBuscar.getText());
+                DBManager.getEmpleadosPorFiltro(Objects.requireNonNull(comboBoxFiltrar.getSelectedItem()).toString(), txtBuscar.getText());
                 createTable(tableInfo);
             }
         });

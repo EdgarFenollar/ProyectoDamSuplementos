@@ -840,10 +840,10 @@ public class DBManager {
     }
 
     ///// FUNCIONES DE BUSQUEDA
-    public static boolean getPromocionesPorDesc(String desc) {
-        String query = "SELECT * FROM PROMOCIONES WHERE DESCRIPCION LIKE ?";
+    public static boolean getPromocionesPorFiltro(String tipo, String busqueda) {
+        String query = "SELECT * FROM PROMOCIONES WHERE " + tipo + " LIKE ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(1, "%" + desc + "%");
+            preparedStatement.setString(1, "%" + busqueda + "%");
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 PromocionManager.promociones = new ArrayList<>();
 
@@ -863,10 +863,10 @@ public class DBManager {
         }
     }
 
-    public static boolean getEmpleadosPorNombre(String nom) {
-        String query = "SELECT * FROM EMPLEADOS WHERE NOMBRE LIKE ?";
+    public static boolean getEmpleadosPorFiltro(String tipo, String busqueda) {
+        String query = "SELECT * FROM EMPLEADOS WHERE " + tipo + " LIKE ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(1, "%" + nom + "%");
+            preparedStatement.setString(1, "%" + busqueda + "%");
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 EmpleadoManager.empleados = new ArrayList<>();
 
@@ -893,10 +893,10 @@ public class DBManager {
         }
     }
 
-    public static boolean getProductosPorNombre(String nom) {
-        String query = "SELECT * FROM PRODUCTOS WHERE NOMBRE LIKE ?";
+    public static boolean getProductosPorFiltro(String tipo, String busqueda) {
+        String query = "SELECT * FROM PRODUCTOS WHERE " + tipo + " LIKE ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(1, "%" + nom + "%");
+            preparedStatement.setString(1, "%" + busqueda + "%");
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 ProductoManager.productos = new ArrayList<>();
 

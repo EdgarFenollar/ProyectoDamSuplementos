@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Esta clase sirve para crear el panel utilizado el cual servira para visualizar los productos, y poder editar, borrar o crear otros productos.
@@ -25,7 +26,6 @@ public class MenuProductos extends JPanel {
     private JButton btnBuscar;
     private JButton btnEditar;
     private JButton btnCrear;
-    private JButton btnFiltrar;
     private JTable tableInfo;
     private JPanel panelTablaProductos;
     private JComboBox<String> comboBoxFiltrar;
@@ -50,14 +50,11 @@ public class MenuProductos extends JPanel {
         btnEditar.setOpaque(false);
         btnBuscar.setBorder(null);
         btnBuscar.setOpaque(false);
-        btnFiltrar.setBorder(null);
-        btnFiltrar.setOpaque(false);
 
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
-        setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
         btnCrear.addActionListener(new ActionListener() {
             @Override
@@ -104,7 +101,7 @@ public class MenuProductos extends JPanel {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DBManager.getProductosPorNombre(txtBuscar.getText());
+                DBManager.getProductosPorFiltro(Objects.requireNonNull(comboBoxFiltrar.getSelectedItem()).toString(), txtBuscar.getText());
                 createTable(tableInfo);
             }
         });
