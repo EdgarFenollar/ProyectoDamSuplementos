@@ -15,6 +15,13 @@ public class Proveedor {
         this.direccion = direccion;
     }
 
+    public Proveedor(String nombre, String correo, String cp, String direccion) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.cp = cp;
+        this.direccion = direccion;
+    }
+
     public int getId() {
         return id;
     }

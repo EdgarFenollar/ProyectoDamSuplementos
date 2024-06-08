@@ -3,6 +3,7 @@ package empleados;
 import DBManager.DBManager;
 import managers.ClienteManager;
 import managers.EmpleadoManager;
+import managers.ProveedorManager;
 import proveedores.MenuCrearProveedores;
 
 import javax.swing.*;

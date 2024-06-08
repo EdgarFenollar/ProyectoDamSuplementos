@@ -1,6 +1,9 @@
 package proveedores;
 
+import DBManager.DBManager;
+import empleados.MenuEditarEmpleados;
 import managers.DataManager;
+import managers.EmpleadoManager;
 import managers.ProveedorManager;
 
 import javax.swing.*;
@@ -30,6 +33,7 @@ public class MenuProveedores extends JPanel {
     private JLabel lblBuscar;
 
     public MenuProveedores() {
+        ProveedorManager.getProveedores();
         setLayout(new BorderLayout());
         add(panelProveedores, BorderLayout.CENTER);
 
@@ -67,11 +71,33 @@ public class MenuProveedores extends JPanel {
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelProveedores.setLayout(new BorderLayout());
-                panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelProveedores.revalidate();  // Revalidate to apply layout changes
-                panelProveedores.repaint();  // Repaint to refresh the component
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar un proveedor para editar.");
+                } else {
+                    for (int i = 0; i < ProveedorManager.proveedores.size(); i++) {
+                        if (i == tableInfo.getSelectedRow()){
+                            MenuEditarProveedores.insertarDatos(
+                                    ProveedorManager.proveedores.get(i).getId(),
+                                    ProveedorManager.proveedores.get(i).getNombre(),
+                                    ProveedorManager.proveedores.get(i).getCorreo(),
+                                    ProveedorManager.proveedores.get(i).getCp(),
+                                    ProveedorManager.proveedores.get(i).getDireccion());
+                        }
+                    }
+
+                    panelProveedores.setLayout(new BorderLayout());
+                    panelProveedores.removeAll();  // Remove any existing components
+                    panelProveedores.add(new MenuEditarProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelProveedores.revalidate();  // Revalidate to apply layout changes
+                    panelProveedores.repaint();  // Repaint to refresh the component
+                }
+            }
+        });
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBManager.getProveedoresPorFiltro(Objects.requireNonNull(comboBoxFiltrar.getSelectedItem()).toString(), txtBuscar.getText());
+                createTable(tableInfo);
             }
         });
     }

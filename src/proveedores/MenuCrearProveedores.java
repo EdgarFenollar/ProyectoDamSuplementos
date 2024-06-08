@@ -1,5 +1,8 @@
 package proveedores;
 
+import managers.EmpleadoManager;
+import managers.ProveedorManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,8 +14,8 @@ import java.awt.event.ActionListener;
  */
 
 public class MenuCrearProveedores extends JPanel{
-    private JPanel panelVentas;
-    private JPanel panelCrearVentas;
+    private JPanel panelProveedores;
+    private JPanel panelCrearProveedores;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JLabel imgProveedor;
@@ -24,7 +27,7 @@ public class MenuCrearProveedores extends JPanel{
 
     public MenuCrearProveedores(){
         setLayout(new BorderLayout());
-        add(panelVentas, BorderLayout.CENTER);
+        add(panelProveedores, BorderLayout.CENTER);
 
         btnConfirmar.setBorder(null);
         btnConfirmar.setBackground(null);
@@ -62,17 +65,38 @@ public class MenuCrearProveedores extends JPanel{
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelVentas.setLayout(new BorderLayout());
-                panelVentas.removeAll();  // Remove any existing components
-                panelVentas.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelVentas.revalidate();  // Revalidate to apply layout changes
-                panelVentas.repaint();  // Repaint to refresh the component
+                panelProveedores.setLayout(new BorderLayout());
+                panelProveedores.removeAll();  // Remove any existing components
+                panelProveedores.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelProveedores.revalidate();  // Revalidate to apply layout changes
+                panelProveedores.repaint();  // Repaint to refresh the component
             }
         });
+
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    if (!txtNombre.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtPostal.getText().isEmpty() && !txtDireccion.getText().isEmpty()){
+                        ProveedorManager.anyadirProveedor(new Proveedor(
+                                txtNombre.getText(),
+                                txtCorreo.getText(),
+                                txtPostal.getText(),
+                                txtDireccion.getText()));
+                        ProveedorManager.getProveedores();
+                        // Volver Atras
+                        panelCrearProveedores.setLayout(new BorderLayout());
+                        panelCrearProveedores.removeAll();  // Remove any existing components
+                        panelCrearProveedores.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelCrearProveedores.revalidate();  // Revalidate to apply layout changes
+                        panelCrearProveedores.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

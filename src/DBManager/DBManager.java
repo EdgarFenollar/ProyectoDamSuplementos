@@ -7,6 +7,7 @@ import empleados.Empleado;
 import managers.EmpleadoManager;
 import managers.ProductoManager;
 import managers.PromocionManager;
+import managers.ProveedorManager;
 import productos.Producto;
 import promociones.Promocion;
 import proveedores.Proveedor;
@@ -291,8 +292,14 @@ public class DBManager {
     }
 
     public static boolean insertarProveedores(Proveedor proveedor){
-        try(ResultSet rs = getTableDataBase("SELECT * FROM PROVEEDOR")) {
-
+        try(ResultSet rs = getTableDataBase("SELECT * FROM PROVEEDORES")) {
+            System.out.println("Introduciendo proveedor.");
+            rs.moveToInsertRow();
+            rs.updateString("Nombre", proveedor.getNombre());
+            rs.updateString("Correo", proveedor.getCorreo());
+            rs.updateString("CodigoPostal", proveedor.getCp());
+            rs.updateString("Direccion", proveedor.getDireccion());
+            rs.insertRow();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error introduciendo proveedor a la BD.");
@@ -794,6 +801,25 @@ public class DBManager {
         }
     }
 
+    public static void editarProveedores(int id, String nombre, String correo, String cp, String direccion){
+        try{
+            Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROVEEDORES WHERE IDPROVEEDOR=" + id);
+            if (rs.next()) {
+                rs.updateString(2,nombre);
+                rs.updateString(3,correo);
+                rs.updateString(4,cp);
+                rs.updateString(5,direccion);
+                rs.updateRow();
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public static void editarCompras(int id, LocalDate fechaCompra, int idProveedor, int idProducto, int cantidad, double precioUnitario, LocalDate fechaRecepcion, int idEmpleado){
         try{
             Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -854,6 +880,29 @@ public class DBManager {
                     LocalDate fechaInicial = rs.getDate(4).toLocalDate();
                     LocalDate fechaFinal = rs.getDate(5).toLocalDate();
                     PromocionManager.promociones.add(new Promocion(codigo, descripcion, descuento, fechaFinal, fechaInicial));
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean getProveedoresPorFiltro(String tipo, String busqueda) {
+        String query = "SELECT * FROM PROVEEDORES WHERE " + tipo + " LIKE ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + busqueda + "%");
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                ProveedorManager.proveedores = new ArrayList<>();
+
+                while (rs.next()) {
+                    int codigo = rs.getInt(1);
+                    String nombre = rs.getString(2);
+                    String correo = rs.getString(3);
+                    String cp = rs.getString(4);
+                    String direccion = rs.getString(5);
+                    ProveedorManager.proveedores.add(new Proveedor(codigo, nombre, correo, cp, direccion));
                 }
                 return true;
             }

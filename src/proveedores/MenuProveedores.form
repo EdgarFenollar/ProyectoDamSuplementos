@@ -69,11 +69,11 @@
                     <constraints/>
                     <properties>
                       <model>
-                        <item value="Id"/>
+                        <item value="IdProveedor"/>
                         <item value="Nombre"/>
-                        <item value="Correo Electronico"/>
-                        <item value="Código Postal"/>
-                        <item value="Dirección"/>
+                        <item value="Correo"/>
+                        <item value="CodigoPostal"/>
+                        <item value="Direccion"/>
                       </model>
                     </properties>
                   </component>
