@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="clientes.MenuEditarClientes">
-  <grid id="27dc6" binding="panelProveedores" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelClientes" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="968" height="636"/>
@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="94971" binding="panelCrearProveedores" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="94971" binding="panelEditarClientes" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -191,7 +191,7 @@
                   <text value="Apellidos:"/>
                 </properties>
               </component>
-              <component id="beb84" class="javax.swing.JTextField" binding="txtCorreo">
+              <component id="beb84" class="javax.swing.JTextField" binding="txtApellidos">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="80" height="40"/>
@@ -210,7 +210,7 @@
                   <text value="DNI"/>
                 </properties>
               </component>
-              <component id="78878" class="javax.swing.JTextField" binding="txtPostal">
+              <component id="78878" class="javax.swing.JTextField" binding="txtDni">
                 <constraints>
                   <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="80" height="40"/>
@@ -258,32 +258,6 @@
                   <text value="Correo electronico"/>
                 </properties>
               </component>
-              <component id="a3496" class="javax.swing.JTextField">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="80" height="40"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <font size="16"/>
-                </properties>
-              </component>
-              <component id="61ee3" class="javax.swing.JRadioButton" binding="radioButtonMinorista">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Minorista"/>
-                </properties>
-              </component>
-              <component id="a14dc" class="javax.swing.JRadioButton" binding="radioButtonMayorista">
-                <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="Mayorista"/>
-                </properties>
-              </component>
               <component id="f07e2" class="javax.swing.JTextField" binding="txtDireccion">
                 <constraints>
                   <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
@@ -293,6 +267,51 @@
                 <properties>
                   <font size="16"/>
                   <text value=""/>
+                </properties>
+              </component>
+              <component id="a14dc" class="javax.swing.JRadioButton" binding="radioButtonMayorista">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Mayorista"/>
+                </properties>
+              </component>
+              <component id="61ee3" class="javax.swing.JRadioButton" binding="radioButtonMinorista">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Minorista"/>
+                </properties>
+              </component>
+              <component id="a3496" class="javax.swing.JTextField" binding="txtCorreo">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="80" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font size="16"/>
+                </properties>
+              </component>
+              <component id="e31cb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="10" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="16" style="1"/>
+                  <text value="Codigo Postal"/>
+                </properties>
+              </component>
+              <component id="a0c53" class="javax.swing.JTextField" binding="txtCodPostal">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="80" height="40"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font size="16"/>
                 </properties>
               </component>
             </children>

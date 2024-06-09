@@ -1,28 +1,57 @@
 package clientes;
 
+import DBManager.DBManager;
+import managers.ClienteManager;
+import productos.MenuProductos;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuEditarClientes extends JPanel{
-    private JPanel panelProveedores;
-    private JPanel panelCrearProveedores;
+    private JPanel panelClientes;
+    private JPanel panelEditarClientes;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     private JLabel imgProveedor;
     private JTextField txtNombre;
-    private JTextField txtCorreo;
-    private JTextField txtPostal;
+    private JTextField txtApellidos;
+    private JTextField txtDni;
     private JTextField txtTelefono;
     private JRadioButton radioButtonMinorista;
     private JRadioButton radioButtonMayorista;
     private JTextField txtDireccion;
+    private JTextField txtCorreo;
+    private JTextField txtCodPostal;
     private JLabel imgProveedorGrande;
+
+    public static int id;
+
+    public static String dni, nombre, apellidos, correo, telefono, codPostal, direccion, tipo;
 
     public MenuEditarClientes(){
         setLayout(new BorderLayout());
-        add(panelProveedores, BorderLayout.CENTER);
+        add(panelClientes, BorderLayout.CENTER);
+
+        txtNombre.setText(nombre);
+        txtApellidos.setText(apellidos);
+        txtDni.setText(dni);
+        txtTelefono.setText(telefono);
+        txtDireccion.setText(direccion);
+        txtCodPostal.setText(codPostal);
+        txtCorreo.setText(correo);
+
+        //Seleccionar depende el tipo de cliente que sea
+
+        if (tipo.equals("Minorista")) {
+            radioButtonMinorista.setSelected(true);
+            radioButtonMayorista.setSelected(false);
+        } else if (tipo.equals("Mayorista")) {
+            radioButtonMinorista.setSelected(false);
+            radioButtonMayorista.setSelected(true);
+        }
+
 
         btnConfirmar.setBorder(null);
         btnConfirmar.setBackground(null);
@@ -58,12 +87,62 @@ public class MenuEditarClientes extends JPanel{
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelProveedores.setLayout(new BorderLayout());
-                panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelProveedores.revalidate();  // Revalidate to apply layout changes
-                panelProveedores.repaint();  // Repaint to refresh the component
+                panelClientes.setLayout(new BorderLayout());
+                panelClientes.removeAll();  // Remove any existing components
+                panelClientes.add(new MenuClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelClientes.revalidate();  // Revalidate to apply layout changes
+                panelClientes.repaint();  // Repaint to refresh the component
+            }
+        });
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (!txtDni.getText().isEmpty() && !txtNombre.getText().isEmpty() && !txtApellidos.getText().isEmpty() && !txtTelefono.getText().isEmpty() &&
+                            !txtDireccion.getText().isEmpty() && !txtCorreo.getText().isEmpty()){
+                        for (int i = 0; i < ClienteManager.clientes.size(); i++) {
+                            if (id == ClienteManager.clientes.get(i).getId()){
+                                DBManager.editarClientes(
+                                        id,
+                                        txtDni.getText(),
+                                        txtNombre.getText(),
+                                        txtApellidos.getText(),
+                                        txtCorreo.getText(),
+                                        txtTelefono.getText(),
+                                        txtCodPostal.getText(),
+                                        txtDireccion.getText(),
+                                        tipo
+
+                                );
+                                ClienteManager.getClientes();
+                            }
+                        }
+                        // Volver Atras
+                        panelClientes.setLayout(new BorderLayout());
+                        panelClientes.removeAll();  // Remove any existing components
+                        panelClientes.add(new MenuClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelClientes.revalidate();  // Revalidate to apply layout changes
+                        panelClientes.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
+    public static void insertarDatos(int idI, String dniI, String nombreI, String apellidosI, String correoI, String telefonoI, String codPostalI, String direccionI, String tipoI){
+        id = idI;
+        dni = dniI;
+        nombre = nombreI;
+        apellidos = apellidosI;
+        correo = correoI;
+        telefono = telefonoI;
+        codPostal = codPostalI;
+        direccion = direccionI;
+        tipo = tipoI;
+    }
+
 }

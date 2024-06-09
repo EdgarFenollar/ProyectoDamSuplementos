@@ -1,8 +1,8 @@
 package clientes;
 
+import DBManager.DBManager;
 import managers.ClienteManager;
-import proveedores.MenuCrearProveedores;
-import proveedores.MenuEditarProveedores;
+import managers.EmpleadoManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -10,15 +10,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MenuClientes extends JPanel {
-    private JPanel panelVentas;
+    private JPanel panelClientes;
     private JButton btnBuscar;
     private JButton btnEditar;
     private JButton btnCrear;
     private JButton btnFiltrar;
     private JTable tableInfo;
-    private JPanel panelTablaVentas;
+    private JPanel panelTablaClientes;
     private JComboBox<String> comboBoxFiltrar;
     private JTextField txtBuscar;
     private JScrollPane scrollTable;
@@ -26,8 +27,9 @@ public class MenuClientes extends JPanel {
 
     public MenuClientes() {
         setLayout(new BorderLayout());
-        add(panelVentas, BorderLayout.CENTER);
+        add(panelClientes, BorderLayout.CENTER);
 
+        ClienteManager.getClientes();
 
         createTable(tableInfo);
 
@@ -56,21 +58,46 @@ public class MenuClientes extends JPanel {
         btnCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelVentas.setLayout(new BorderLayout());
-                panelVentas.removeAll();  // Remove any existing components
-                panelVentas.add(new MenuCrearClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelVentas.revalidate();  // Revalidate to apply layout changes
-                panelVentas.repaint();  // Repaint to refresh the component
+                panelClientes.setLayout(new BorderLayout());
+                panelClientes.removeAll();  // Remove any existing components
+                panelClientes.add(new MenuCrearClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
+                panelClientes.revalidate();  // Revalidate to apply layout changes
+                panelClientes.repaint();  // Repaint to refresh the component
             }
         });
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelVentas.setLayout(new BorderLayout());
-                panelVentas.removeAll();  // Remove any existing components
-                panelVentas.add(new MenuEditarClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelVentas.revalidate();  // Revalidate to apply layout changes
-                panelVentas.repaint();  // Repaint to refresh the component
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar un cliente para editar.");
+                } else {
+                    for (int i = 0; i < ClienteManager.clientes.size(); i++) {
+                        if (i == tableInfo.getSelectedRow()) {
+                            MenuEditarClientes.insertarDatos(
+                                    ClienteManager.clientes.get(i).getId(),
+                                    ClienteManager.clientes.get(i).getDni(),
+                                    ClienteManager.clientes.get(i).getNombre(),
+                                    ClienteManager.clientes.get(i).getApellidos(),
+                                    ClienteManager.clientes.get(i).getCorreo(),
+                                    ClienteManager.clientes.get(i).getTelefono(),
+                                    ClienteManager.clientes.get(i).getCodigoPostal(),
+                                    ClienteManager.clientes.get(i).getDireccion(),
+                                    String.valueOf(ClienteManager.clientes.get(i).getTipoCli()));
+                        }
+                    }
+                    panelClientes.setLayout(new BorderLayout());
+                    panelClientes.removeAll();  // Remove any existing components
+                    panelClientes.add(new MenuEditarClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelClientes.revalidate();  // Revalidate to apply layout changes
+                    panelClientes.repaint();  // Repaint to refresh the component
+                }
+            }
+        });
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBManager.getClientesPorFiltro(Objects.requireNonNull(comboBoxFiltrar.getSelectedItem()).toString(), txtBuscar.getText());
+                createTable(tableInfo);
             }
         });
     }
@@ -88,7 +115,7 @@ public class MenuClientes extends JPanel {
                 ClienteManager.clientes = new ArrayList<>();
             }
 
-            String[][] data = new String[ClienteManager.clientes.size()][5];
+            String[][] data = new String[ClienteManager.clientes.size()][9];
             cargarClientes(data);
 
             String[] cabe = {"ID", "DNI", "Nombre", "Apellidos", "Correo", "Telefono", "Codigo Postal", "Direccion", "Tipo"};
