@@ -15,14 +15,14 @@ public class Compra {
     private LocalDate fecha_recepcion;
     private int id_empleado;
 
-    public Compra(int id, String fecha_compra, int id_proveedor, int id_producto, int cantidad, double precio_unitario, String fecha_recepcion, int id_empleado) {
+    public Compra(int id, LocalDate fecha_compra, int id_proveedor, int id_producto, int cantidad, double precio_unitario, LocalDate fecha_recepcion, int id_empleado) {
         this.id = id;
-        this.fecha_compra = LocalDate.parse(fecha_compra);
+        this.fecha_compra = fecha_compra;
         this.id_proveedor = id_proveedor;
         this.id_producto = id_producto;
         this.cantidad = cantidad;
         this.precio_unitario = precio_unitario;
-        this.fecha_recepcion = LocalDate.parse(fecha_recepcion);
+        this.fecha_recepcion = fecha_recepcion;
         this.id_empleado = id_empleado;
     }
 

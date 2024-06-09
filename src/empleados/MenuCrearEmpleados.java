@@ -109,7 +109,8 @@ public class MenuCrearEmpleados extends JPanel {
                         admin = 0;
                     }
                     if (!txtNombre.getText().isEmpty() && !txtApellidos.getText().isEmpty() && !txtCorreo.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtDireccion.getText().isEmpty() && !txtUsuario.getText().isEmpty() && !pass.isEmpty()){
-                    EmpleadoManager.anyadirEmpleado(new Empleado(txtDni.getText(),
+                    EmpleadoManager.anyadirEmpleado(new Empleado(
+                            txtDni.getText(),
                             txtNombre.getText(),
                             txtApellidos.getText(),
                             txtCorreo.getText(),
