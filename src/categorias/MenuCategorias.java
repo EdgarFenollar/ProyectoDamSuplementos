@@ -31,6 +31,7 @@ public class MenuCategorias extends JPanel {
     private JLabel lblBuscar;
 
     public MenuCategorias() {
+        CategoriaManager.getCategorias();
         setLayout(new BorderLayout());
         add(panelCategorias, BorderLayout.CENTER);
 

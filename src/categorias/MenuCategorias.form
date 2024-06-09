@@ -69,11 +69,9 @@
                     <constraints/>
                     <properties>
                       <model>
-                        <item value="Id"/>
-                        <item value="Nombre"/>
-                        <item value="Correo Electronico"/>
-                        <item value="Código Postal"/>
-                        <item value="Dirección"/>
+                        <item value="idCategoria"/>
+                        <item value="nombre"/>
+                        <item value="descripcion"/>
                       </model>
                     </properties>
                   </component>

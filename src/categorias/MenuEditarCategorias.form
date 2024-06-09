@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="94971" binding="panelCrearCategorias" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="94971" binding="panelEditarCategorias" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -32,7 +32,7 @@
               <hspacer id="25661">
                 <constraints/>
               </hspacer>
-              <component id="77ee0" class="javax.swing.JLabel" binding="imgProveedor">
+              <component id="77ee0" class="javax.swing.JLabel" binding="imgCategoria">
                 <constraints/>
                 <properties>
                   <text value=""/>
@@ -196,7 +196,7 @@
                   <text value="Descripcion:"/>
                 </properties>
               </component>
-              <component id="beb84" class="javax.swing.JTextField" binding="txtCorreo">
+              <component id="beb84" class="javax.swing.JTextField" binding="txtDescripcion">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="9" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="80" height="40"/>

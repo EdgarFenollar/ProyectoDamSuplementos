@@ -1,6 +1,9 @@
 package categorias;
 
+import managers.CategoriaManager;
+import managers.ProveedorManager;
 import proveedores.MenuProveedores;
+import proveedores.Proveedor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +20,9 @@ public class MenuCrearCategorias extends JPanel{
     private JPanel panelCrearCategorias;
     private JButton btnConfirmar;
     private JButton btnCancelar;
-    private JLabel imgProveedor;
+    private JLabel imgCategoria;
     private JTextField txtNombre;
-    private JTextField txtCorreo;
+    private JTextField txtDescripcion;
     private JLabel imgProveedorGrande;
 
     public MenuCrearCategorias(){
@@ -56,7 +59,7 @@ public class MenuCrearCategorias extends JPanel{
         Image categoriaPrincImage = categoriaPrinc.getImage();
         Image categoriaPrincImageScaledInstance = categoriaPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon categoria = new ImageIcon(categoriaPrincImageScaledInstance);
-        imgProveedor.setIcon(categoria);
+        imgCategoria.setIcon(categoria);
         //////////////////////////////
 
         btnCancelar.addActionListener(new ActionListener() {
@@ -67,6 +70,31 @@ public class MenuCrearCategorias extends JPanel{
                 panelCategorias.add(new MenuCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelCategorias.revalidate();  // Revalidate to apply layout changes
                 panelCategorias.repaint();  // Repaint to refresh the component
+            }
+        });
+
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty()) {
+                        CategoriaManager.anyadirCategoria(new Categoria(
+                                txtNombre.getText(),
+                                txtDescripcion.getText()));
+                        CategoriaManager.getCategorias();
+                        // Volver Atras
+                        panelCrearCategorias.setLayout(new BorderLayout());
+                        panelCrearCategorias.removeAll();  // Remove any existing components
+                        panelCrearCategorias.add(new MenuCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelCrearCategorias.revalidate();  // Revalidate to apply layout changes
+                        panelCrearCategorias.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

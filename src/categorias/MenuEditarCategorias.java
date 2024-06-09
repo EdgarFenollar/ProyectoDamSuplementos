@@ -1,5 +1,8 @@
 package categorias;
 
+import DBManager.DBManager;
+import managers.CategoriaManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,13 +15,15 @@ import java.awt.event.ActionListener;
 
 public class MenuEditarCategorias extends JPanel{
     private JPanel panelCategorias;
-    private JPanel panelCrearCategorias;
+    private JPanel panelEditarCategorias;
     private JButton btnConfirmar;
     private JButton btnCancelar;
-    private JLabel imgProveedor;
+    private JLabel imgCategoria;
     private JTextField txtNombre;
-    private JTextField txtCorreo;
+    private JTextField txtDescripcion;
     private JLabel imgProveedorGrande;
+    public static String nombre,descripcion;
+    public static int id;
 
     public MenuEditarCategorias(){
         setLayout(new BorderLayout());
@@ -54,7 +59,7 @@ public class MenuEditarCategorias extends JPanel{
         Image categoriaPrincImage = categoriaPrinc.getImage();
         Image categoriaPrincImageScaledInstance = categoriaPrincImage.getScaledInstance(20, 20,  Image.SCALE_SMOOTH);
         ImageIcon categoria = new ImageIcon(categoriaPrincImageScaledInstance);
-        imgProveedor.setIcon(categoria);
+        imgCategoria.setIcon(categoria);
         //////////////////////////////
 
         btnCancelar.addActionListener(new ActionListener() {
@@ -67,5 +72,38 @@ public class MenuEditarCategorias extends JPanel{
                 panelCategorias.repaint();  // Repaint to refresh the component
             }
         });
+
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (!txtNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty()) {
+                        DBManager.editarCategoria(
+                                id,
+                                txtNombre.getText(),
+                                txtDescripcion.getText());
+                        CategoriaManager.getCategorias();
+                        // Volver Atras
+                        panelEditarCategorias.setLayout(new BorderLayout());
+                        panelEditarCategorias.removeAll();  // Remove any existing components
+                        panelEditarCategorias.add(new MenuCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelEditarCategorias.revalidate();  // Revalidate to apply layout changes
+                        panelEditarCategorias.repaint();  // Repaint to refresh the component
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
     }
+
+    public static void insertarDatos(int idI, String nombreI, String descripcionI){
+        id = idI;
+        nombre = nombreI;
+        descripcion = descripcionI;
+    }
+
 }
+
