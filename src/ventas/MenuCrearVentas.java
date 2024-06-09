@@ -1,13 +1,18 @@
 package ventas;
 
 import com.toedter.calendar.JDateChooser;
+import managers.ProveedorManager;
+import managers.VentaManager;
 import principal.Login;
 import principal.PantallaPrincipalAdmin;
+import proveedores.Proveedor;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class MenuCrearVentas extends JPanel{
     private JPanel panelventas;
@@ -80,6 +85,37 @@ public class MenuCrearVentas extends JPanel{
                 panelventas.add(new MenuVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
                 panelventas.revalidate();  // Revalidate to apply layout changes
                 panelventas.repaint();  // Repaint to refresh the component
+            }
+        });
+
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String fechanac = String.valueOf(dateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                    if (!txtCliente.getText().isEmpty() && !txtCantidad.getText().isEmpty() && !txtPrecio.getText().isEmpty() && !txtEmpleado.getText().isEmpty() && !txtIdPromo.getText().isEmpty() && !txtProducto.getText().isEmpty()){
+                        VentaManager.anyadirVenta(new Venta(
+                                fechanac,
+                                Integer.parseInt(txtCantidad.getText()),
+                                Double.parseDouble(txtPrecio.getText()),
+                                Integer.parseInt(txtCliente.getText()),
+                                Integer.parseInt(txtEmpleado.getText()),
+                                Integer.parseInt(txtProducto.getText()),
+                                Integer.parseInt(txtIdPromo.getText())));
+                        VentaManager.getVentas();
+                        // Volver Atras
+                        panelCrearVentas.setLayout(new BorderLayout());
+                        panelCrearVentas.removeAll();  // Remove any existing components
+                        panelCrearVentas.add(new MenuVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelCrearVentas.revalidate();  // Revalidate to apply layout changes
+                        panelCrearVentas.repaint();  // Repaint to refresh the component
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }catch (Exception exception) {
+                    exception.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

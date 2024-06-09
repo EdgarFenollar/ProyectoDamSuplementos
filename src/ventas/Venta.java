@@ -24,6 +24,16 @@ public class Venta {
         this.idPromocion = idPromocion;
     }
 
+    public Venta(String fechaVenta, int cantidad, double precioUnitario, int idCliente, int idEmpleado, int idProducto, int idPromocion) {
+        this.fechaVenta = LocalDate.parse(fechaVenta);
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.idCliente = idCliente;
+        this.idEmpleado = idEmpleado;
+        this.idProducto = idProducto;
+        this.idPromocion = idPromocion;
+    }
+
     public int getId() {
         return id;
     }

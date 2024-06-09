@@ -69,14 +69,14 @@
                     <constraints/>
                     <properties>
                       <model>
-                        <item value="ID"/>
-                        <item value="Fecha Venta"/>
-                        <item value="Cantidad"/>
-                        <item value="Precio Unitario"/>
-                        <item value="ID Cliente"/>
-                        <item value="ID Empleado"/>
-                        <item value="ID Producto"/>
-                        <item value="ID Promomcion"/>
+                        <item value="idVenta"/>
+                        <item value="fechaVenta"/>
+                        <item value="cantidad"/>
+                        <item value="precioUnitario"/>
+                        <item value="IDCliente"/>
+                        <item value="IDEmpleado"/>
+                        <item value="IDProducto"/>
+                        <item value="IDPromomcion"/>
                       </model>
                     </properties>
                   </component>
@@ -86,16 +86,10 @@
                       <text value=""/>
                     </properties>
                   </component>
-                  <component id="29dba" class="javax.swing.JButton" binding="btnFiltrar">
-                    <constraints/>
-                    <properties>
-                      <text value=""/>
-                    </properties>
-                  </component>
                   <component id="4681f" class="javax.swing.JLabel" binding="lblBuscar">
                     <constraints/>
                     <properties>
-                      <text value="Buscar por Nombre:"/>
+                      <text value="Buscar por Filtro:"/>
                     </properties>
                   </component>
                   <component id="b9821" class="javax.swing.JTextField" binding="txtBuscar">

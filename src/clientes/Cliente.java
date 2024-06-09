@@ -23,6 +23,17 @@ public class Cliente {
         this.tipoCli = tipoCli;
     }
 
+    public Cliente(String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion, EnumTipoCliente tipoCli) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.codigoPostal = codigoPostal;
+        this.direccion = direccion;
+        this.tipoCli = tipoCli;
+    }
+
     public int getId() {
         return id;
     }

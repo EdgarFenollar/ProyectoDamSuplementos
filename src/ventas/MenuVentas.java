@@ -1,6 +1,9 @@
 package ventas;
 
+import DBManager.DBManager;
+import empleados.MenuEditarEmpleados;
 import managers.ClienteManager;
+import managers.EmpleadoManager;
 import managers.VentaManager;
 import proveedores.MenuCrearProveedores;
 import proveedores.MenuEditarProveedores;
@@ -11,13 +14,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MenuVentas extends JPanel {
     private JPanel panelVentas;
     private JButton btnBuscar;
     private JButton btnEditar;
     private JButton btnCrear;
-    private JButton btnFiltrar;
     private JTable tableInfo;
     private JPanel panelTablaVentas;
     private JComboBox<String> comboBoxFiltrar;
@@ -26,6 +29,7 @@ public class MenuVentas extends JPanel {
     private JLabel lblBuscar;
 
     public MenuVentas() {
+        VentaManager.getVentas();
         setLayout(new BorderLayout());
         add(panelVentas, BorderLayout.CENTER);
 
@@ -41,14 +45,12 @@ public class MenuVentas extends JPanel {
         btnEditar.setOpaque(false);
         btnBuscar.setBorder(null);
         btnBuscar.setOpaque(false);
-        btnFiltrar.setBorder(null);
-        btnFiltrar.setOpaque(false);
+
 
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
-        setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
         btnCrear.addActionListener(new ActionListener() {
             @Override
@@ -60,16 +62,44 @@ public class MenuVentas extends JPanel {
                 panelVentas.repaint();  // Repaint to refresh the component
             }
         });
+
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelVentas.setLayout(new BorderLayout());
-                panelVentas.removeAll();  // Remove any existing components
-                panelVentas.add(new MenuEditarVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelVentas.revalidate();  // Revalidate to apply layout changes
-                panelVentas.repaint();  // Repaint to refresh the component
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar un empleado para editar.");
+                } else {
+                    for (int i = 0; i < VentaManager.ventas.size(); i++) {
+                        if (i == tableInfo.getSelectedRow()){
+                            MenuEditarVentas.insertarDatos(
+                                    VentaManager.ventas.get(i).getId(),
+                                    String.valueOf(VentaManager.ventas.get(i).getFechaVenta()),
+                                    VentaManager.ventas.get(i).getCantidad(),
+                                    VentaManager.ventas.get(i).getPrecioUnitario(),
+                                    VentaManager.ventas.get(i).getIdCliente(),
+                                    VentaManager.ventas.get(i).getIdEmpleado(),
+                                    VentaManager.ventas.get(i).getIdProducto(),
+                                    VentaManager.ventas.get(i).getIdPromocion());
+                        }
+                    }
+
+                    panelVentas.setLayout(new BorderLayout());
+                    panelVentas.removeAll();  // Remove any existing components
+                    panelVentas.add(new MenuEditarVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelVentas.revalidate();  // Revalidate to apply layout changes
+                    panelVentas.repaint();  // Repaint to refresh the component
+                }
             }
         });
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBManager.getVentasPorFiltro(Objects.requireNonNull(comboBoxFiltrar.getSelectedItem()).toString(), txtBuscar.getText());
+                createTable(tableInfo);
+            }
+        });
+
+
     }
 
     private void setButtonIcon(JButton button, String iconPath) {
@@ -86,7 +116,7 @@ public class MenuVentas extends JPanel {
             }
 
             String[][] data = new String[VentaManager.ventas.size()][8];
-            cargarClientes(data);
+            cargarVentas(data);
 
             String[] cabe = {"ID", "Fecha Venta", "Cantidad", "Precio Unitario", "ID Cliente", "ID Empleado", "ID Producto", "ID Promocion"};
 
@@ -99,11 +129,11 @@ public class MenuVentas extends JPanel {
         }
     }
 
-    public static String[][] cargarClientes(String[][] data) {
+    public static String[][] cargarVentas(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[0].length; j++) {
-                    if (ClienteManager.clientes.get(i) != null) {
+                    if (VentaManager.ventas.get(i) != null) {
                         if (j == 0) {
                             data[i][j] = String.valueOf(VentaManager.ventas.get(i).getId());
                         } else if (j == 1) {

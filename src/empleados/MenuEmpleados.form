@@ -69,7 +69,7 @@
                     <constraints/>
                     <properties>
                       <model>
-                        <item value="idEmpleado&#9;"/>
+                        <item value="idEmpleado"/>
                         <item value="DNI"/>
                         <item value="Nombre"/>
                         <item value="Apellidos"/>
@@ -96,7 +96,9 @@
                   </component>
                   <component id="a5a6f" class="javax.swing.JTextField" binding="txtBuscar">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <text value=""/>
+                    </properties>
                   </component>
                   <component id="fa841" class="javax.swing.JButton" binding="btnBuscar">
                     <constraints/>

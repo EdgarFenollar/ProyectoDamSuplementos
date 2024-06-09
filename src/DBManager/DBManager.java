@@ -2,12 +2,10 @@ package DBManager;
 
 import categorias.Categoria;
 import clientes.Cliente;
+import clientes.EnumTipoCliente;
 import compras.Compra;
 import empleados.Empleado;
-import managers.EmpleadoManager;
-import managers.ProductoManager;
-import managers.PromocionManager;
-import managers.ProveedorManager;
+import managers.*;
 import productos.Producto;
 import promociones.Promocion;
 import proveedores.Proveedor;
@@ -231,7 +229,7 @@ public class DBManager {
             System.out.println("Introduciendo categoria.");
             rs.moveToInsertRow();
             rs.updateString("NOMBRE",categoria.getNombre());
-
+            rs.updateString("DESCRIPCION", categoria.getDescripcion());
 
             rs.insertRow();
             return true;
@@ -842,6 +840,28 @@ public class DBManager {
         }
     }
 
+    public static void editarVentas(int id, LocalDate fechaVenta, int cantidad, Double precioUnitario, int idCliente, int idEmpleado, int idProducto, int idPromocion){
+        try{
+            Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM VENTAS WHERE IDVENTA = " + id);
+            if (rs.next()) {
+                rs.updateDate(2, Date.valueOf(fechaVenta));
+                rs.updateInt(3,cantidad);
+                rs.updateDouble(4,precioUnitario);
+                rs.updateInt(5,idCliente);
+                rs.updateInt(6,idEmpleado);
+                rs.updateInt(7,idProducto);
+                rs.updateInt(8,idPromocion);
+                rs.updateRow();
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public static void editarClientes(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codPostal, String direccion, String tipo){
         try{
             Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -855,6 +875,23 @@ public class DBManager {
                 rs.updateString(2,codPostal);
                 rs.updateString(2,direccion);
                 rs.updateString(2,tipo);
+                rs.updateRow();
+                rs.close();
+                stmt.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar los datos, revise los datos introducidos y intentelo de nuevo.", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void editarCategoria(int id, String nombre, String descripcion){
+        try{
+            Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CATEGORIAS WHERE IDCATEGORIA = " + id);
+            if (rs.next()) {
+                rs.updateString(2,nombre);
+                rs.updateString(2,descripcion);
                 rs.updateRow();
                 rs.close();
                 stmt.close();
@@ -972,6 +1009,108 @@ public class DBManager {
             return false;
         }
     }
+
+    public static boolean getComprasPorFiltro(String tipo, String busqueda) {
+        String query = "SELECT * FROM COMPRAS WHERE " + tipo + " LIKE ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + busqueda + "%");
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                CompraManager.compras = new ArrayList<>();
+
+                while (rs.next()) {
+                    int id = rs.getInt(1);
+                    Date fechaCompra = rs.getDate(2);
+                    int idProveedor = rs.getInt(3);
+                    int idProducto = rs.getInt(4);
+                    int cantidad = rs.getInt(5);
+                    double precioUnirario = rs.getDouble(6);
+                    Date fechaEntrega = rs.getDate(7);
+                    int idEmpleado = rs.getInt(8);
+                    CompraManager.compras.add(new Compra(id,String.valueOf(fechaCompra),idProveedor,idProducto,cantidad,precioUnirario,String.valueOf(fechaEntrega),idEmpleado));
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean getVentasPorFiltro(String tipo, String busqueda) {
+        String query = "SELECT * FROM VENTAS WHERE " + tipo + " LIKE ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + busqueda + "%");
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                VentaManager.ventas = new ArrayList<>();
+
+                while (rs.next()) {
+                    int id = rs.getInt(1);
+                    Date fechaVenta = rs.getDate(2);
+                    int cantidad = rs.getInt(3);
+                    double precioUnitario = rs.getDouble(4);
+                    int idCliente = rs.getInt(5);
+                    int idEmpleado = rs.getInt(6);
+                    int idProducto = rs.getInt(7);
+                    int idPromocion = rs.getInt(8);
+                    VentaManager.ventas.add(new Venta(id , String.valueOf(fechaVenta), cantidad, precioUnitario, idCliente, idEmpleado, idProducto, idPromocion));
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean getCategoriasPorFiltro(String tipo, String busqueda) {
+        String query = "SELECT * FROM CATEGORIAS WHERE " + tipo + " LIKE ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + busqueda + "%");
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                CategoriaManager.categorias = new ArrayList<>();
+
+                while (rs.next()) {
+                    int id = rs.getInt(1);
+                    String nombre = rs.getString(2);
+                    String descripcion = rs.getString(3);
+                    CategoriaManager.categorias.add(new Categoria(id,nombre,descripcion));
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean getClientesPorFiltro(String tipo, String busqueda) {
+        String query = "SELECT * FROM CLIENTES WHERE " + tipo + " LIKE ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + busqueda + "%");
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                ClienteManager.clientes = new ArrayList<>();
+
+                while (rs.next()) {
+                    int id = rs.getInt(1);
+                    String dni = rs.getString(2);
+                    String nombre = rs.getString(3);
+                    String apellido = rs.getString(4);
+                    String correo = rs.getString(5);
+                    String telefono = rs.getString(6);
+                    String codigoPostal = rs.getString(7);
+                    String direccion = rs.getString(8);
+                    String tipoCliente = rs.getString(9);
+                    ClienteManager.clientes.add(new Cliente(id,dni,nombre,apellido,correo,telefono,codigoPostal,direccion, EnumTipoCliente.valueOf(tipoCliente)));
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 
     // FUNCION ELIMINAR //
     //Funciona eliminada debido a que vamos a quitar la funcion de eliminar datos porque no seria necesario dentro de la empresa debido a que se debe de llevar el registro de todo.

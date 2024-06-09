@@ -13,7 +13,7 @@ import java.util.List;
 public class VentaManager {
     public static List<Venta> ventas = new ArrayList<>();
 
-    public static boolean getCompras(){
+    public static boolean getVentas(){
         if (DBManager.connect()){
             try(ResultSet rs = DBManager.getTableDataBase("SELECT * FROM VENTAS")){
                 ventas = new ArrayList<>();
