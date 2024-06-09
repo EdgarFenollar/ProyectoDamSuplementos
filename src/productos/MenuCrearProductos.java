@@ -39,6 +39,9 @@ public class MenuCrearProductos extends JPanel{
     private JDateChooser dateChooser1 = new JDateChooser();
     private JDateChooser dateChooser2 = new JDateChooser();
 
+    /**
+     * Constructor para crear el panel de creación de productos.
+     */
     public MenuCrearProductos(){
         setLayout(new BorderLayout());
         add(panelProductos, BorderLayout.CENTER);

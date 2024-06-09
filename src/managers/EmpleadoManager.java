@@ -11,6 +11,11 @@ import java.util.List;
 
 import static empleados.MenuCrearEmpleados.encrypt;
 
+
+/**
+ * La clase EmpleadoManager gestiona las operaciones relacionadas con los empleados,
+ * incluyendo la obtención, adición, actualización y eliminación de empleados en la base de datos.
+ */
 public class EmpleadoManager {
     public static List<Empleado> empleados = new ArrayList<>();
 
@@ -47,6 +52,11 @@ public class EmpleadoManager {
         return empleados;
     }
 
+    /**
+     * Obtiene todos los empleados de la base de datos y los almacena en la lista local.
+     *
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean anyadirEmpleado(Empleado empleado){
         if (DBManager.connect() & DBManager.insertarEmpleado(empleado)){
             try {
@@ -75,6 +85,11 @@ public class EmpleadoManager {
         }
     }
 
+    /**
+     * Devuelve la lista de empleados.
+     *
+     * @return una lista de empleados.
+     */
     public static boolean actualizarEmpleados(Empleado empleado){
         try {
             if (DBManager.connect()) {
@@ -93,6 +108,12 @@ public class EmpleadoManager {
         return false;
     }
 
+    /**
+     * Elimina un empleado de la lista local basada en su ID.
+     *
+     * @param id el ID del empleado a eliminar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean borrarColumnaPorId(int id){
         for (int i = 0; i < empleados.size(); i++) {
             if (empleados.get(i).getId()==id){

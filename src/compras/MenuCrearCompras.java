@@ -17,6 +17,12 @@ import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
+/**
+ * Clase que representa el panel para crear nuevas compras en la aplicación.
+ * Proporciona campos para ingresar los detalles de la compra y botones para confirmar o cancelar la operación.
+ *
+ * @version 0.1
+ */
 public class MenuCrearCompras extends JPanel {
     private JPanel panelCrearCompras;
     private JLabel imgPromocion;
@@ -37,6 +43,10 @@ public class MenuCrearCompras extends JPanel {
     private JDateChooser fCompra = new JDateChooser();
     private JDateChooser fRecepcion = new JDateChooser();
 
+    /**
+     * Constructor de la clase MenuCrearCompras.
+     * Inicializa el panel de creación de compras y sus componentes.
+     */
     public MenuCrearCompras() {
         setLayout(new BorderLayout());
         add(panelCompras, BorderLayout.CENTER);
@@ -84,16 +94,28 @@ public class MenuCrearCompras extends JPanel {
         ImageIcon compras = new ImageIcon(comprasPrincImageScaledInstance);
         imgPromocion.setIcon(compras);
         //////////////////////////////
+        /**
+         * Acción realizada al hacer clic en el botón "Cancelar".
+         * Vuelve al panel principal de compras.
+         *
+         * @param e El evento de acción.
+         */
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelCompras.setLayout(new BorderLayout());
-                panelCompras.removeAll();  // Remove any existing components
-                panelCompras.add(new MenuCompras(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelCompras.revalidate();  // Revalidate to apply layout changes
-                panelCompras.repaint();  // Repaint to refresh the component
+                panelCompras.removeAll();
+                panelCompras.add(new MenuCompras(), BorderLayout.CENTER);
+                panelCompras.revalidate();
+                panelCompras.repaint();
             }
         });
+        /**
+         * Acción realizada al hacer clic en el botón "Confirmar".
+         * Valida los datos ingresados y crea una nueva compra si los datos son correctos.
+         *
+         * @param e El evento de acción.
+         */
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,10 +135,10 @@ public class MenuCrearCompras extends JPanel {
                             CompraManager.getCompras();
                         // Volver Atras
                         panelCompras.setLayout(new BorderLayout());
-                        panelCompras.removeAll();  // Remove any existing components
-                        panelCompras.add(new MenuCompras(), BorderLayout.CENTER);  // Add new Dashboard panel
-                        panelCompras.revalidate();  // Revalidate to apply layout changes
-                        panelCompras.repaint();  // Repaint to refresh the component
+                        panelCompras.removeAll();
+                        panelCompras.add(new MenuCompras(), BorderLayout.CENTER);
+                        panelCompras.revalidate();
+                        panelCompras.repaint();
                     } else {
                         JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
                     }

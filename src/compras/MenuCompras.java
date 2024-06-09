@@ -26,6 +26,10 @@ public class MenuCompras extends JPanel {
     private JTable tableInfo;
     private JPanel panelCompras;
 
+    /**
+     * Constructor de la clase MenuCompras.
+     * Inicializa el panel de compras y sus componentes.
+     */
     public MenuCompras() {
         setLayout(new BorderLayout());
         add(panelCompras, BorderLayout.CENTER);
@@ -100,6 +104,12 @@ public class MenuCompras extends JPanel {
     }
 
 
+    /**
+     * Establece el icono de un botón dado.
+     *
+     * @param button   El botón al que se le establecerá el icono.
+     * @param iconPath La ruta del archivo del icono.
+     */
     private void setButtonIcon(JButton button, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
@@ -107,6 +117,11 @@ public class MenuCompras extends JPanel {
         button.setIcon(new ImageIcon(scaledIconImage));
     }
 
+    /**
+     * Crea una tabla de información de compras.
+     *
+     * @param tabla La tabla en la que se mostrará la información de las compras.
+     */
     public static void createTable(JTable tabla) {
         try {
             if (CompraManager.compras == null) {
@@ -132,6 +147,12 @@ public class MenuCompras extends JPanel {
         }
     }
 
+    /**
+     * Carga los datos de las compras en un arreglo bidimensional.
+     *
+     * @param data El arreglo bidimensional en el que se cargarán los datos de las compras.
+     * @return El arreglo con los datos de las compras.
+     */
     public static String[][] cargarCompras(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {

@@ -86,10 +86,10 @@ public class MenuCrearProveedores extends JPanel{
                         ProveedorManager.getProveedores();
                         // Volver Atras
                         panelCrearProveedores.setLayout(new BorderLayout());
-                        panelCrearProveedores.removeAll();  // Remove any existing components
-                        panelCrearProveedores.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                        panelCrearProveedores.revalidate();  // Revalidate to apply layout changes
-                        panelCrearProveedores.repaint();  // Repaint to refresh the component
+                        panelCrearProveedores.removeAll();
+                        panelCrearProveedores.add(new MenuProveedores(), BorderLayout.CENTER);
+                        panelCrearProveedores.revalidate();
+                        panelCrearProveedores.repaint();
                     } else {
                         JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
                     }

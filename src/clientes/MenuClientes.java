@@ -25,6 +25,11 @@ public class MenuClientes extends JPanel {
     private JScrollPane scrollTable;
     private JLabel lblBuscar;
 
+    /**
+     * Esta clase sirve para crear el panel utilizado para visualizar, editar, buscar y crear clientes.
+     * @version 0.1
+     */
+
     public MenuClientes() {
         setLayout(new BorderLayout());
         add(panelClientes, BorderLayout.CENTER);
@@ -102,6 +107,12 @@ public class MenuClientes extends JPanel {
         });
     }
 
+    /**
+     * Configura el icono de un botón.
+     *
+     * @param button El botón al que se le va a establecer el icono.
+     * @param iconPath La ruta del archivo de icono.
+     */
     private void setButtonIcon(JButton button, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
@@ -109,6 +120,11 @@ public class MenuClientes extends JPanel {
         button.setIcon(new ImageIcon(scaledIconImage));
     }
 
+    /**
+     * Crea y configura la tabla de información de los clientes.
+     *
+     * @param tabla La tabla donde se mostrarán los datos de los clientes.
+     */
     public static void createTable(JTable tabla) {
         try {
             if (ClienteManager.clientes == null) {
@@ -129,6 +145,12 @@ public class MenuClientes extends JPanel {
         }
     }
 
+    /**
+     * Carga los datos de los clientes en una matriz de strings.
+     *
+     * @param data La matriz donde se cargarán los datos de los clientes.
+     * @return La matriz con los datos de los clientes.
+     */
     public static String[][] cargarClientes(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {

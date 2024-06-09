@@ -123,6 +123,12 @@ public class MenuPromociones extends JPanel {
         }
     }
 
+    /**
+     * Método para cargar las promociones en un arreglo bidimensional.
+     *
+     * @param data el arreglo bidimensional donde se cargarán los datos de las promociones.
+     * @return el arreglo con los datos cargados.
+     */
     public static String[][] cargarPromociones(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {

@@ -31,6 +31,9 @@ public class MenuCategorias extends JPanel {
     private JScrollPane scrollTable;
     private JLabel lblBuscar;
 
+    /**
+     * Constructor de la clase MenuCategorias.
+     */
     public MenuCategorias() {
         CategoriaManager.getCategorias();
         setLayout(new BorderLayout());
@@ -98,6 +101,11 @@ public class MenuCategorias extends JPanel {
         });
     }
 
+    /**
+     * Establece el ícono de un botón.
+     * @param button El botón al cual se le va a establecer el ícono.
+     * @param iconPath La ruta del ícono.
+     */
     private void setButtonIcon(JButton button, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();
@@ -105,6 +113,10 @@ public class MenuCategorias extends JPanel {
         button.setIcon(new ImageIcon(scaledIconImage));
     }
 
+    /**
+     * Crea la tabla de categorías.
+     * @param tabla La tabla en la que se mostrarán las categorías.
+     */
     public static void createTable(JTable tabla) {
         try {
             if (CategoriaManager.categorias == null) {
@@ -125,6 +137,11 @@ public class MenuCategorias extends JPanel {
         }
     }
 
+    /**
+     * Carga los proveedores en la tabla.
+     * @param data La matriz de datos a cargar en la tabla.
+     * @return La matriz de datos cargada.
+     */
     public static String[][] cargarProveedores(String[][] data) {
         try {
             for (int i = 0; i < data.length; i++) {

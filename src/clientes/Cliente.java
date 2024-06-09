@@ -1,5 +1,12 @@
 package clientes;
 
+/**
+ * Esta clase representa un cliente con sus detalles básicos como DNI, nombre, apellidos, correo, teléfono, código postal, dirección y tipo de cliente.
+ * Proporciona métodos para obtener y establecer estos valores.
+ *
+ * @version 1.0
+ */
+
 public class Cliente {
     private int id;
     private String dni;
@@ -10,6 +17,20 @@ public class Cliente {
     private String codigoPostal;
     private String direccion;
     private EnumTipoCliente tipoCli;
+
+    /**
+     * Constructor para crear un cliente con todos los detalles, incluido el ID.
+     *
+     * @param id El ID del cliente.
+     * @param dni El DNI del cliente.
+     * @param nombre El nombre del cliente.
+     * @param apellidos Los apellidos del cliente.
+     * @param correo El correo electrónico del cliente.
+     * @param telefono El número de teléfono del cliente.
+     * @param codigoPostal El código postal del cliente.
+     * @param direccion La dirección del cliente.
+     * @param tipoCli El tipo de cliente (EnumTipoCliente).
+     */
 
     public Cliente(int id, String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion, EnumTipoCliente tipoCli) {
         this.id = id;
@@ -22,6 +43,18 @@ public class Cliente {
         this.direccion = direccion;
         this.tipoCli = tipoCli;
     }
+    /**
+     * Constructor para crear un cliente sin especificar el ID.
+     *
+     * @param dni El DNI del cliente.
+     * @param nombre El nombre del cliente.
+     * @param apellidos Los apellidos del cliente.
+     * @param correo El correo electrónico del cliente.
+     * @param telefono El número de teléfono del cliente.
+     * @param codigoPostal El código postal del cliente.
+     * @param direccion La dirección del cliente.
+     * @param tipoCli El tipo de cliente (EnumTipoCliente).
+     */
 
     public Cliente(String dni, String nombre, String apellidos, String correo, String telefono, String codigoPostal, String direccion, EnumTipoCliente tipoCli) {
         this.dni = dni;

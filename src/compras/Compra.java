@@ -15,6 +15,19 @@ public class Compra {
     private LocalDate fecha_recepcion;
     private int id_empleado;
 
+    /**
+     * Constructor de la clase Compra.
+     *
+     * @param id              Identificador de la compra.
+     * @param fecha_compra    Fecha en la que se realizó la compra.
+     * @param id_proveedor    Identificador del proveedor.
+     * @param id_producto     Identificador del producto.
+     * @param cantidad        Cantidad de productos comprados.
+     * @param precio_unitario Precio unitario del producto.
+     * @param fecha_recepcion Fecha en la que se recibió la compra.
+     * @param id_empleado     Identificador del empleado que gestionó la compra.
+     */
+
     public Compra(int id, LocalDate fecha_compra, int id_proveedor, int id_producto, int cantidad, double precio_unitario, LocalDate fecha_recepcion, int id_empleado) {
         this.id = id;
         this.fecha_compra = fecha_compra;
@@ -26,6 +39,17 @@ public class Compra {
         this.id_empleado = id_empleado;
     }
 
+    /**
+     * Constructor alternativo de la clase Compra.
+     *
+     * @param fecha_compra    Fecha en la que se realizó la compra.
+     * @param id_proveedor    Identificador del proveedor.
+     * @param id_producto     Identificador del producto.
+     * @param cantidad        Cantidad de productos comprados.
+     * @param precio_unitario Precio unitario del producto.
+     * @param fecha_recepcion Fecha en la que se recibió la compra.
+     * @param id_empleado     Identificador del empleado que gestionó la compra.
+     */
     public Compra(LocalDate fecha_compra, int id_proveedor, int id_producto, int cantidad, double precio_unitario, LocalDate fecha_recepcion, int id_empleado) {
         this.fecha_compra = fecha_compra;
         this.id_proveedor = id_proveedor;

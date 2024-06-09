@@ -17,6 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 
+/**
+ * La clase PantallaPrincipalAdmin gestiona la interfaz gráfica para el menú principal del administrador.
+ * Permite al administrador acceder a diferentes módulos de la aplicación como ventas, clientes, empleados, etc.
+ */
 public class PantallaPrincipalAdmin extends JFrame{
     private JPanel panelDashboard;
     private JLabel imgMiniLogo;
@@ -37,6 +41,11 @@ public class PantallaPrincipalAdmin extends JFrame{
     private JPanel panelGeneral;
     private JButton productosBtn;
 
+
+
+    /**
+     * Constructor que inicializa la ventana principal del administrador y sus componentes.
+     */
     public PantallaPrincipalAdmin(){
         super("Menu Principal - PeekPerformance");
         setContentPane(panelDashboard);

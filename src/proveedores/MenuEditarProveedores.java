@@ -78,10 +78,10 @@ public class MenuEditarProveedores extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelProveedores.setLayout(new BorderLayout());
-                panelProveedores.removeAll();  // Remove any existing components
-                panelProveedores.add(new MenuProveedores(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelProveedores.revalidate();  // Revalidate to apply layout changes
-                panelProveedores.repaint();  // Repaint to refresh the component
+                panelProveedores.removeAll();
+                panelProveedores.add(new MenuProveedores(), BorderLayout.CENTER);
+                panelProveedores.revalidate();
+                panelProveedores.repaint();
             }
         });
 

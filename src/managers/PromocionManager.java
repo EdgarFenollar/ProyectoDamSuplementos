@@ -13,9 +13,19 @@ import java.util.List;
 
 import static DBManager.DBManager.connect;
 
+/**
+ * La clase PromocionManager gestiona las operaciones relacionadas con las promociones,
+ * incluyendo la obtención, adición y mantenimiento de una lista local de promociones.
+ */
+
 public class PromocionManager {
     public static List<Promocion> promociones = new ArrayList<>();
 
+    /**
+     * Obtiene todas las promociones de la base de datos y las almacena en la lista local.
+     *
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean getPromociones(){
         if (connect()){
             try(ResultSet rs = DBManager.getTableDataBase("SELECT * FROM PROMOCIONES")) {
@@ -43,6 +53,12 @@ public class PromocionManager {
         return promociones;
     }
 
+    /**
+     * Añade una nueva promoción a la base de datos y a la lista local.
+     *
+     * @param promocion la promoción a añadir.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean anyadirPromocion(Promocion promocion){
         if (connect() && DBManager.insertarPromociones(promocion)){
             try {

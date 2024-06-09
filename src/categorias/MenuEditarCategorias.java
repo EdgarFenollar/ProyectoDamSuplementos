@@ -66,17 +66,31 @@ public class MenuEditarCategorias extends JPanel{
         //////////////////////////////
 
         btnCancelar.addActionListener(new ActionListener() {
+            /**
+             * Acción realizada cuando se presiona el botón "Cancelar".
+             * Elimina todos los componentes existentes del panel y añade el panel de categorías,
+             * aplicando los cambios necesarios en el diseño y repintando el componente.
+             *
+             * @param e El evento de acción que desencadena el método.
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelCategorias.setLayout(new BorderLayout());
-                panelCategorias.removeAll();  // Remove any existing components
-                panelCategorias.add(new MenuCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelCategorias.revalidate();  // Revalidate to apply layout changes
-                panelCategorias.repaint();  // Repaint to refresh the component
+                panelCategorias.removeAll();
+                panelCategorias.add(new MenuCategorias(), BorderLayout.CENTER);
+                panelCategorias.revalidate();
+                panelCategorias.repaint();
             }
         });
 
         btnConfirmar.addActionListener(new ActionListener() {
+            /**
+             * Acción realizada cuando se presiona el botón "Confirmar".
+             * Edita la categoría en la base de datos con los datos introducidos,
+             * actualiza la lista de categorías y vuelve al panel principal de categorías.
+             *
+             * @param e El evento de acción que desencadena el método.
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -88,10 +102,10 @@ public class MenuEditarCategorias extends JPanel{
                         CategoriaManager.getCategorias();
                         // Volver Atras
                         panelEditarCategorias.setLayout(new BorderLayout());
-                        panelEditarCategorias.removeAll();  // Remove any existing components
-                        panelEditarCategorias.add(new MenuCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
-                        panelEditarCategorias.revalidate();  // Revalidate to apply layout changes
-                        panelEditarCategorias.repaint();  // Repaint to refresh the component
+                        panelEditarCategorias.removeAll();
+                        panelEditarCategorias.add(new MenuCategorias(), BorderLayout.CENTER);
+                        panelEditarCategorias.revalidate();
+                        panelEditarCategorias.repaint();
                     } else {
                         JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -101,6 +115,14 @@ public class MenuEditarCategorias extends JPanel{
             }
         });
     }
+
+    /**
+     * Método estático para insertar los datos de la categoría a editar.
+     *
+     * @param idI El ID de la categoría.
+     * @param nombreI El nombre de la categoría.
+     * @param descripcionI La descripción de la categoría.
+     */
 
     public static void insertarDatos(int idI, String nombreI, String descripcionI){
         id = idI;

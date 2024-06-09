@@ -3,6 +3,11 @@ package empleados;
 import java.time.LocalDate;
 import java.security.*;
 
+/**
+ * La clase Empleado representa a un empleado de la empresa.
+ * Contiene información personal y de contacto del empleado,
+ * así como sus credenciales de usuario y detalles administrativos.
+ */
 public class Empleado {
     private int id;
     private String dni;
@@ -16,6 +21,21 @@ public class Empleado {
     private String usuario;
     private String contrasenya;
 
+    /**
+     * Constructor completo para la clase Empleado.
+     *
+     * @param id            el ID único del empleado.
+     * @param dni           el DNI del empleado.
+     * @param nombre        el nombre del empleado.
+     * @param apellidos     los apellidos del empleado.
+     * @param correo        el correo electrónico del empleado.
+     * @param telefono      el número de teléfono del empleado.
+     * @param direccion     la dirección del empleado.
+     * @param fechaNacimiento la fecha de nacimiento del empleado.
+     * @param administrador indica si el empleado tiene privilegios de administrador (1 si es administrador, 0 si no lo es).
+     * @param usuario       el nombre de usuario del empleado para el sistema.
+     * @param contrasenya   la contraseña del empleado para el sistema.
+     */
     public Empleado(int id, String dni, String nombre, String apellidos, String correo, String telefono, String direccion, LocalDate fechaNacimiento, int administrador, String usuario, String contrasenya) {
         this.id = id;
         this.dni = dni;
@@ -30,6 +50,21 @@ public class Empleado {
         this.contrasenya = contrasenya;
     }
 
+    /**
+     * Constructor parcial para la clase Empleado sin el ID.
+     * Este constructor puede ser utilizado cuando el ID es asignado automáticamente por la base de datos.
+     *
+     * @param dni           el DNI del empleado.
+     * @param nombre        el nombre del empleado.
+     * @param apellidos     los apellidos del empleado.
+     * @param correo        el correo electrónico del empleado.
+     * @param telefono      el número de teléfono del empleado.
+     * @param direccion     la dirección del empleado.
+     * @param fechaNacimiento la fecha de nacimiento del empleado.
+     * @param administrador indica si el empleado tiene privilegios de administrador (1 si es administrador, 0 si no lo es).
+     * @param usuario       el nombre de usuario del empleado para el sistema.
+     * @param contrasenya   la contraseña del empleado para el sistema.
+     */
     public Empleado(String dni, String nombre, String apellidos, String correo, String telefono, String direccion, LocalDate fechaNacimiento, int administrador, String usuario, String contrasenya) {
         this.dni = dni;
         this.nombre = nombre;

@@ -11,9 +11,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * La clase EmpleadoManager gestiona las operaciones relacionadas con los empleados,
+ * incluyendo la obtención, adición, actualización y eliminación de empleados en la base de datos.
+ */
 public class ProductoManager {
     public static List<Producto> productos = new ArrayList<>();
 
+    /**
+     * Obtiene todos los empleados de la base de datos y los almacena en la lista local.
+     *
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean getProductos(){
         if (DBManager.connect()){
             try(ResultSet rs = DBManager.getTableDataBase("SELECT * FROM PRODUCTOS")){
@@ -49,6 +58,12 @@ public class ProductoManager {
         return productos;
     }
 
+    /**
+     * Añade un nuevo empleado a la base de datos y a la lista local.
+     *
+     * @param empleado el empleado a añadir.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean anyadirProducto(Producto producto){
         if (DBManager.connect() & DBManager.insertarProducto(producto)){
             try {
@@ -66,6 +81,12 @@ public class ProductoManager {
         }
     }
 
+    /**
+     * Actualiza un empleado existente en la base de datos y en la lista local.
+     *
+     * @param empleado el empleado a actualizar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean actualizarProducto(Producto producto){
         try {
             if (DBManager.connect()) {
@@ -84,6 +105,12 @@ public class ProductoManager {
         return false;
     }
 
+    /**
+     * Elimina un empleado de la lista local basada en su ID.
+     *
+     * @param id el ID del empleado a eliminar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean borrarColumnaPorId(int id){
         for (int i = 0; i < productos.size(); i++) {
             if (productos.get(i).getId()==id){

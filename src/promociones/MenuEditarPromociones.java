@@ -36,6 +36,7 @@ public class MenuEditarPromociones extends JPanel{
     private JDateChooser dateChooser1 = new JDateChooser();
     private JDateChooser dateChooser2 = new JDateChooser();
 
+
     public MenuEditarPromociones(){
         setLayout(new BorderLayout());
         add(panelPromociones, BorderLayout.CENTER);
@@ -135,6 +136,15 @@ public class MenuEditarPromociones extends JPanel{
         });
     }
 
+    /**
+     * Método para insertar datos en el formulario de edición.
+     *
+     * @param idI el ID de la promoción.
+     * @param descripcionI la descripción de la promoción.
+     * @param descuentoI el descuento de la promoción.
+     * @param fechaIniI la fecha de inicio de la promoción.
+     * @param fechaFinI la fecha de fin de la promoción.
+     */
     public static void insertarDatos(int idI, String descripcionI, double descuentoI, String fechaIniI, String fechaFinI){
         id = idI;
         descripcion = descripcionI;

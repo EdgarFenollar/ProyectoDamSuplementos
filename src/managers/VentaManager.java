@@ -10,15 +10,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * La clase VentaManager gestiona las operaciones relacionadas con las ventas,
+ * incluyendo la obtención, adición, actualización y eliminación de ventas en la base de datos y en una lista local.
+ */
 public class VentaManager {
     public static List<Venta> ventas = new ArrayList<>();
 
-    public static boolean getVentas(){
-        if (DBManager.connect()){
-            try(ResultSet rs = DBManager.getTableDataBase("SELECT * FROM VENTAS")){
+
+    /**
+     * Obtiene todas las ventas de la base de datos y las almacena en la lista local.
+     *
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
+    public static boolean getVentas() {
+        if (DBManager.connect()) {
+            try (ResultSet rs = DBManager.getTableDataBase("SELECT * FROM VENTAS")) {
                 ventas = new ArrayList<>();
 
-                while (rs.next()){
+                while (rs.next()) {
                     int id = rs.getInt(1);
                     Date fechaVenta = rs.getDate(2);
                     int cantidad = rs.getInt(3);
@@ -35,33 +45,46 @@ public class VentaManager {
                 e.printStackTrace();
                 return false;
             }
-        }else {
+        } else {
             return false;
         }
     }
 
-    public static List<Venta> getVentasList(){
+    public static List<Venta> getVentasList() {
         return ventas;
     }
 
-    public static boolean anyadirVenta(Venta venta){
-        if (DBManager.connect() & DBManager.insertarVentas(venta)){
+
+    /**
+     * Añade una nueva venta a la base de datos y a la lista local.
+     *
+     * @param venta la venta a añadir.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
+    public static boolean anyadirVenta(Venta venta) {
+        if (DBManager.connect() & DBManager.insertarVentas(venta)) {
             try {
                 ventas.add(new Venta(venta.getId(), String.valueOf(venta.getFechaVenta()), venta.getCantidad(), venta.getPrecioUnitario(),
                         venta.getIdCliente(), venta.getIdEmpleado(), venta.getIdProducto(), venta.getIdPromocion()));
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 return false;
-            }finally {
+            } finally {
                 DBManager.close();
             }
             return true;
-        }else {
+        } else {
             return false;
         }
     }
+    /**
+     * Actualiza una venta existente en la base de datos y en la lista local.
+     *
+     * @param venta la venta a actualizar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
 
-    public static boolean actualizarVenta(Venta venta){
+    public static boolean actualizarVenta(Venta venta) {
         try {
             if (DBManager.connect()) {
                 if (DBManager.actualizarVentas(venta)) {
@@ -79,7 +102,13 @@ public class VentaManager {
         return false;
     }
 
-    public static boolean eliminarVenta(Venta venta){
+    /**
+     * Elimina una venta de la base de datos y de la lista local.
+     *
+     * @param venta la venta a eliminar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
+    public static boolean eliminarVenta(Venta venta) {
         try {
             if (DBManager.connect()) {
                 if (DBManager.eliminarVenta(venta.getId())) {
@@ -96,9 +125,15 @@ public class VentaManager {
         return false;
     }
 
-    public static boolean borrarColumnaPorId(int id){
+    /**
+     * Borra una venta de la lista local basada en su ID.
+     *
+     * @param id el ID de la venta a borrar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
+    public static boolean borrarColumnaPorId(int id) {
         for (int i = 0; i < ventas.size(); i++) {
-            if (ventas.get(i).getId()==id){
+            if (ventas.get(i).getId() == id) {
                 ventas.remove(i);
                 return true;
             }

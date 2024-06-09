@@ -9,6 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase sirve para crear el panel utilizado para editar los clientes existentes.
+ * @version 0.1
+ */
+
 public class MenuEditarClientes extends JPanel{
     private JPanel panelClientes;
     private JPanel panelEditarClientes;
@@ -30,6 +35,9 @@ public class MenuEditarClientes extends JPanel{
 
     public static String dni, nombre, apellidos, correo, telefono, codPostal, direccion, tipo;
 
+    /**
+     * Constructor de la clase que inicializa el panel de edición de clientes.
+     */
     public MenuEditarClientes(){
         setLayout(new BorderLayout());
         add(panelClientes, BorderLayout.CENTER);
@@ -94,6 +102,10 @@ public class MenuEditarClientes extends JPanel{
                 panelClientes.repaint();  // Repaint to refresh the component
             }
         });
+
+        /**
+         * Confirma la edición del cliente con los datos introducidos.
+         */
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -133,6 +145,20 @@ public class MenuEditarClientes extends JPanel{
             }
         });
     }
+
+    /**
+     * Método estático para insertar los datos del cliente que se va a editar.
+     *
+     * @param idI       Identificador del cliente.
+     * @param dniI      DNI del cliente.
+     * @param nombreI   Nombre del cliente.
+     * @param apellidosI Apellidos del cliente.
+     * @param correoI   Correo electrónico del cliente.
+     * @param telefonoI Teléfono del cliente.
+     * @param codPostalI Código postal del cliente.
+     * @param direccionI Dirección del cliente.
+     * @param tipoI     Tipo de cliente (Minorista o Mayorista).
+     */
     public static void insertarDatos(int idI, String dniI, String nombreI, String apellidosI, String correoI, String telefonoI, String codPostalI, String direccionI, String tipoI){
         id = idI;
         dni = dniI;

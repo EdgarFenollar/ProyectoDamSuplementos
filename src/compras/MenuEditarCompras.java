@@ -11,7 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
-
+/**
+ * Clase que representa el panel para editar compras existentes en la aplicación.
+ * Proporciona campos para modificar los detalles de la compra seleccionada y botones para confirmar o cancelar la operación.
+ *
+ * @version 0.1
+ */
 public class MenuEditarCompras extends JPanel {
     private JPanel panelCrearCompras;
     private JLabel imgPromocion;
@@ -33,6 +38,10 @@ public class MenuEditarCompras extends JPanel {
     private JDateChooser fRecepcion = new JDateChooser();
 
 
+    /**
+     * Constructor de la clase MenuEditarCompras.
+     * Inicializa el panel de edición de compras y sus componentes.
+     */
     public MenuEditarCompras() {
         setLayout(new BorderLayout());
 
@@ -97,16 +106,28 @@ public class MenuEditarCompras extends JPanel {
         imgPromocion.setIcon(compras);
         //////////////////////////////
 
+        /**
+         * Acción realizada al hacer clic en el botón "Cancelar".
+         * Vuelve al panel principal de compras.
+         *
+         * @param e El evento de acción.
+         */
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelCompras.setLayout(new BorderLayout());
-                panelCompras.removeAll();  // Remove any existing components
-                panelCompras.add(new MenuCompras(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelCompras.revalidate();  // Revalidate to apply layout changes
-                panelCompras.repaint();  // Repaint to refresh the component
+                panelCompras.removeAll();
+                panelCompras.add(new MenuCompras(), BorderLayout.CENTER);
+                panelCompras.revalidate();
+                panelCompras.repaint();
             }
         });
+        /**
+         * Acción realizada al hacer clic en el botón "Confirmar".
+         * Valida los datos ingresados y actualiza la compra seleccionada si los datos son correctos.
+         *
+         * @param e El evento de acción.
+         */
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,6 +167,18 @@ public class MenuEditarCompras extends JPanel {
         });
     }
 
+    /**
+     * Inserta los datos de la compra seleccionada en los campos correspondientes para su edición.
+     *
+     * @param idI El ID de la compra.
+     * @param fechaCompraI La fecha de la compra.
+     * @param idProveedorI El ID del proveedor.
+     * @param idProductoI El ID del producto.
+     * @param cantidadI La cantidad comprada.
+     * @param precioUnitarioI El precio unitario de la compra.
+     * @param fechaRecepcionI La fecha de recepción de la compra.
+     * @param idEmpleadoI El ID del empleado que realizó la compra.
+     */
     public static void insertarDatos(int idI, LocalDate fechaCompraI, int idProveedorI, int idProductoI, int cantidadI,
                                      double precioUnitarioI, LocalDate fechaRecepcionI, int idEmpleadoI){
         id = idI;

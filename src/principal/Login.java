@@ -18,6 +18,10 @@ import java.io.IOException;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Base64;
+/**
+ * La clase Login gestiona la interfaz gráfica para el inicio de sesión en la aplicación.
+ * Permite a los usuarios ingresar sus credenciales y autentificarse.
+ */
 
 public class Login extends JFrame{
 
@@ -31,6 +35,9 @@ public class Login extends JFrame{
     public static int id;
     public static String ENCRYPT_KEY = loadSecret();
 
+    /**
+     * Constructor que inicializa la ventana de inicio de sesión y sus componentes.
+     */
     public Login(){
         super("Login - PeekPerformance");
         setContentPane(panelLogin);
@@ -117,6 +124,13 @@ public class Login extends JFrame{
     }
 
     //Funcion de login
+    /**
+     * Verifica las credenciales del usuario.
+     *
+     * @param usuario el nombre de usuario ingresado.
+     * @param pass la contraseña ingresada.
+     * @return true si las credenciales son correctas, false en caso contrario.
+     */
     private static boolean login(String usuario, char[] pass){
         try{
             String password = String.valueOf(pass);
@@ -143,6 +157,12 @@ public class Login extends JFrame{
     }
 
     // Funcion para saber si un usuario logueado es admin.
+    /**
+     * Comprueba si el usuario tiene privilegios de administrador.
+     *
+     * @param usuario el nombre de usuario.
+     * @return true si el usuario es administrador, false en caso contrario.
+     */
     public static boolean admin(String usuario){
         nombre = usuario;
         for (int i = 0; i < EmpleadoManager.empleados.size(); i++) {

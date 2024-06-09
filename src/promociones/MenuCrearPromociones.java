@@ -38,6 +38,9 @@ public class MenuCrearPromociones extends JPanel{
     private JDateChooser dateChooser1 = new JDateChooser();
     private JDateChooser dateChooser2 = new JDateChooser();
 
+    /**
+     * Constructor para inicializar el panel de creación de promociones.
+     */
     public MenuCrearPromociones(){
         setLayout(new BorderLayout());
         add(panelPromociones, BorderLayout.CENTER);
@@ -128,6 +131,12 @@ public class MenuCrearPromociones extends JPanel{
         });
     }
 
+    /**
+     * Convierte una fecha de tipo Date a LocalDate.
+     *
+     * @param dateToConvert la fecha a convertir.
+     * @return la fecha convertida en LocalDate.
+     */
     private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())

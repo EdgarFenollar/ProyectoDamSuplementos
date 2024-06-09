@@ -25,6 +25,11 @@ public class MenuCrearClientes extends JPanel{
     private JLabel imgProveedorGrande;
     public static String tipo;
 
+    /**
+     * Esta clase sirve para crear el panel utilizado para crear nuevos clientes.
+     * @version 0.1
+     */
+
     public MenuCrearClientes() {
         setLayout(new BorderLayout());
         add(panelClientes, BorderLayout.CENTER);
@@ -63,16 +68,19 @@ public class MenuCrearClientes extends JPanel{
         imgProveedor.setIcon(proveedor);
         //////////////////////////////
 
+        // Acción para el botón Cancelar
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelClientes.setLayout(new BorderLayout());
-                panelClientes.removeAll();  // Remove any existing components
-                panelClientes.add(new MenuClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelClientes.revalidate();  // Revalidate to apply layout changes
-                panelClientes.repaint();  // Repaint to refresh the component
+                panelClientes.removeAll();
+                panelClientes.add(new MenuClientes(), BorderLayout.CENTER);
+                panelClientes.revalidate();
+                panelClientes.repaint();
             }
         });
+
+        // Acción para el botón Confirmar
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,10 +118,10 @@ public class MenuCrearClientes extends JPanel{
 
                         // Volver Atras
                         panelClientes.setLayout(new BorderLayout());
-                        panelClientes.removeAll();  // Remove any existing components
-                        panelClientes.add(new MenuClientes(), BorderLayout.CENTER);  // Add new Dashboard panel
-                        panelClientes.revalidate();  // Revalidate to apply layout changes
-                        panelClientes.repaint();  // Repaint to refresh the component
+                        panelClientes.removeAll();
+                        panelClientes.add(new MenuClientes(), BorderLayout.CENTER);
+                        panelClientes.revalidate();
+                        panelClientes.repaint();
                     } else {
                         JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
                     }

@@ -10,9 +10,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La clase ClienteManager gestiona las operaciones relacionadas con los clientes,
+ * incluyendo la obtención, adición, actualización y eliminación de clientes en la base de datos.
+ */
 public class ClienteManager {
     public static List<Cliente> clientes = new ArrayList<>();
 
+    /**
+     * Obtiene todos los clientes de la base de datos y los almacena en la lista local.
+     *
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean getClientes(){
         if (DBManager.connect()){
             try(ResultSet rs = DBManager.getTableDataBase("SELECT * FROM CLIENTES")){
@@ -43,11 +52,21 @@ public class ClienteManager {
             return false;
         }
     }
-
+    /**
+     * Devuelve la lista de clientes.
+     *
+     * @return una lista de clientes.
+     */
     public static List<Cliente> getClientesList(){
         return clientes;
     }
 
+    /**
+     * Añade un nuevo cliente a la base de datos y a la lista local.
+     *
+     * @param cliente el cliente a añadir.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean anyadirCliente(Cliente cliente){
         if (DBManager.connect() & DBManager.insertarClientes(cliente)){
             try {
@@ -65,6 +84,12 @@ public class ClienteManager {
         }
     }
 
+    /**
+     * Actualiza un cliente existente en la base de datos y en la lista local.
+     *
+     * @param cliente el cliente a actualizar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean actualizarCliente(Cliente cliente){
         try {
             if (DBManager.connect()) {
@@ -83,6 +108,12 @@ public class ClienteManager {
         return false;
     }
 
+    /**
+     * Elimina un cliente existente de la base de datos y de la lista local.
+     *
+     * @param cliente el cliente a eliminar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean eliminarCliente(Cliente cliente){
         try {
             if (DBManager.connect()) {
@@ -100,6 +131,12 @@ public class ClienteManager {
         return false;
     }
 
+    /**
+     * Elimina un cliente de la lista local basada en su ID.
+     *
+     * @param id el ID del cliente a eliminar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean borrarColumnaPorId(int id){
         for (int i = 0; i < clientes.size(); i++) {
             if (clientes.get(i).getId()==id){

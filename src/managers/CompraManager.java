@@ -13,9 +13,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * La clase CompraManager gestiona las operaciones relacionadas con las compras,
+ * incluyendo la obtención, adición, actualización y eliminación de compras en la base de datos.
+ */
 public class CompraManager {
     public static ArrayList<Compra> compras = new ArrayList<>();
 
+    /**
+     * Obtiene todas las compras de la base de datos y las almacena en la lista local.
+     *
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean getCompras(){
         if (DBManager.connect()){
             try(ResultSet rs = DBManager.getTableDataBase("SELECT * FROM COMPRAS")){
@@ -47,6 +56,12 @@ public class CompraManager {
         return compras;
     }
 
+    /**
+     * Añade una nueva compra a la base de datos y a la lista local.
+     *
+     * @param compra la compra a añadir.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean anyadirCompra(Compra compra){
         if (DBManager.connect() & DBManager.insertarCompras(compra)){
             try {
@@ -71,6 +86,12 @@ public class CompraManager {
         }
     }
 
+    /**
+     * Actualiza una compra existente en la base de datos y en la lista local.
+     *
+     * @param compra la compra a actualizar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean actualizarCompra(Compra compra){
         try {
             if (DBManager.connect()) {
@@ -89,6 +110,12 @@ public class CompraManager {
         return false;
     }
 
+    /**
+     * Elimina una compra existente de la base de datos y de la lista local.
+     *
+     * @param compra la compra a eliminar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean eliminarCompra(Compra compra){
         try {
             if (DBManager.connect()) {
@@ -106,6 +133,12 @@ public class CompraManager {
         return false;
     }
 
+    /**
+     * Elimina una compra de la lista local basada en su ID.
+     *
+     * @param id el ID de la compra a eliminar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     */
     public static boolean borrarColumnaPorId(int id){
         for (int i = 0; i < compras.size(); i++) {
             if (compras.get(i).getId()==id){

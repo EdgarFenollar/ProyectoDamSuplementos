@@ -81,10 +81,10 @@ public class MenuCrearVentas extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelventas.setLayout(new BorderLayout());
-                panelventas.removeAll();  // Remove any existing components
-                panelventas.add(new MenuVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelventas.revalidate();  // Revalidate to apply layout changes
-                panelventas.repaint();  // Repaint to refresh the component
+                panelventas.removeAll();
+                panelventas.add(new MenuVentas(), BorderLayout.CENTER);
+                panelventas.revalidate();
+                panelventas.repaint();
             }
         });
 
@@ -105,10 +105,10 @@ public class MenuCrearVentas extends JPanel{
                         VentaManager.getVentas();
                         // Volver Atras
                         panelCrearVentas.setLayout(new BorderLayout());
-                        panelCrearVentas.removeAll();  // Remove any existing components
-                        panelCrearVentas.add(new MenuVentas(), BorderLayout.CENTER);  // Add new Dashboard panel
-                        panelCrearVentas.revalidate();  // Revalidate to apply layout changes
-                        panelCrearVentas.repaint();  // Repaint to refresh the component
+                        panelCrearVentas.removeAll();
+                        panelCrearVentas.add(new MenuVentas(), BorderLayout.CENTER);
+                        panelCrearVentas.revalidate();
+                        panelCrearVentas.repaint();
                     }else {
                         JOptionPane.showMessageDialog(null, "Debes de introducir todos los datos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
                     }

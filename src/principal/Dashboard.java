@@ -9,7 +9,10 @@ import java.awt.*;
 import java.beans.Statement;
 import java.sql.ResultSet;
 import java.util.Objects;
-
+/**
+ * La clase Dashboard crea el panel principal del tablero de mandos, mostrando estadísticas como el total de ventas,
+ * clientes y empleados. Configura iconos y bordes personalizados para los componentes del panel.
+ */
 public class Dashboard extends JPanel{
     private JPanel panelPantallas;
     private JLabel imgVentasDash;
@@ -21,6 +24,10 @@ public class Dashboard extends JPanel{
     private JLabel txtBienvenida;
     private JPanel panelStats;
 
+
+    /**
+     * Constructor que inicializa el tablero de mandos con estadísticas y configuraciones personalizadas.
+     */
     public Dashboard(){
         String usr = System.getProperty("user.name");
         txtBienvenida.setText(usr);
@@ -41,6 +48,12 @@ public class Dashboard extends JPanel{
         setButtonIcon(imgEmpleadosDash, "imagenes/employe.png");
     }
 
+    /**
+     * Configura el icono de un JLabel con una imagen escalada.
+     *
+     * @param lbl el JLabel al que se le establecerá el icono.
+     * @param iconPath la ruta del archivo de imagen.
+     */
     private void setButtonIcon(JLabel lbl, String iconPath) {
         ImageIcon icon = new ImageIcon(iconPath);
         Image iconImage = icon.getImage();

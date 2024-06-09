@@ -25,6 +25,9 @@ public class MenuCrearCategorias extends JPanel{
     private JTextField txtDescripcion;
     private JLabel imgProveedorGrande;
 
+    /**
+     * Constructor de la clase MenuCrearCategorias.
+     */
     public MenuCrearCategorias(){
         setLayout(new BorderLayout());
         add(panelCategorias, BorderLayout.CENTER);
@@ -62,14 +65,21 @@ public class MenuCrearCategorias extends JPanel{
         imgCategoria.setIcon(categoria);
         //////////////////////////////
 
+        /**
+         * Acción realizada cuando se presiona el botón "Cancelar".
+         * Elimina todos los componentes existentes del panel y añade el panel de categorías,
+         * aplicando los cambios necesarios en el diseño y repintando el componente.
+         *
+         * @param e El evento de acción que desencadena el método.
+         */
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelCategorias.setLayout(new BorderLayout());
-                panelCategorias.removeAll();  // Remove any existing components
-                panelCategorias.add(new MenuCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelCategorias.revalidate();  // Revalidate to apply layout changes
-                panelCategorias.repaint();  // Repaint to refresh the component
+                panelCategorias.removeAll();// Eliminar cualquier componente existente
+                panelCategorias.add(new MenuCategorias(), BorderLayout.CENTER);// Añadir el nuevo panel de categorías
+                panelCategorias.revalidate(); // Revalidar para aplicar los cambios de diseño
+                panelCategorias.repaint();  // Repintar para refrescar el componente
             }
         });
 
