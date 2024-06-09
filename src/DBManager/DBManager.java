@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DBManager {
     // Conexión a la base de datos
@@ -214,6 +215,7 @@ public class DBManager {
             rs.updateInt("CANTIDAD", compra.getCantidad());
             rs.updateDouble("PrecioUnitario", compra.getPrecio_unitario());
             rs.updateDate("FechaRecepcion",Date.valueOf(compra.getFecha_recepcion().toString()));
+            rs.updateInt("IdEmpleado",compra.getId_empleado());
             rs.insertRow();
             System.out.println("Introduciendo valores de compra a la BD");
             return true;
@@ -823,13 +825,13 @@ public class DBManager {
             Statement stmt = DBManager.conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = stmt.executeQuery("SELECT * FROM COMPRAS WHERE IDCOMPRAS = " + id);
             if (rs.next()) {
-                rs.updateDate(4, Date.valueOf(fechaCompra.toString()));
+                rs.updateDate(2, Date.valueOf(fechaCompra.toString()));
                 rs.updateInt(3,idProveedor);
-                rs.updateInt(3,idProducto);
-                rs.updateInt(3,cantidad);
-                rs.updateDouble(3,precioUnitario);
-                rs.updateDate(4, Date.valueOf(fechaRecepcion.toString()));
-                rs.updateInt(3,idEmpleado);
+                rs.updateInt(4,idProducto);
+                rs.updateInt(5,cantidad);
+                rs.updateDouble(6,precioUnitario);
+                rs.updateDate(7, Date.valueOf(fechaRecepcion.toString()));
+                rs.updateInt(8,idEmpleado);
                 rs.updateRow();
                 rs.close();
                 stmt.close();
@@ -1019,14 +1021,14 @@ public class DBManager {
 
                 while (rs.next()) {
                     int id = rs.getInt(1);
-                    Date fechaCompra = rs.getDate(2);
+                    LocalDate fechaCompra = rs.getDate(2).toLocalDate();
                     int idProveedor = rs.getInt(3);
                     int idProducto = rs.getInt(4);
                     int cantidad = rs.getInt(5);
                     double precioUnirario = rs.getDouble(6);
-                    Date fechaEntrega = rs.getDate(7);
+                    LocalDate fechaEntrega = rs.getDate(7).toLocalDate();
                     int idEmpleado = rs.getInt(8);
-                    CompraManager.compras.add(new Compra(id,String.valueOf(fechaCompra),idProveedor,idProducto,cantidad,precioUnirario,String.valueOf(fechaEntrega),idEmpleado));
+                    CompraManager.compras.add(new Compra(id, fechaCompra,idProveedor,idProducto,cantidad,precioUnirario, fechaEntrega,idEmpleado));
                 }
                 return true;
             }

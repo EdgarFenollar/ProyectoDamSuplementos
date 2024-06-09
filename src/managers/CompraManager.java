@@ -11,6 +11,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CompraManager {
     public static ArrayList<Compra> compras = new ArrayList<>();
@@ -22,15 +23,15 @@ public class CompraManager {
 
                 while (rs.next()){
                     int id = rs.getInt(1);
-                    Date fechaCompra = rs.getDate(2);
+                    LocalDate fechaCompra = rs.getDate(2).toLocalDate();
                     int idProveedor = rs.getInt(3);
                     int idProducto = rs.getInt(4);
                     int cantidad = rs.getInt(5);
                     double precioUnitario = rs.getDouble(6);
-                    Date fechaRecepcion = rs.getDate(7);
+                    LocalDate fechaRecepcion = rs.getDate(7).toLocalDate();
                     int idEmpleado = rs.getInt(8);
 
-                    compras.add(new Compra(id,String.valueOf(fechaCompra), idProveedor, idProducto, cantidad, precioUnitario, String.valueOf(fechaRecepcion), idEmpleado));
+                    compras.add(new Compra(id, fechaCompra, idProveedor, idProducto, cantidad, precioUnitario, fechaRecepcion, idEmpleado));
                 }
                 return true;
             } catch (SQLException e) {
@@ -49,8 +50,15 @@ public class CompraManager {
     public static boolean anyadirCompra(Compra compra){
         if (DBManager.connect() & DBManager.insertarCompras(compra)){
             try {
-                compras.add(new Compra(compra.getId(), String.valueOf(compra.getFecha_compra()), compra.getId_proveedor(), compra.getId_producto(),
-                        compra.getCantidad(), compra.getPrecio_unitario(), String.valueOf(compra.getFecha_recepcion()), compra.getId_empleado()));
+                compras.add(new Compra(
+                        compra.getId(),
+                        compra.getFecha_compra(),
+                        compra.getId_proveedor(),
+                        compra.getId_producto(),
+                        compra.getCantidad(),
+                        compra.getPrecio_unitario(),
+                        compra.getFecha_recepcion(),
+                        compra.getId_empleado()));
             }catch (Exception ex){
                 ex.printStackTrace();
                 return false;

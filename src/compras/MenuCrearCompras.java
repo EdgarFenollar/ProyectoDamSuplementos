@@ -101,28 +101,20 @@ public class MenuCrearCompras extends JPanel {
                     LocalDate fechaCompr = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     LocalDate fechaRecep = fRecepcion.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     if (!txtIDproveedor.getText().isEmpty() && !txtIDproducto.getText().isEmpty() && !txtCantidad.getText().isEmpty() && !txtPrecioUnitario.getText().isEmpty() && !txtIDempleado.getText().isEmpty()){
-                        for (int i = 0; i < CompraManager.compras.size(); i++) {
-                            if (id == CompraManager.compras.get(i).getId()){
-                                LocalDate feCompra = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                                LocalDate feRecepcion = fCompra.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-                                CompraManager.anyadirCompra(new Compra(id,
-                                        String.valueOf(feCompra),
-                                        Integer.parseInt(txtIDproveedor.getText()),
-                                        Integer.parseInt(txtIDproducto.getText()),
-                                        Integer.parseInt(txtCantidad.getText()),
-                                        Double.parseDouble(txtPrecioUnitario.getText()),
-                                        String.valueOf(feRecepcion),
-                                        Integer.parseInt(txtIDempleado.getText()))
-
-                                );
-                                CompraManager.getCompras();
-                            }
-                        }
+                            CompraManager.anyadirCompra(new Compra(
+                                    fechaCompr,
+                                    Integer.parseInt(txtIDproveedor.getText()),
+                                    Integer.parseInt(txtIDproducto.getText()),
+                                    Integer.parseInt(txtCantidad.getText()),
+                                    Double.parseDouble(txtPrecioUnitario.getText()),
+                                    fechaRecep,
+                                    Integer.parseInt(txtIDempleado.getText()))
+                            );
+                            CompraManager.getCompras();
                         // Volver Atras
                         panelCompras.setLayout(new BorderLayout());
                         panelCompras.removeAll();  // Remove any existing components
-                        panelCompras.add(new MenuProductos(), BorderLayout.CENTER);  // Add new Dashboard panel
+                        panelCompras.add(new MenuCompras(), BorderLayout.CENTER);  // Add new Dashboard panel
                         panelCompras.revalidate();  // Revalidate to apply layout changes
                         panelCompras.repaint();  // Repaint to refresh the component
                     } else {

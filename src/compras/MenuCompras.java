@@ -1,5 +1,6 @@
 package compras;
 
+import DBManager.DBManager;
 import empleados.MenuCrearEmpleados;
 import empleados.MenuEditarEmpleados;
 import managers.CompraManager;
@@ -11,13 +12,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MenuCompras extends JPanel {
     private JPanel panelTablaCompras;
     private JButton btnEditar;
     private JButton btnCrear;
     private JComboBox comboBoxFiltrar;
-    private JButton btnFiltrar;
     private JLabel lblBuscar;
     private JTextField txtBuscar;
     private JButton btnBuscar;
@@ -44,14 +45,11 @@ public class MenuCompras extends JPanel {
         btnEditar.setOpaque(false);
         btnBuscar.setBorder(null);
         btnBuscar.setOpaque(false);
-        btnFiltrar.setBorder(null);
-        btnFiltrar.setOpaque(false);
 
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
-        setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
         btnCrear.addActionListener(new ActionListener() {
             @Override
@@ -92,6 +90,13 @@ public class MenuCompras extends JPanel {
                 }
             }
         });
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBManager.getComprasPorFiltro(Objects.requireNonNull(comboBoxFiltrar.getSelectedItem()).toString(), txtBuscar.getText());
+                createTable(tableInfo);
+            }
+        });
     }
 
 
@@ -108,10 +113,10 @@ public class MenuCompras extends JPanel {
                 CompraManager.compras = new ArrayList<>();
             }
 
-            String[][] data = new String[CompraManager.compras.size()][5];
+            String[][] data = new String[CompraManager.compras.size()][9];
             cargarCompras(data);
 
-            String[] columnNames = {"ID", "Fecha de Compra", "ID del Proveedor", "ID del Producto", "Cantidad", "Precio Unitario", "Fecha de Recepción", "Fecha de Recepción", "ID del Empleado"};
+            String[] columnNames = {"ID", "Fecha de Compra", "ID del Proveedor", "ID del Producto", "Cantidad", "Precio Unitario", "Fecha de Recepción", "ID del Empleado"};
 
             tabla.setModel(new DefaultTableModel(data, columnNames) {
                 @Override
