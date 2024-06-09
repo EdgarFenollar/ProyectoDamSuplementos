@@ -1,5 +1,6 @@
 package categorias;
 
+import DBManager.DBManager;
 import managers.CategoriaManager;
 import managers.ProveedorManager;
 import proveedores.MenuCrearProveedores;
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Esta clase sirve para crear el panel utilizado el cual servira para visualizar las categorias, y poder editar, borrar o crear otras categorias.
@@ -22,7 +24,6 @@ public class MenuCategorias extends JPanel {
     private JButton btnBuscar;
     private JButton btnEditar;
     private JButton btnCrear;
-    private JButton btnFiltrar;
     private JTable tableInfo;
     private JPanel panelTablaCategorias;
     private JComboBox<String> comboBoxFiltrar;
@@ -47,14 +48,11 @@ public class MenuCategorias extends JPanel {
         btnEditar.setOpaque(false);
         btnBuscar.setBorder(null);
         btnBuscar.setOpaque(false);
-        btnFiltrar.setBorder(null);
-        btnFiltrar.setOpaque(false);
 
         // Redimensionar e insertar iconos en los botones
         setButtonIcon(btnCrear, "imagenes/create.png");
         setButtonIcon(btnEditar, "imagenes/edit.png");
         setButtonIcon(btnBuscar, "imagenes/lupa.png");
-        setButtonIcon(btnFiltrar, "imagenes/filtrar.png");
 
         btnCrear.addActionListener(new ActionListener() {
             @Override
@@ -69,11 +67,33 @@ public class MenuCategorias extends JPanel {
         btnEditar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelCategorias.setLayout(new BorderLayout());
-                panelCategorias.removeAll();  // Remove any existing components
-                panelCategorias.add(new MenuEditarCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
-                panelCategorias.revalidate();  // Revalidate to apply layout changes
-                panelCategorias.repaint();  // Repaint to refresh the component
+                if (tableInfo.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Debes de seleccionar un categoria para editar.");
+                } else {
+                    for (int i = 0; i < CategoriaManager.categorias.size(); i++) {
+                        if (i == tableInfo.getSelectedRow()){
+                            MenuEditarCategorias.insertarDatos(
+                                    CategoriaManager.categorias.get(i).getId(),
+                                    CategoriaManager.categorias.get(i).getNombre(),
+                                    CategoriaManager.categorias.get(i).getDescripcion());
+
+                        }
+                    }
+
+                    panelCategorias.setLayout(new BorderLayout());
+                    panelCategorias.removeAll();  // Remove any existing components
+                    panelCategorias.add(new MenuEditarCategorias(), BorderLayout.CENTER);  // Add new Dashboard panel
+                    panelCategorias.revalidate();  // Revalidate to apply layout changes
+                    panelCategorias.repaint();  // Repaint to refresh the component
+                }
+            }
+        });
+
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DBManager.getCategoriasPorFiltro(Objects.requireNonNull(comboBoxFiltrar.getSelectedItem()).toString(), txtBuscar.getText());
+                createTable(tableInfo);
             }
         });
     }

@@ -893,7 +893,7 @@ public class DBManager {
             ResultSet rs = stmt.executeQuery("SELECT * FROM CATEGORIAS WHERE IDCATEGORIA = " + id);
             if (rs.next()) {
                 rs.updateString(2,nombre);
-                rs.updateString(2,descripcion);
+                rs.updateString(3,descripcion);
                 rs.updateRow();
                 rs.close();
                 stmt.close();

@@ -36,6 +36,9 @@ public class MenuEditarCategorias extends JPanel{
         btnCancelar.setBackground(null);
         btnCancelar.setOpaque(false);
 
+        txtDescripcion.setText(descripcion);
+        txtNombre.setText(nombre);
+
         txtNombre.setSize(new Dimension(100, 100));
 
         //Redimensionar Imagen CANCELAR//
