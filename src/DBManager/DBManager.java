@@ -870,13 +870,13 @@ public class DBManager {
             ResultSet rs = stmt.executeQuery("SELECT * FROM CLIENTES WHERE IDCLIENTE = " + id);
             if (rs.next()) {
                 rs.updateString(2,dni);
-                rs.updateString(2,nombre);
-                rs.updateString(2,apellidos);
-                rs.updateString(2,correo);
-                rs.updateString(2,telefono);
-                rs.updateString(2,codPostal);
-                rs.updateString(2,direccion);
-                rs.updateString(2,tipo);
+                rs.updateString(3,nombre);
+                rs.updateString(4,apellidos);
+                rs.updateString(5,correo);
+                rs.updateString(6,telefono);
+                rs.updateString(7,codPostal);
+                rs.updateString(8,direccion);
+                rs.updateString(9,tipo);
                 rs.updateRow();
                 rs.close();
                 stmt.close();
