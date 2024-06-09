@@ -7,6 +7,9 @@
 ## 🌸 | Libraries on zip
 <li> <a href="https://drive.google.com/file/d/1Cb0B1SMcGNvueJItRr9slbBWLbqVqGlD/view?usp=sharing">Download</a>
 
+## 📋 | Download .SQL
+<li> <a href="https://drive.google.com/file/d/1ekgOXch3cKyfZB3O0ON67VqdfDEUuRs7/view?usp=sharing">Download</a>
+
 ## 🚧 | Prerequisites
 <li> <a href="https://search.maven.org/artifact/com.formdev/flatlaf/3.4.1/jar?eh=">FlatLaf - Flat Look and Feel 3.4.1</a>
 <br>
